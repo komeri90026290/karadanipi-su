@@ -1,0 +1,31 @@
+.text {
+    padding-left:10em
+}
+.food {
+    display:flex;
+    flex-flow: column;
+}
+.content {
+    padding: 0em 0.5em;
+    margin: 40px auto;
+    width: 1000px;
+    height: 200px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: solid 1px #000000;
+}
+
+.after_main {
+    display:flex;
+    flex-flow: column;
+}
+.after-part {
+    padding: 0em 0.5em;
+    margin: 30px auto;
+    width: 1000px;
+    height: 200px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: solid 1px #000000;
+}
+
