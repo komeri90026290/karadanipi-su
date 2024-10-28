@@ -6,25 +6,25 @@
     clear: both;
     overflow: hidden;
     margin: 0px auto;
-    position: fixed; /* 左側に固定 */
-    top: 0;          /* 上からの位置を指定 */
-    left: 0;         /* 左端に固定 */
-    height: 100%;    /* 全体の高さにする（必要に応じて変更） */
-    z-index: 1000;   /* 他の要素より前に表示 */
-    background: linear-gradient(#F1FEFE, #FFFFFF);
-    border-right: 2px solid black; /* 右端に黒線を追加 */
-    padding-top: 60px; /* 上部にスペースを追加 */
+    position: fixed; 
+    top: 0;          
+    left: 0;         
+    height: 100%;    
+    z-index: 1000;   /*他のより前に*/
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*グラデの背景色*/
+    border-right: 2px solid black; /* 右に黒線 */
+    padding-top: 60px; /* 上にスペース */
 }
 
 
-/*リストの点消す*/
+/*リストの点消し*/
 #admin_nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/*ボタン同士の距離指定*/
+/*ボタン同士の距離*/
 #admin_nav ul li {
     height: 75px;
 }
@@ -36,18 +36,18 @@
     padding: 15px;
     background-color: yellow;
     color: black;
-    text-decoration: none; /* リンクの下線を消す */
-    text-align: center; /* 文字を中央に配置 */
+    text-decoration: none; /*リンク下線消し*/
+    text-align: center; /*真ん中*/
 }
 
 
 /*現在地のブロックを色変更*/
 #admin_nav ul li.current a {
-    background-attachment: #b7a077;
+    background-attachment: #b7a077; /*今いる画面のとこリスト色変更*/
 }
 
 /* ホバー時に色を変える*/
 #admin_nav ul li a:hover {
-    background-color: rgb(200, 200, 50); /* マウスオーバー時の色 */
+    background-color: rgb(200, 200, 50);
 }
 
