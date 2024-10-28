@@ -9,37 +9,59 @@
         <nav id="title">
             <h1>新規会員登録</h1>
         </nav>
+
         <nav id="input">
         <form>                                          
             <!--ID、パスワード入力欄-->
-            <label for="user_name">ユーザーネーム</label><br>
+            <label for="user_name">●ユーザーネーム</label><br>
             <input type="text" id="user_name" name="user_name"><br>
+
+            <div class="password_container">
+                <p>●パスワード(半角英数字8-16文字)</p>
+                <input type="password" id="user_password" name="user_password">
+                <span class="toggle-password" onclick="clickButton()">👀</span><br>
+            </div>
         
-            <label for="user_password">パスワード(半角英数字8-16文字)</label><br>
-            <input type="password" id="user_password" name="user_password"><br>
 
-            <lavel for="user_height">身長</lavel><br>
-            <input type="number" id="user_height" name="user_height"><br> <!--cm付け足し忘れない-->
+            <label for="user_height">●身長</label><br>
+            <input type="number" id="user_height" name="user_height" step="1"> <!--cm付け足し忘れない-->
+            <div class="error">整数のみ入力できます</div><br> 
 
-            <label for="user_weight">体重</label><br>
+            <label for="user_weight">●体重</label><br>
             <input type="number" id="user_weight" name="user_weight"><br> <!--kg付け足し忘れない-->
-            <!--m-->
-            <label for="user_age">年齢</label><br>
+
+            <label for="user_age">●年齢</label><br>
             <input type="number" id="user_age" name="user_age" min="0" max="100" /><br>
 
-            <label for="user_sex">性別</label><br>
+            <label for="user_sex">●性別</label><br>
                 <select id="user_sex" name="user_sex">
                     <option value=""></option>
                     <option value="man">男性</option>
                     <option value="woman">女性</option>
                     <option value="notset">未設定</option>
-                </select>
-        </nav>
-            
+                </select><br>
+
+                
+                <script>
+                    function clickButton() {
+                        var user_password = document.getElementById("user_password");
+                        var toggleIcon = document.querySelector(".toggle-password");
+                      
+                        if (user_password.type === "password") {
+                            user_password.type = "text";
+                            toggleIcon.textContent = "👀"; // 眼のアイコンに表示を切り替える絵文字
+                        } else {
+                            user_password.type = "password";
+                            toggleIcon.textContent = "🙈"; // 目のアイコンに表示を切り替える絵文字
+                        }
+                    }
+                </script>
+
             <!--ログインボタン-->
-        <nav id="submit">
-            <input type="submit" value="登録">
+                <div id="submit">
+                    <input type="submit" value="登録">
+                </div>
+            </form>
         </nav>
-        </form>
     </body>
 </html>
