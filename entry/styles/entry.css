@@ -1,1 +1,58 @@
-ｇｇ
+@charset "utf-8";
+
+
+#title {
+    font-size: 35px;
+    text-align: center;
+    clear: both;
+    overflow: hidden;
+    margin: 25px auto;
+    letter-spacing: 0.25em;
+}
+
+#input {
+    align-items: center;    /* 中央に寄せる */
+}
+
+#input input[type="text"],
+#input input[type="password"],
+#input input[type="number"],
+#input select {
+    width: 80%;
+    text-align: center;
+    width: 60%; 
+    font-size: 20px;
+    padding: 5px;
+    margin: 8px 0;
+    border-radius: 5px;
+}
+
+
+#submit {
+    text-align: right; 
+    margin: 20px auto;
+}
+
+#submit input[type="submit"] {
+    font-size: 20px;
+    padding: 8px 16px;
+    background-color: yellow;
+    color: black;
+    border: none; 
+    cursor: pointer;
+}
+
+/*体重小数点エラー部分*/
+.error {
+    display: none; 
+  }
+  /* 隣接セレクタで
+   * input:invalidの隣の
+   * エラーメッセージは表示する
+   */
+  input:invalid + .error {
+    display: block;
+    color: red;
+    font-size: 0.9em;
+}
+
