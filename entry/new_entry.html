@@ -16,7 +16,7 @@
             <input type="text" id="user_name" name="user_name"><br>
         
             <label for="user_password">パスワード(半角英数字8-16文字)</label><br>
-            <input type="password" id="user_password" name="user_password"><br>
+            <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"><br>
 
             <lavel for="user_height">身長</lavel><br>
             <input type="number" id="user_height" name="user_height"><br> <!--cm付け足し忘れない-->
