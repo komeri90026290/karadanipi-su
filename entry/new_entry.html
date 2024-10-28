@@ -18,15 +18,9 @@
 
             <div class="password_container">
                 <p>●パスワード(半角英数字8-16文字)</p>
-                <input type="password" id="user_password" name="user_password">
+                <input type="password" id="user_password" name="user_password"minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$">
                 <span class="toggle-password" onclick="clickButton()">👀</span><br>
             </div>
-        
-<<<<<<< HEAD:new_entry.html
-=======
-            <label for="user_password">パスワード(半角英数字8-16文字)</label><br>
-            <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"><br>
->>>>>>> 11385da0b5d6e95313254180f160e0fb8261cbbb:entry/new_entry.html
 
             <label for="user_height">●身長</label><br>
             <input type="number" id="user_height" name="user_height" step="1"> <!--cm付け足し忘れない-->
@@ -39,11 +33,33 @@
             <input type="number" id="user_age" name="user_age" min="0" max="100" /><br>
 
             <label for="user_sex">●性別</label><br>
+=======
+        <nav id="input">
+        <form>                                          
+            <!--ID、パスワード入力欄-->
+            <label for="user_name">ユーザーネーム</label><br>
+            <input type="text" id="user_name" name="user_name"><br>
+        
+            <label for="user_password">パスワード(半角英数字8-16文字)</label><br>
+            <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"><br>
+
+            <lavel for="user_height">身長</lavel><br>
+            <input type="number" id="user_height" name="user_height"><br> <!--cm付け足し忘れない-->
+
+            <label for="user_weight">体重</label><br>
+            <input type="number" id="user_weight" name="user_weight"><br> <!--kg付け足し忘れない-->
+            <!--m-->
+            <label for="user_age">年齢</label><br>
+            <input type="number" id="user_age" name="user_age" min="0" max="100" /><br>
+
+            <label for="user_sex">性別</label><br>
+
                 <select id="user_sex" name="user_sex">
                     <option value=""></option>
                     <option value="man">男性</option>
                     <option value="woman">女性</option>
                     <option value="notset">未設定</option>
+
                 </select><br>
 
                 
@@ -68,5 +84,6 @@
                 </div>
             </form>
         </nav>
+
     </body>
 </html>
