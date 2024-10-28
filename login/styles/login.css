@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+
+#title {
+    font-size: 35px;
+    text-align: center;
+    clear: both;
+    overflow: hidden;
+    margin: 25px auto;
+    letter-spacing: 0.25em;
+}
+
+#input {
+    text-align: center;
+    font-size: 25px
+}
+
+#input input[type="text"],
+#input input[type="password"] {
+    width: 80%; /* 入力欄を画面幅の80%に設定 */
+    font-size: 20px; /* テキストが見やすいようにサイズ調整 */
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc; /* 枠線を薄めに調整 */
+    border-radius: 5px; /* 角を丸くして柔らかい印象に */
+}
+
+/*kk*/
+
+#submit {
+    text-align: right; /* ボタンを右に寄せる */
+    margin: 20px auto;
+}
+
+#submit input[type="submit"] {
+    font-size: 20px;
+    padding: 8px 16px;
+    background-color: yellow;
+    color: black;
+    border: none; /* 枠を削除 */
+    cursor: pointer;
+}
+
+#newentry {
+    text-align: right;
+    margin: 50px;
+} 
+
