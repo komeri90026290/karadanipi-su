@@ -1,0 +1,34 @@
+body {
+    background: linear-gradient(#F1FEFE, #FFFFFF);
+    display: flex; /*ディスプレイ設定*/
+    justify-content: center;   /*横、中央に*/
+    height: 100vh;          /*高さ*/
+}
+
+#sentence {
+    display: flex; /*ディスプレイ*/
+    flex-direction: column; /*縦方向に並べる*/
+    align-items: center; /*真ん中に並べる */
+}
+
+#buttons {
+    display: flex;           /* 横並び配置 */
+    gap: 10px;               /* ボタンスペース */
+    margin-top: 15px; /*要素の上のスペース広さ*/
+}
+
+#ok input[type="submit"],
+#cancel input[type="submit"] {
+    font-size: 16px;  /*フォントサイズ設定*/
+    padding: 8px 16px;  /*空白設定*/
+    cursor: pointer;  /*クリックできますよ的なの出るように*/
+    border-radius: 15px; /*渕の丸み*/
+    min-width: 100px;      /*横幅*/
+    min-height: 50px;       /*立幅*/
+    text-align: center;     /* 中央寄せ */
+    border: 1.5px solid black; /*枠線太さ色*/
+}
+
+#cancel input[type="submit"] {
+    background:red; /*背景色*/
+}
