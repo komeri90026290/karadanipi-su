@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(#F1FEFE, #FFFFFF);
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
     display: flex; /*ディスプレイ設定*/
     justify-content: center;   /*横、中央に*/
     height: 100vh;          /*高さ*/
@@ -30,5 +30,5 @@ body {
 }
 
 #cancel input[type="submit"] {
-    background:red; /*背景色*/
+    background:#F06060; /*キャンセルボタン色指定*/
 }
