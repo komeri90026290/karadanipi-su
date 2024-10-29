@@ -5,6 +5,12 @@
     display:flex;
     flex-flow: column;
 }
+
+.image {
+    position:absolute;
+    left:890px;
+    bottom:250px;
+}
 .content {
     padding: 0em 0.5em;
     margin: 40px auto;
@@ -13,11 +19,13 @@
     font-weight: bold;
     border-radius: 10px;
     border: solid 1px #000000;
+    background-color:#ffffff;
 }
 
 .after_main {
     display:flex;
     flex-flow: column;
+    
 }
 .after-part {
     padding: 0em 0.5em;
@@ -27,5 +35,9 @@
     font-weight: bold;
     border-radius: 10px;
     border: solid 1px #000000;
+    background-color:#ffffff;
 }
 
+#back {
+    background: linear-gradient(#F1FEFE, #FFFFFF);
+}
