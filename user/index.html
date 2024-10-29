@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+    <title>肉体改造管理システム</title>
+</head>
+<body>
+    <h1>肉体改造管理システム</h1>
+
+    <!-- 今日の日付 -->
+    <p id="today"></p>
+    
+    <p>ユーザー名</p>
+    
+    <!-- 身長と体重の入力 -->
+    <p><label for="user_height">身長</label> <input type="number" id="user_height" placeholder="例: 160"> cm </p> 
+    <p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"> kg </p> 
+    
+    <!-- BMI計算ボタン -->
+    <p><button onclick="calculateBMI()">確認</button></p> 
+    <p>BMI: <span id="result"></span>%</p>
+
+    <!-- 平均値表示 -->
+    <h2>平均</h2>
+    <p>体重: <span id="heitai"></span> kg</p> 
+    <p>BMI: <span id="heibmi"></span>%</p> 
+
+    <!-- 目標入力 -->
+    <input type="text" id="moku" placeholder="目標">
+
+    <!-- 各種ボタンとグラフ表示 -->
+    <p>
+        <button type="button">アフターケア</button>
+        <button type="button">トレーニング追加</button>
+        <canvas id="lineChart"></canvas>
+        <p><button onclick="days_id()">日間</button></p>
+        <p><button onclick="week_id()">週間</button></p>
+        <p><button onclick="history_id()">過去記録</button></p>
+    </p>
+
+    <table class="test-table">
+        <thead>
+          <tr>
+            <th class="test-header">朝食</th>
+            <th class="test-header">昼食</th>
+            <th class="test-header">夕食</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td class="test-cell">
+                <input type="text" class="test-input" placeholder="入力してください">
+              </td>
+              <td class="test-cell">
+                <input type="text" class="test-input" placeholder="入力してください">
+              </td>
+              <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+               
+            </tr>
+            <tr>
+              <td class="test-cell">
+                <input type="text" class="test-input" placeholder="入力してください">
+              </td>
+              <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+                <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+             
+            </tr>
+       
+            <tr>
+              <td class="test-cell">
+                <input type="text" class="test-input" placeholder="入力してください">
+              </td>
+              <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+                <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+
+            </tr>
+            <tr>
+                <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
+                </td>
+                <td class="test-cell">
+                    <input type="text" class="test-input" placeholder="入力してください">
+                  </td>
+                  <td class="test-cell">
+                    <input type="text" class="test-input" placeholder="入力してください">
+                  </td>
+  
+              </tr>
+
+              <tr>
+                
+                
+                <td class="test-cell">
+                  <input type="number" class="test-input" placeholder="Kcal">
+                </td>
+                <td class="test-cell">
+                    <input type="number" class="test-input" placeholder="Kcal">
+                  </td>
+                  <td class="test-cell">
+                    <input type="number" class="test-input" placeholder="Kcal">
+                  </td>
+  
+              </tr>
+
+          </tbody>
+        </table>
+
+    <p><button onclick="break_id()">朝食</button></p>
+    <p><button onclick="lunch_id()">昼食</button></p>
+    <p><button onclick="dinner_id()">夕食</button></p>
+    <div id="weight_change_container"></div>
+</body>
+</html>

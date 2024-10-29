@@ -1,0 +1,25 @@
+/* 入力欄を含むコンテナ */
+.input-container {
+	position: relative;
+	width: 150px; /* 必要に応じて変更 */
+}
+
+/* 入力欄のスタイル */
+.input-container input {
+	width: 100%; /* 入力欄の幅をコンテナ全体に合わせる */
+	padding-right: 40px; /* "Kcal" 分のスペース */
+	box-sizing: border-box; /* パディング込みのボックスサイズにする */
+	text-align: right; /* 数値を右揃え */
+}
+
+/* Kcalのスタイル */
+.input-container::after {
+	content: "Kcal"; /* テキストボックス内に表示する固定文字 */
+	position: absolute;
+	right: 10px; /* 右端に配置 */
+	top: 50%;
+	transform: translateY(-50%);
+	color: #555; /* 色調整 */
+	font-size: 14px; /* 必要に応じてサイズ調整 */
+	pointer-events: none; /* クリック不可 */
+}
