@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="styles/login.css">
     </head>
     <body>
+        <div id="back">
         <nav id="title">
             <h1>肉体改造管理システム</h1> 
         </nav>
@@ -15,8 +16,11 @@
             <label for="user_id">ユーザーネームを入力してください</label><br>
             <input type="text" id="user_name" name="user_name"><br>
         
-            <label for="user_password">パスワードを入力してください</label><br>
-            <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"><br>
+            <div class="password_container">
+                <p>パスワード(半角英数字8-16文字)</p>
+                <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$">
+                <span class="toggle-password" onclick="clickButton()">👀</span><br>
+            </div>
         </nav>
             
             <!--ログインボタン-->
@@ -28,5 +32,20 @@
         <nav id="newentry">
             <a href="new_entry.html">新規会員登録はこちらから</a>
         </nav>
+        </div>
+        <script>
+            function clickButton() {
+                var user_password = document.getElementById("user_password");
+                var toggleIcon = document.querySelector(".toggle-password");
+              
+                if (user_password.type === "password") {
+                    user_password.type = "text";
+                    toggleIcon.textContent = "👀"; // 眼のアイコンに表示を切り替える絵文字
+                } else {
+                    user_password.type = "password";
+                    toggleIcon.textContent = "🙈"; // 目のアイコンに表示を切り替える絵文字
+                }
+            }
+        </script>
     </body>
 </html>
