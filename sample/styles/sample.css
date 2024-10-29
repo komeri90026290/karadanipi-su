@@ -8,10 +8,12 @@
 
 .image {
     position:absolute;
-    left:850px;
-    bottom:255px;
+    left:890px;
+    bottom:310px;
 }
+
 .content {
+    display: flex;   /* 横並びにする */ 
     padding: 0em 0.5em;
     margin: 40px auto;
     width: 1000px;
@@ -22,11 +24,23 @@
     background-color:#ffffff;
 }
 
+.sample-text {
+    position: absolute;
+    top: 70px;
+    left: 185px;
+  }
+
+.box1 {
+    padding: 14.5px;
+}
+
+
 .after_main {
     display:flex;
     flex-flow: column;
     
 }
+
 .after-part {
     padding: 0em 0.5em;
     margin: 30px auto;
