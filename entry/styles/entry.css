@@ -1,58 +1,63 @@
 @charset "utf-8";
 
-
-#title {
-    font-size: 35px;
-    text-align: center;
-    clear: both;
-    overflow: hidden;
-    margin: 25px auto;
-    letter-spacing: 0.25em;
+body {
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景のグラデーションカラーを指定*/
 }
 
-#input {
-    align-items: center;    /* 中央に寄せる */
+nav#title {
+    font-size: 35px; /*フォントサイズ*/
+    text-align: center;  /*テキストの位置を真ん中に*/
+    clear: both; /*下の行を問題なく発生させる*/
+    overflow: hidden; /*ボックスの範囲から飛び出た時そこを隠す*/
+    letter-spacing: 0.25em; /*文字の間のスペース指定*/
 }
 
-#input input[type="text"],
-#input input[type="password"],
-#input input[type="number"],
-#input select {
-    width: 80%;
-    text-align: center;
-    width: 60%; 
-    font-size: 20px;
-    padding: 5px;
-    margin: 8px 0;
-    border-radius: 5px;
+nav#input {
+    display: flex;  /*フレックスボックスを配置*/
+    flex-direction: column;  /* 縦方向配置 */
+    align-items: center;  /*中央ぞろえでかっこよく*/
+}
+
+nav#input input[type="text"],
+nav#input input[type="password"],
+nav#input input[type="number"],
+nav#input select {
+    text-align: center; /*中央に揃える*/
+    width: 60%; /*横幅指定*/
+    font-size: 20px; /*フォントの大きさを指定 */
+    padding: 5px; /*内側の余白の大きさ*/
+    margin: 8px 0; /*外側の余白の大きさ*/
+    border-radius: 15px; /*枠の淵の丸みを指定*/
 }
 
 
 #submit {
-    text-align: right; 
-    margin: 20px auto;
+    text-align: right; /*登録ボタンの場所を右端に*/
+    margin: 20px auto; /*外側の余白の大きさ*/
+    border-radius: 15px; /*枠の淵の丸みを指定*/
 }
 
 #submit input[type="submit"] {
-    font-size: 20px;
-    padding: 8px 16px;
-    background-color: yellow;
-    color: black;
-    border: none; 
-    cursor: pointer;
+    font-size: 20px; /*文字の大きさ指定*/
+    padding: 8px 16px; /*内側の余白の大きさ*/
+    background-color: yellow; /*ボタンの色を指定*/
+    color: black; /*文字の色指定*/
+    cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
+    border: 1.5px solid black; /*枠線太さ色*/
+    border-radius: 15px; /*枠の淵の丸みを指定*/
 }
 
 /*体重小数点エラー部分*/
 .error {
-    display: none; 
+    display: none;  /*いつもは隠れてます*/
   }
   /* 隣接セレクタで
    * input:invalidの隣の
    * エラーメッセージは表示する
    */
   input:invalid + .error {
-    display: block;
-    color: red;
-    font-size: 0.9em;
+    display: block; /*ブロックとして表示*/
+    color: red; /*文字の色指定*/
+    font-size: 0.9em; /*文字の大きさ指定*/
 }
 
