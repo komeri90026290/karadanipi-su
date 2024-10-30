@@ -6,44 +6,47 @@
         <link rel="stylesheet" href="styles/login.css">
     </head>
     <body>
-        <div id="back">
-        <nav id="title">
+        <nav id="back"> <!--背景色指定のためのID[back]-->
+        <nav id="title"> <!--タイトルの大きさ変更のためのID[title]-->
             <h1>肉体改造管理システム</h1> 
         </nav>
+
         <nav id="input">
         <form>                                          
-            <!--ID、パスワード入力欄-->
-            <label for="user_id">ユーザーネームを入力してください</label><br>
+            <!--ユーザーネーム、パスワード入力欄-->
+            <label for="user_id">ユーザーネームを入力してください</label><br> <!--●ユーザーネームでラベル付け-->
             <input type="text" id="user_name" name="user_name"><br>
         
             <div class="password_container">
                 <p>パスワード(半角英数字8-16文字)</p>
-                <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$">
-                <span class="toggle-password" onclick="clickButton()">👀</span><br>
+                <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"> <!--パスワード入力欄、英数字のみの指定-->
+                <span class="toggle-password" onclick="clickButton()">👀</span><br> <!--関数clickButtonを呼び出すことでパスワードの表示非表示を切り替え--> 
             </div>
-        </nav>
+        
             
             <!--ログインボタン-->
-        <nav id="submit">
-            <input type="submit" value="ログイン">           
+        <nav id="submit"> <!--ログインボタンをCSSでいじるためのID[submit]-->
+            <input type="submit" value="ログイン">
+
         </nav>
         </form>
         <!--新規会員登録リンク-->
-        <nav id="newentry">
-            <a href="new_entry.html">新規会員登録はこちらから</a>
+        <nav id="newentry"> <!--会員登録文をいじるためのID[newentry]-->
+            <a href="new_entry.html">新規会員登録はこちらから</a> <!--new_entry.htmlに飛ぶリンク-->
         </nav>
         </div>
+
         <script>
-            function clickButton() {
-                var user_password = document.getElementById("user_password");
-                var toggleIcon = document.querySelector(".toggle-password");
+            function clickButton() {        
+                var user_password = document.getElementById("user_password"); //変数user_passwordに入力途中のパスワードを入れとく
+                var toggleIcon = document.querySelector(".toggle-password"); //変数toggleIconにtoggle-passwordを入れとく
               
-                if (user_password.type === "password") {
-                    user_password.type = "text";
-                    toggleIcon.textContent = "👀"; // 眼のアイコンに表示を切り替える絵文字
+                if (user_password.type === "password") { //パスワードのtype属性が[password](隠れている状態であること)確認 そうだった場合そのまま下のコードへ
+                    user_password.type = "text"; //type属性を[text]に変更することでpasswordの中身を表示
+                    toggleIcon.textContent = "👀"; // パスワードが見れるようになったら👀に絵文字を変更
                 } else {
-                    user_password.type = "password";
-                    toggleIcon.textContent = "🙈"; // 目のアイコンに表示を切り替える絵文字
+                    user_password.type = "password"; //type属性をpasswordに変更することでpasswordの中身を隠す
+                    toggleIcon.textContent = "🙈"; // パスワードが見れなくなったら🙈に絵文字を変更
                 }
             }
         </script>

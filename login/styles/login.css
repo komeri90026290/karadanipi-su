@@ -1,50 +1,52 @@
 @charset "utf-8";
 
 #back {
-    background: linear-gradient(#F1FEFE, #FFFFFF);
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ指定*/
 }
 
+
+
 #title {
-    font-size: 35px;
-    text-align: center;
-    clear: both;
-    overflow: hidden;
-    margin: 25px auto;
-    letter-spacing: 0.25em;
+    font-size: 35px; /*文字の大きさ指定*/
+    text-align: center; /*中央に寄せる*/
+    clear: both; /*下の行を問題なく発生させる*/
+    overflow: hidden; /*ボックスの範囲から飛び出た時そこを隠す*/
+    letter-spacing: 0.25em;/*文字の間のスペース指定*/
 }
 
 #input {
-    text-align: center;
-    font-size: 25px
+    text-align: center; /*中央に揃える*/
+    font-size: 25px /*文字の大きさ指定*/
 }
 
 #input input[type="text"],
 #input input[type="password"] {
-    width: 80%; 
-    font-size: 20px; 
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
+    text-align: center; /*中央に揃える*/
+    width: 60%; /*横幅指定*/
+    font-size: 20px; /*文字の大きさ指定*/
+    padding: 10px; /*内側の余白の大きさ*/
+    margin: 10px 0; /*外側の余白の大きさ*/
+    border: 2px solid #ccc;  /*枠の淵の線の太さと色指定*/
+    border-radius: 15px; /*枠の淵の丸みを指定*/
 }
 
 
 #submit {
     text-align: right; /* ボタンを右に寄せる */
-    margin: 20px auto;
+    margin: 20px auto; /*外側の余白の大きさ*/
 }
 
 #submit input[type="submit"] {
-    font-size: 20px;
-    padding: 8px 16px;
-    background-color: yellow;
-    color: black;
-    border: none; /* 枠を削除 */
-    cursor: pointer;
+    font-size: 20px; /*文字の大きさ指定*/
+    padding: 8px 16px; /*内側の余白の大きさ*/
+    background-color: yellow; /*ボタンの色指定*/
+    color: black; /*文字の色指定*/
+    border: 1.5px solid black; /*枠線太さ色*/ 
+    cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
 }
 
 #newentry {
-    text-align: right;
-    margin: 50px;
+    text-align: right; /*右に移動*/
+    margin: 50px;  /*外側の余白の大きさ*/
 } 
 
