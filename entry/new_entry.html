@@ -2,6 +2,7 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--スマホとかとサイズ変更にも対応-->
         <title>新規会員登録</title>
         <link rel="stylesheet" href="styles/entry.css">
     </head>
@@ -41,8 +42,22 @@
                     <option value="woman">女性</option>
                     <option value="notset">未設定</option>
                 </select><br>
-            </nav>
 
+                        <!--~~~~~~~~~入力欄の中の秒、回、セットを表示させるための部分~~~~~~~~~~-->
+                        <div class="cm">
+                            <p>cm</p>
+                          </div>
+                    
+                          <div class="kg">
+                            <p>kg</p>
+                          </div>
+                    
+                          <div class="age">
+                            <p>歳</p>
+                          </div>
+                          <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
+                </form>
+<!--~~~~~~~~~~~~~~~パスワード表示、非表示切り替えゾーン~~~~~~~~~~~~~~~~~~~~-->
                 <script>
                     function clickButton() {        
                         var user_password = document.getElementById("user_password"); //変数user_passwordに入力途中のパスワードを入れとく
@@ -57,12 +72,14 @@
                         }
                     }
                 </script>
+<!--~~~~~~~~~~~~~~ゾーン終わり~~~~~~~~~~~~~~~~-->
 
             <!--登録ボタン-->
                 <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
                     <input type="submit" value="登録">
+                </nav>
                 </div>
-            </form>
+            
         </nav>
     </body>
 </html>
