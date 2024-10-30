@@ -8,8 +8,20 @@
 
 .image {
     position:absolute;
-    left:890px;
+    left:910px;
     bottom:310px;
+}
+
+.image2 {
+    position:absolute;
+    left:930px;
+    bottom:32px;
+}
+
+.image3 {
+    position:absolute;
+    left:982.6px;
+    bottom:303px;
 }
 
 .content {
@@ -30,10 +42,19 @@
     left: 185px;
   }
 
-.box1 {
-    padding: 14.5px;
+.lunch {
+    padding: 13.5px;    
 }
 
+.dinner {
+    padding: 13.5px;    
+}
+
+.sample-text-2 {
+    position: absolute;
+    bottom: 203px;
+    left: 185px;
+  }
 
 .after_main {
     display:flex;
