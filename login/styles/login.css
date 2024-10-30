@@ -39,10 +39,12 @@
 #submit input[type="submit"] {
     font-size: 20px; /*文字の大きさ指定*/
     padding: 8px 16px; /*内側の余白の大きさ*/
-    background-color: yellow; /*ボタンの色指定*/
+    background-color: #ffea81; /*ボタンの色指定*/
     color: black; /*文字の色指定*/
-    border: 1.5px solid black; /*枠線太さ色*/ 
     cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
+    border-radius: 10px; /*枠の淵の丸み指定*/
+    border: none; /*枠を削除*/
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
 }
 
 #newentry {
