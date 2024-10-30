@@ -8,7 +8,6 @@
 
 .image {       /*納豆ご飯画像*/
     position:absolute;
-<<<<<<< HEAD
     left:910px;
     bottom:310px;
 }
@@ -32,29 +31,8 @@
 }
 
 
-=======
-    left:850px;
-    bottom:255px;
-}
 
-.image2 {     /*温泉卵画像*/
-    position:absolute;
-    left:850px;
-    top:420px;
-}
 
-.image3 {     /*ツナトースト画像*/
-    position:absolute;
-    left:865px;
-    top:700px;
-}
-
-.image4 {    /*ヨーグルト画像*/
-    position:absolute;
-    left:880px;
-    top:1000px;
-}
->>>>>>> f6fc0028839d7e5c684b875a7cfa92fd6e7f2998
 .content {
     display:flex; /*横向き*/
     padding: 0em 0.5em;/*枠のサイズ変更*/
@@ -75,13 +53,13 @@
     left: 185px;
   }
 
-<<<<<<< HEAD
+
 .lunch {
     padding: 13.5px;    
-=======
+
 .box1 {
     padding: 14.5px;/*昼ごはんのページの枠内の間隔変更*/
->>>>>>> f6fc0028839d7e5c684b875a7cfa92fd6e7f2998
+
 }
 
 .dinner {
@@ -93,6 +71,24 @@
     bottom: 203px;
     left: 185px;
   }
+
+.breakfast {
+    padding: 14.5px;/*朝ごはんのページの枠内の間隔変更*/
+}
+
+.diet_title {       /*「ダイエット」の配置変更*/
+    position:absolute;
+    top: 70px;
+    left: 130px;
+    
+}
+
+.diet_title2 {      /*「ダイエット」の配置変更*/
+    position:absolute;
+    top: 350px;
+    left: 130px;
+    
+}
 
 .breakfast {
     padding: 14.5px;/*朝ごはんのページの枠内の間隔変更*/
