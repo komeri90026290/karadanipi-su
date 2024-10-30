@@ -24,6 +24,13 @@
     bottom:303px;
 }
 
+.image4 {
+    position:absolute;
+    left:920px;
+    bottom:28px;
+}
+
+
 .content {
     display: flex;   /* 横並びにする */ 
     padding: 0em 0.5em;
@@ -35,6 +42,8 @@
     border: solid 1px #000000;
     background-color:#ffffff;
 }
+
+
 
 .sample-text {
     position: absolute;
