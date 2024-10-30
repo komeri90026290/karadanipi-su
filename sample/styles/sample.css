@@ -6,29 +6,30 @@
     flex-flow: column;
 }
 
-.image {       /*納豆ご飯画像*/
+.luimage {       /*納豆ご飯画像*/
     position:absolute;
     left:910px;
     bottom:310px;
 }
 
-.image2 {
+.luimage2 {
     position:absolute;
     left:930px;
     bottom:32px;
 }
 
-.image3 {
+.diimage {
     position:absolute;
     left:982.6px;
     bottom:303px;
 }
 
-.image4 {
+.diimage2 {
     position:absolute;
     left:920px;
     bottom:28px;
 }
+
 
 
 
@@ -56,7 +57,7 @@
 
 .lunch {
     padding: 13.5px;    
-
+}
 .box1 {
     padding: 14.5px;/*昼ごはんのページの枠内の間隔変更*/
 
