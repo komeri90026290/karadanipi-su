@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "utf-8"; /*明日はここから*/
 
 /*メニューボタン全体位置指定指定*/
 #admin_nav {
@@ -14,9 +14,8 @@
     background: linear-gradient(#F1FEFE, #FFFFFF); /*グラデの背景色*/
     border-right: 2px solid black; 
     padding-top: 60px; 
-
+    border-radius: 10px;
 }
-/*dd*/
 
 /*リストの点消し*/
 #admin_nav ul {
