@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--スマホとかとサイズ変更にも対応-->
+    <link rel="stylesheet" href="styles/tore.css">
+</head>
+<body>
+    <div id="back"> <!--背景色指定のためのID[back]-->
+        <nav id="input"> <!--タイトルの大きさ変更のためのID[title]-->
+
+<!--~~~~~~~~~~ここからユーザーが入力する欄を作るための部分~~~~~~~~~~~~~~~-->
+            <form>
+                <select id="part" name="kinntore"> <!--筋トレ部位をselectで選択させる-->
+                    <option value="">肉体部位</option>
+                    <option value="ryoute" id="">両手</option>
+                    <option value="kyoukinn" id="">胸筋</option>
+                    <option value="hukkinn" id="">腹筋</option>                        
+                    <option value="ryouasi" id="leg">両足</option>
+                </select>
+
+      <p><label for="tore"></label> <input type="text" id="tore" name="tore"></p> <!--トレーニング内容入力欄を作るための部分-->
+
+      <div class="byou">
+      <p><label for="byou"></label> <input type="number" id="byou" name="byou">  </p> <!--秒数入力欄を作るための部分-->
+      </div>
+
+      <div class="kai">
+        <p><label for="kai"></label> <input type="number" id="kai" name="kai">  </p> <!--回数入力欄を作るための部分-->
+      </div>
+
+      <div class="seto">
+        <p><label for="seto"></label> <input type="number" id="seto" name="seto">  </p> <!--セット回数を入力するための部分-->
+      </div>
+
+<!--~~~~~~~~~~~~~~~入力欄のためのコード終わり~~~~~~~~~~~~~~~~~~~~-->
+
+
+            <!--~~~~~~~~~入力欄の中の秒、回、セットを表示させるための部分~~~~~~~~~~-->
+            <div class="seconds">
+                <p>秒</p>
+              </div>
+        
+              <div class="numbertime">
+                <p>回</p>
+              </div>
+        
+              <div class="kakeru">
+                <p>×</p>
+              </div>
+        
+              <div class="set">
+                <p>セット</p>
+              </div>
+              <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
+
+
+
+        <!--追加ボタン作るよ～-->
+                <div id="submit">
+                   <input type="submit" value="追加">
+                </div>
+            </nav>
+        </form>
+    </div>
+</body>
