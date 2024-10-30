@@ -25,6 +25,8 @@ function initializeChart() {
             }]
         },
         options: {
+            responsive: false, // レスポンシブを無効にする
+            maintainAspectRatio: false, // アスペクト比を維持しない
             scales: {
                 y: {
                     beginAtZero: true,
