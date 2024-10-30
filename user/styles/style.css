@@ -1,25 +1,36 @@
-/* 入力欄を含むコンテナ */
-.input-container {
-	position: relative;
-	width: 150px; /* 必要に応じて変更 */
+body {
+    display: flex; /* ボディ全体をフレックスコンテナに */
+    font-family: Arial, sans-serif; /* フォント設定 */
 }
 
-/* 入力欄のスタイル */
-.input-container input {
-	width: 100%; /* 入力欄の幅をコンテナ全体に合わせる */
-	padding-right: 40px; /* "Kcal" 分のスペース */
-	box-sizing: border-box; /* パディング込みのボックスサイズにする */
-	text-align: right; /* 数値を右揃え */
+.sidebar {
+    width: 200px; /* サイドバーの幅を設定 */
+    padding: 20px; /* パディングを追加 */
+    border-right: 1px solid #ccc; /* サイドバーの右側に線を追加 */
+    background-color: #f9f9f9; /* 背景色 */
 }
 
-/* Kcalのスタイル */
-.input-container::after {
-	content: "Kcal"; /* テキストボックス内に表示する固定文字 */
-	position: absolute;
-	right: 10px; /* 右端に配置 */
-	top: 50%;
-	transform: translateY(-50%);
-	color: #555; /* 色調整 */
-	font-size: 14px; /* 必要に応じてサイズ調整 */
-	pointer-events: none; /* クリック不可 */
+.content {
+    flex: 1; /* 残りのスペースを占める */
+    padding: 20px; /* パディングを追加 */
+}
+
+h1, h2 {
+    margin: 0 0 15px 0; /* 見出しのマージン設定 */
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 100px; /* 幅を小さくする */
+    padding: 5px; /* パディングを追加 */
+    font-size: 14px; /* フォントサイズを小さくする */
+    border: 1px solid #ccc; /* ボーダーのスタイル */
+    border-radius: 4px; /* 角を丸くする */
+}
+
+input[type="text"],
+input[type="moku"]{
+    width: 700px;
+	font-size:  32px;
+	text-align: center;
 }
