@@ -140,3 +140,8 @@
 #back {
     background: linear-gradient(#F1FEFE, #FFFFFF);
 }
+
+.afterimage {
+    padding:absolute;
+    left:500px;
+}
