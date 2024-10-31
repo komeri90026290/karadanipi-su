@@ -185,3 +185,28 @@ input[type="moku"]{
 }
 
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
+}
+/*~~~~~~~~入力欄の中のやつを表示させるための部分~~~~~~~~~*/
+
+.cm {
+    z-index: 9999; /*何があっても一番前に表示*/
+    position: absolute;     /*無敵*/
+    top: 136px;        /*上からの位置指定*/
+    left: 113.5px;      /*左からの位置指定*/ 
+    font-size: 17.5px;     /*文字の大きさ指定*/
+    color: #333;         /*文字の色指定*/
+}
+
+.kg {
+    z-index: 9999;      /* 高い数値ほど前面に表示される */
+    position: absolute;       /*無敵*/
+    top: 203px;               /*上からの位置指定*/
+    left: 118px;            /*左からの位置指定*/   
+    font-size: 17.5px;          /*文字の大きさ指定*/
+    color: #333;              /*文字の色指定*/     
+}
+
+/*入力欄の中のやつ終わり*/
