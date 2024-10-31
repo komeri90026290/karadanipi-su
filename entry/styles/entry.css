@@ -65,6 +65,10 @@ nav#input select {
 
 /*体重小数点エラー部分*/
 .error {
+    top: 340px;        /*上からの位置指定*/
+    left: 570px;      /*左からの位置指定*/ 
+    z-index: 9999; /*何があっても一番前に表示*/
+    position: absolute;     /*無敵*/
     display: none;  /*いつもは隠れてます*/
   }
   /* 隣接セレクタで
