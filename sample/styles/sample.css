@@ -142,6 +142,7 @@
 }
 
 .afterimage {
-    padding:absolute;
-    left:500px;
+    position:absolute;
+    top:90px;
+    left:900px;
 }
