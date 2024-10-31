@@ -1,5 +1,21 @@
-body {
-    display: flex; /* ボディ全体をフレックスコンテナに */
+
+@charset "utf-8"; 
+
+/*メニューボタン全体位置指定指定*/
+#admin_nav {
+    width: 130px;
+    clear: both;
+    overflow: hidden;
+    margin: 0px auto;
+    position: fixed; 
+    top: 0;          
+    left: 0;         
+    height: 100%;    
+    z-index: 1000;   /*他のより前に*/
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*グラデの背景色*/
+    border-right: 2px solid black; 
+    padding-top: 60px; 
+    border-radius: 10px;
 }
 .custom-button {
     padding: 15px 0px; /* 共通のパディング */
