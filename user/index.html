@@ -82,98 +82,54 @@
         </div>
     </p>
 
-    <table class="test-table">
-        <thead>
+    
           <tr>
-            <th class="test-header">朝食</th>
-            <th class="test-header">昼食</th>
-            <th class="test-header">夕食</th>
+            <th class="test-bre">朝食</th>
+            <th class="test-lun">昼食</th>
+            <th class="test-din">夕食</th>
           </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <td class="test-cell">
-                <input type="text" class="test-input" placeholder="入力してください">
-              </td>
-              <td class="test-cell">
-                <input type="text" class="test-input" placeholder="入力してください">
-              </td>
-              <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-               
-            </tr>
-            <tr>
-              <td class="test-cell">
-                <input type="text" class="test-input" placeholder="入力してください">
-              </td>
-              <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-                <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-             
-            </tr>
        
-            <tr>
+        <tbody>
+
+             
+
               <td class="test-cell">
-                <input type="text" class="test-input" placeholder="入力してください">
-              </td>
-              <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-                <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
+                <textarea class="text-breakfast" placeholder="入力してください"></textarea>
                 </td>
 
-            </tr>
-            <tr>
                 <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-                <td class="test-cell">
-                    <input type="text" class="test-input" placeholder="入力してください">
+                  <textarea class="text-lunch" placeholder="入力してください"></textarea>
                   </td>
-                  <td class="test-cell">
-                    <input type="text" class="test-input" placeholder="入力してください">
-                  </td>
-  
-              </tr>
 
-              <tr>
-                
-                
-                <td class="test-cell">
-                  <input type="number" class="test-input" placeholder="Kcal">
-                </td>
-                <td class="test-cell">
-                    <input type="number" class="test-input" placeholder="Kcal">
-                  </td>
                   <td class="test-cell">
-                    <input type="number" class="test-input" placeholder="Kcal">
-                  </td>
-  
-              </tr>
+                    <textarea class="text-dinner" placeholder="入力してください"></textarea>
+                    </td>
 
           </tbody>
         </table>
-        <div>
-          <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-          <button id="entry-button" class="custom-button entry" onclick="lunch_id()">登録</button>
-          <button id="entry-button" class="custom-button entry" onclick="dinner_id()">登録</button>
-      </div>
-      <div id="weight_change_container"></div>
-         
 
 
-        <div>
-          <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
-          <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
-          <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
-      </div>
-      <div id="weight_change_container"></div>
-      
+
+
+
+
+        <tr>
+               
+               
+          <td class="test-cell">
+            <input type="number" class="test-input" placeholder="Kcal">
+            <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+          </td>
+          <td class="test-cell">
+              <input type="number" class="test-input" placeholder="Kcal">
+              <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+            </td>
+            <td class="test-cell">
+              <input type="number" class="test-input" placeholder="Kcal">
+              <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+            </td>
+
+        </tr>
    
   </div>
 </body>
