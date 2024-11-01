@@ -140,3 +140,9 @@
 #back {
     background: linear-gradient(#F1FEFE, #FFFFFF);
 }
+
+.afterimage {
+    position:absolute;
+    top:90px;
+    left:900px;
+}

@@ -17,8 +17,18 @@
     <p>ユーザー名</p>
     
     <!-- 身長と体重の入力 -->
-    <p><label  for="user_height">身長</label> <input type="number"  id="user_height" placeholder="例: 160"> cm </p> 
-    <p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"> kg </p> 
+    <p><label  for="user_height">身長</label> <input type="number"  id="user_height" placeholder="例: 160"></p> 
+    <p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"></p> 
+
+                 <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
+                  <div class="cm">
+                     <p>cm</p>
+                  </div>
+                    
+                  <div class="kg">
+                      <p>kg</p>
+                  </div>
+                          <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
     
     <!-- BMI計算ボタン -->
     <p>BMI: <span id="result"></span>%</p>
@@ -28,8 +38,9 @@
     <h2>平均</h2>
     <p>体重: <span id="heitai"></span> kg</p> 
     <p>BMI: <span id="heibmi"></span>%</p> 
-  </div>
 
+
+      </div>
   <div class="content">
 
     <!-- 目標入力 -->
