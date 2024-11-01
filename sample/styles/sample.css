@@ -51,10 +51,21 @@
 
 .diimage2 {
     position:absolute;
-    left:920px;
-    bottom:28px;
+    left:930px;
+    top: 433px;
 }
 
+.diimage3 {
+    position:absolute;
+    left:930px;
+    top: 700px;
+}
+
+.diimage4 {
+    position:absolute;
+    left:900px;
+    top: 990px;
+}
 
 .content {
     display:flex; /*横向き*/
@@ -78,6 +89,12 @@
 .sample-text-2 {  
     position: absolute;   /*Lunch、Dinnerの筋トレ表示位置指定*/
     bottom: 203px;
+    left: 185px;
+  }
+
+.sample-text-3 {  
+    position: absolute;   /*Lunch、Dinnerの筋トレ表示位置指定*/
+    top: 630px;
     left: 185px;
   }
 
