@@ -251,9 +251,6 @@ input[type="moku"]{
 }
 
 
-
-
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
@@ -278,5 +275,5 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #333;              /*文字の色指定*/     
 }
 
-/*入力欄の中のやつ終わり*/
+入力欄の中のやつ終わり*/
 
