@@ -28,7 +28,7 @@
     <h2>平均</h2>
     <p>体重: <span id="heitai"></span> kg</p> 
     <p>BMI: <span id="heibmi"></span>%</p> 
-  </div>
+    </div>
 
   <div class="content">
 
@@ -39,7 +39,6 @@
 
     <div class="container">
       <!-- 人型ピクトグラム -->
-      <h2>体の部位</h2>
       <svg id="body-parts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 250" width="400" height="800">
         <!-- 頭 -->
         <circle cx="60" cy="40" r="20" class="body-part" id="head" />
@@ -48,23 +47,26 @@
         <!-- 腹筋 -->
         <rect x="45" y="100" width="30" height="50" class="body-part" id="abs" />
         <!-- 左腕 (反対方向に広げる) -->
-        <rect x="30" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(30 35 70)" />
+        <rect x="30" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(30 35 83)" />
         <!-- 右腕 (反対方向に広げる) -->
-        <rect x="80" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(-30 85 70)" />
+        <rect x="80" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(-30 85 83)" />
         <!-- 左脚 (斜めに広げる) -->
         <rect x="38" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(15 45 150)" />
-        <!-- 右脚 (斜めに広げる) -->
-        <rect x="68" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(-15 55 150)" />
+        <!-- 右脚 (斜めに広げる - 線対称に配置) -->
+        <rect x="68" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(-15 72 142)" />
     </svg>
     </div>
 
 
     <!-- 各種ボタンとグラフ表示 -->
     <p>
+      <div class="button-container">
         <button id="care" class="custom-button care">アフターケア</button>
         <button id="tr" class="custom-button tr">トレーニング追加</button>
+      </div>
+        <h1>体重管理</h1>
         <canvas id="lineChart"></canvas>
-        <div>
+        <div >
         <button id="days" class="custom-button days" onclick="days_id()">日間</button>
         <button id="week" class="custom-button week" onclick="week_id()">週間</button>
         <button id="history" class="custom-button history" onclick="history_id()">過去記録</button>
@@ -104,7 +106,6 @@
                 </td>
              
             </tr>
-       
             <tr>
               <td class="test-cell">
                 <input type="text" class="test-input" placeholder="入力してください">
@@ -115,7 +116,6 @@
                 <td class="test-cell">
                   <input type="text" class="test-input" placeholder="入力してください">
                 </td>
-
             </tr>
             <tr>
                 <td class="test-cell">
@@ -127,20 +127,21 @@
                   <td class="test-cell">
                     <input type="text" class="test-input" placeholder="入力してください">
                   </td>
-  
               </tr>
-
               <tr>
                 
                 
                 <td class="test-cell">
                   <input type="number" class="test-input" placeholder="Kcal">
+                  <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
                 </td>
                 <td class="test-cell">
                     <input type="number" class="test-input" placeholder="Kcal">
+                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
                   </td>
                   <td class="test-cell">
                     <input type="number" class="test-input" placeholder="Kcal">
+                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
                   </td>
   
               </tr>
@@ -148,22 +149,18 @@
           </tbody>
         </table>
         <div>
-          <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-          <button id="entry-button" class="custom-button entry" onclick="lunch_id()">登録</button>
-          <button id="entry-button" class="custom-button entry" onclick="dinner_id()">登録</button>
+          
       </div>
       <div id="weight_change_container"></div>
          
 
 
-        <div>
-          <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
-          <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
-          <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
-      </div>
+      <div class="button-group">
+        <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
+        <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
+        <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
+    </div>
       <div id="weight_change_container"></div>
-      
-   
   </div>
 </body>
 </html>

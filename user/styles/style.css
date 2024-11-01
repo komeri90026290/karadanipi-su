@@ -2,6 +2,7 @@ body {
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
+    
 }
 
 .sidebar {
@@ -13,7 +14,8 @@ body {
 
 .content {
     flex: 1; /* 残りのスペースを占める */
-    padding: 20px; /* パディングを追加 */
+    padding: 0px; /* パディングを追加 */
+    margin-left: 100px; /* 左に20pxのスペースを追加 */
 }
 
 h1, h2 {
@@ -57,10 +59,19 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    margin-bottom: 80px; /* 下に40px分のスペースを追加 */
     
     height: 100vh; /* 中央に配置するための高さ設定 */
 }
 
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平方向にセンタリング */
+    margin-top: 30px; /* アバターを上下方向に移動 */
+    margin-left: -1450px; /* アバターを左右方向に移動 */
+}
 
 
 
@@ -70,6 +81,7 @@ input[type="moku"]{
 	font-size:  32px;
 	text-align: center;
     box-shadow: 0 0 8px gray;
+    margin-top:50px; /* グループ全体の上に20pxのスペースを追加 */
 }
 
 
@@ -105,6 +117,7 @@ input[type="moku"]{
     text-align: center;/**/
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    
 
 
 }
@@ -117,12 +130,28 @@ input[type="moku"]{
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
+/* CSSの追加 */
+.button-container {
+    display: flex;                   /* フレックスボックスを使用して横並びにする */
+    justify-content: center;         /* ボタンを中央に配置 */
+    margin-top: 20px; 
+    margin-left: -1370px;              /* ボタンの上部にスペースを設ける（必要に応じて調整） */
+    margin-bottom: 160px; /* 下に40px分のスペースを追加 */
+}
+
+.custom-button {
+    margin: 0 10px;                 /* ボタン間の横方向のスペースを設定 */
+}
+
+
+
+
 .days {
     width: 110px;
     height:60px ;
     text-align: center;/**/
     
-    
+
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 
@@ -184,4 +213,20 @@ input[type="moku"]{
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
+/* ボタン全体を囲むコンテナにFlexbox設定を追加 */
+.button-group {
+    display: flex;
+    justify-content: flex-start; /* 左寄せ */
+    gap: 450px; /* ボタン間のスペース */
+    min-width: 600px;
+    margin: 0; /* 左寄せにするために中央寄せを削除 */
+    margin-top: 15px; /* アバターとボタン間の空白を設定 */
+}
+
+/* 各ボタンのスタイル */
+.custom-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
