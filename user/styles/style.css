@@ -163,6 +163,72 @@ input[type="moku"]{
 
 }
 
+
+
+/* 格子スタイルのテキストエリア */
+.text-breakfast {
+    width: 15%; /* 全幅にする */
+    height: 100px; /* 高さを調整 */
+    padding: 2px;
+    font-size: 14px;
+    line-height: 24px; /* 横線の間隔 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* サイズ変更を無効化 */
+    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
+    background-size: 100% 24px; /* 横線の間隔と高さ */
+    position:  absolute;        /* 要素の配置方法を指定 */
+    padding:  20px;             /* 余白指定 */
+    left:  550px;                /* 左からの位置指定 */
+    top: 1200px;
+}
+
+
+
+
+/* 格子スタイルのテキストエリア */
+.text-lunch {
+    width: 15%; /* 全幅にする */
+    height: 100px; /* 高さを調整 */
+    padding:2px;
+    font-size: 14px;
+    line-height: 24px; /* 横線の間隔 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* サイズ変更を無効化 */
+    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
+    background-size: 100% 24px; /* 横線の間隔と高さ */
+    position:  absolute;        /* 要素の配置方法を指定 */
+    padding:  20px;             /* 余白指定 */
+    left:  300px;                /* 左からの位置指定 */
+    top: 1200px;
+}
+
+
+
+
+
+/* 格子スタイルのテキストエリア */
+.text-dinner {
+    width: 15%; /* 全幅にする */
+    height: 100px; /* 高さを調整 */
+    padding: 2px;
+    font-size: 14px;
+    line-height: 24px; /* 横線の間隔 */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* サイズ変更を無効化 */
+    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
+    background-size: 100% 24px; /* 横線の間隔と高さ */
+
+    position:  absolute;        /* 要素の配置方法を指定 */
+    padding:  20px;             /* 余白指定 */
+    left:  820px;                /* 左からの位置指定 */
+    top: 1200px;
+    
+}
+
+
 .breakfast {
     width: 140px; /* 朝食ボタンの幅 */
     height: 100px; /* 朝食ボタンの高さ */
@@ -183,5 +249,6 @@ input[type="moku"]{
     background-color: #D9D9D9; /* 夕食ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
+
 
 
