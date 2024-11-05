@@ -1,20 +1,20 @@
 @charset "utf-8";
-
+ 
 #back {
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ指定*/
 }
-
-
+ 
+ 
 #input select{
     position: relative; /* 今の位置を基準 */
     top: 20px; /* 上からの位置指定 */
     left: 100px; /* 左からの位置指定 */
     font-size: 25px; /*文字の大きさ指定*/
-    padding: 6px 45px; /*枠の縦横の数値を指定*/ 
+    padding: 6px 45px; /*枠の縦横の数値を指定*/
     border: 1px solid #ccc; /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
 }
-
+ 
 #input input[type="text"]{
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
     text-align: center; /*入力される文が入力欄の真ん中に出るように設定*/
@@ -26,8 +26,8 @@
     border-radius: 15px; /*枠の淵の丸みを指定*/
     margin-left: 100px; /*枠の左のスペース*/
 }
-
-
+ 
+ 
 #input input[id="byou"]{
     top: 80px; /*上からの位置指定*/
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
@@ -40,8 +40,8 @@
     border: 1px solid #ccc; /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
 }
-
-
+ 
+ 
 #input input[id="kai"]{
     top: 84px; /*上からの位置指定*/
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
@@ -54,50 +54,50 @@
     border: 1px solid #ccc;  /*枠線の太さと色指定*/
     border-radius: 15px;/*枠の淵の丸みを指定*/
 }
-
+ 
 /*~~~~~~~~入力欄の中のやつを表示させるための部分~~~~~~~~~*/
-
+ 
 .seconds {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
     top: 157px;        /*上からの位置指定*/
-    left: 240px;      /*左からの位置指定*/ 
+    left: 240px;      /*左からの位置指定*/
     font-size: 25px;     /*文字の大きさ指定*/
     color: #333;         /*文字の色指定*/
 }
-
+ 
 .numbertime {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 248px;               /*上からの位置指定*/
-    left: 240px;            /*左からの位置指定*/   
+    left: 240px;            /*左からの位置指定*/  
     font-size: 25px;          /*文字の大きさ指定*/
-    color: #333;              /*文字の色指定*/     
+    color: #333;              /*文字の色指定*/    
 }
-
+ 
 .kakeru {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 138px;               /*上からの位置指定*/
-    left: 308px;              /*左からの位置指定*/ 
+    left: 308px;              /*左からの位置指定*/
     font-size: 50px;        /*文字の大きさ指定*/  
     color: #333;          /*文字の色指定*/    
 }
-
+ 
 .set {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 214px;               /*上からの位置指定*/
-    left: 460px;             /*左からの位置指定*/ 
+    left: 460px;             /*左からの位置指定*/
     font-size: 20px;          /*文字の大きさ指定*/  
     color: #333;      /*文字の色指定*/
 }
-
+ 
 /*入力欄の中のやつ終わり*/
-
-
-
-
+ 
+ 
+ 
+ 
 #input input[id="seto"]{
     top: 210px;  /*上からの位置指定*/
     position: absolute;  /*無敵*/
@@ -111,9 +111,9 @@
     margin-left: 380px; /*左側の余白の大きさ指定*/
     margin-top: -25px;  /*上からの位置指定*/
 }
-
-
-
+ 
+ 
+ 
 #submit input[type="submit"] {
     left : 630px; /*左からの位置指定*/
     position: absolute; /*無敵*/
@@ -127,7 +127,9 @@
     border-radius: 10px; /*枠の淵の丸み指定*/
     box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
 }
-
-
-
-
+ 
+ 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
+}

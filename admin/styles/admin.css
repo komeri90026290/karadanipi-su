@@ -1,47 +1,45 @@
-
-@charset "utf-8"; 
-
+@charset "utf-8";
 /*メニューボタン全体位置指定指定*/
 #admin_nav {
-    width: 130px;
-    clear: both;
-    overflow: hidden;
-    margin: 0px auto;
-    position: fixed; 
-    top: 0;          
-    left: 0;         
-    height: 100%;    
+    width: 130px;  /*横幅指定*/
+    clear: both;  /*下の行を問題なく発生させる*/
+    overflow: hidden; /*ボックスの範囲から飛び出た時そこを隠す*/
+    margin: 0px auto;   /*外側の余白の大きさ*/
+    position: fixed; /*無敵的な*/
+    top: 0;          /*上からの位置指定*/
+    left: 0;         /*左からの位置指定*/
+    height: 100%;    /*横幅指定*/
     z-index: 1000;   /*他のより前に*/
     background: linear-gradient(#F1FEFE, #FFFFFF); /*グラデの背景色*/
-    border-right: 2px solid black; 
-    padding-top: 60px; 
-    border-radius: 10px;
+    border-right: 2px solid black; /*線の色*/
+    padding-top: 60px; /*上からの余白*/
+    border-radius: 10px; /*枠の淵の丸み指定*/
 }
 .custom-button {
-    padding: 15px 0px; /* 共通のパディング */
-    border: none; /* ボーダーなし */
-    border-radius: 10px; /* 角を丸くする */
-    cursor: pointer; /* ポインターを表示 */
-    font-size: 16px; /* フォントサイズ */
+    padding: 15px 0px; /*内側の余白の大きさ*/
+    border: none; /*線を消す*/
+    border-radius: 10px;  /*枠の淵の丸み指定*/
+    cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
+    font-size: 16px; /*文字の大きさ指定*/
 }
-
-
+ 
+ 
 /* ボタン風のリンクスタイル */
 .button-link {
-    display: inline-block;
-    padding: 10px 20px;
-    color: black;
-    background-color: #FFEA81;
-    text-decoration: none;
-    border-radius: 10px;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-    min-width: 100px;      /*横幅*/
-    min-height: 50px;       /*立幅*/
+    display: inline-block; /*ディスプレイ指定*/
+    padding: 10px 20px; /*内側の余白の大きさ*/
+    color: black; /*文字の色指定*/
+    background-color: #FFEA81; /*背景色指定*/
+    text-decoration: none; /*リンクの下線消してリンク感なくす*/
+    border-radius: 10px; /*枠の淵の丸み指定*/
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3); /* シャドウ追加 */
+    min-width: 100px;      /*横幅の指定*/
+    min-height: 50px;       /*縦幅の指定*/
     text-align: center;     /* 中央寄せ */
 }
-
-
-
+ 
+ 
+ 
 #body {
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
@@ -64,7 +62,7 @@
 ul{
     padding-left:0;
   }
-  
+ 
   li{
     list-style: none;
     width: 100%; /* リスト全体をボタンに合わせる */

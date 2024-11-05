@@ -1,9 +1,9 @@
 @charset "utf-8";
-
+ 
 body {
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景のグラデーションカラーを指定*/
 }
-
+ 
 nav#title {
     font-size: 35px; /*フォントサイズ*/
     text-align: center;  /*テキストの位置を真ん中に*/
@@ -11,13 +11,13 @@ nav#title {
     overflow: hidden; /*ボックスの範囲から飛び出た時そこを隠す*/
     letter-spacing: 0.25em; /*文字の間のスペース指定*/
 }
-
+ 
 nav#input {
     display: flex;  /*フレックスボックスを配置*/
     flex-direction: column;  /* 縦方向配置 */
     align-items: center;  /*中央ぞろえでかっこよく*/
 }
-
+ 
 nav#input input[type="text"],
 nav#input input[type="password"],
 nav#input input[type="number"],
@@ -29,30 +29,30 @@ nav#input select {
     margin: 8px 0; /*外側の余白の大きさ*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
 }
-
+ 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
 }
-
+ 
 nav#input select {
     width: 85%; /*横幅指定*/
     border-radius: 15px; /*枠の淵の丸み指定*/
     border: 1px solid black; /* 枠線を他と統一 */
 }
-
-
+ 
+ 
 #submit {
     text-align: right; /*登録ボタンの場所を右端に*/
     margin: 20px auto; /*外側の余白の大きさ*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
 }
-
+ 
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
     top: 642.5px;        /*上からの位置指定*/
-    left: 680px;      /*左からの位置指定*/ 
+    left: 680px;      /*左からの位置指定*/
     font-size: 20px; /*文字の大きさ指定*/
     padding: 8px 16px; /*内側の余白の大きさ*/
     background-color: #ffea81; /*ボタンの色を指定*/
@@ -62,11 +62,11 @@ nav#input select {
     border-radius: 10px; /*枠の淵の丸みを指定*/
     box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
 }
-
+ 
 /*体重小数点エラー部分*/
 .error {
     top: 340px;        /*上からの位置指定*/
-    left: 570px;      /*左からの位置指定*/ 
+    left: 570px;      /*左からの位置指定*/
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
     display: none;  /*いつもは隠れてます*/
@@ -80,34 +80,32 @@ nav#input select {
     color: red; /*文字の色指定*/
     font-size: 0.9em; /*文字の大きさ指定*/
 }
-
+ 
 /*~~~~~~~~入力欄の中のやつを表示させるための部分~~~~~~~~~*/
-
+ 
 .cm {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
     top: 353px;        /*上からの位置指定*/
-    left: 695px;      /*左からの位置指定*/ 
+    left: 695px;      /*左からの位置指定*/
     font-size: 20px;     /*文字の大きさ指定*/
     color: #333;         /*文字の色指定*/
 }
-
+ 
 .kg {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 430px;               /*上からの位置指定*/
-    left: 700px;            /*左からの位置指定*/   
+    left: 700px;            /*左からの位置指定*/  
     font-size: 20px;          /*文字の大きさ指定*/
-    color: #333;              /*文字の色指定*/     
+    color: #333;              /*文字の色指定*/    
 }
-
+ 
 .age {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 506.5px;               /*上からの位置指定*/
-    left: 700px;              /*左からの位置指定*/ 
+    left: 700px;              /*左からの位置指定*/
     font-size: 20px;        /*文字の大きさ指定*/  
     color: #333;          /*文字の色指定*/    
 }
-
-/*入力欄の中のやつ終わり*/

@@ -50,7 +50,6 @@
 
     <div class="container">
       <!-- 人型ピクトグラム -->
-      <h2>体の部位</h2>
       <svg id="body-parts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 250" width="400" height="800">
         <!-- 頭 -->
         <circle cx="60" cy="40" r="20" class="body-part" id="head" />
@@ -59,13 +58,13 @@
         <!-- 腹筋 -->
         <rect x="45" y="100" width="30" height="50" class="body-part" id="abs" />
         <!-- 左腕 (反対方向に広げる) -->
-        <rect x="30" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(30 35 70)" />
+        <rect x="30" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(30 35 83)" />
         <!-- 右腕 (反対方向に広げる) -->
-        <rect x="80" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(-30 85 70)" />
+        <rect x="80" y="70" width="10" height="60" class="body-part arms" id="arms" transform="rotate(-30 85 83)" />
         <!-- 左脚 (斜めに広げる) -->
         <rect x="38" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(15 45 150)" />
-        <!-- 右脚 (斜めに広げる) -->
-        <rect x="68" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(-15 55 150)" />
+        <!-- 右脚 (斜めに広げる - 線対称に配置) -->
+        <rect x="68" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(-15 72 142)" />
     </svg>
     </div>
 
@@ -83,11 +82,7 @@
     </p>
 
     
-          <tr>
-            <th class="test-bre">朝食</th>
-            <th class="test-lun">昼食</th>
-            <th class="test-din">夕食</th>
-          </tr>
+
        
         <tbody>
 
@@ -132,5 +127,14 @@
         </tr>
    
   </div>
+
+
+
+  <div class ="button-group">
+    <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
+    <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
+    <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
+</div>
+<div id="weight_change_container"></div>
 </body>
 </html>

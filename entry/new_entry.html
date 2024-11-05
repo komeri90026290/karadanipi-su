@@ -11,30 +11,30 @@
         <nav id="title"> <!--タイトルの大きさ変更のためのID[title]-->
             <h1>新規会員登録</h1>
         </nav>
-
+ 
         <nav id="input"> <!--入力欄の大きさ等すべて操作するためのID[input]-->
         <form>                                          
             <!--ユーザーネーム、パスワード、身長、体重、年齢、性別入力-->
-
+ 
             <label for="user_name">●ユーザーネーム</label><br> <!--●ユーザーネームでラベル付け-->
             <input type="text" id="user_name" name="user_name"><br>
-
+ 
             <div class="password_container">
                 <p>●パスワード(半角英数字8-16文字)</p>
                 <input type="password" id="user_password" name="user_password"minlength="8" maxlength="16"pattern="^[a-zA-Z0-9]+$"> <!--パスワード入力欄、英数字のみの指定-->
-                <span class="toggle-password" onclick="clickButton()">👀</span><br><!--関数clickButtonを呼び出すことでパスワードの表示非表示を切り替え--> 
+                <span class="toggle-password" onclick="clickButton()">👀</span><br><!--関数clickButtonを呼び出すことでパスワードの表示非表示を切り替え-->
             </div>
-
+ 
             <label for="user_height">●身長</label><br>
             <input type="number" id="user_height" name="user_height" step="1"> <!--cm付け足し忘れない-->
-            <div class="error">整数のみ入力できます</div><br> 
-
+            <div class="error">整数のみ入力できます</div><br>
+ 
             <label for="user_weight">●体重</label><br>
             <input type="number" id="user_weight" name="user_weight"><br> <!--kg付け足し忘れない-->
-
+ 
             <label for="user_age">●年齢</label><br>
             <input type="number" id="user_age" name="user_age" min="0" max="100" /><br> <!--入力の最低と最高を制限(0~100)-->
-
+ 
             <label for="user_sex">●性別</label><br>
                 <select id="user_sex" name="user_sex">
                     <option value=""></option>
@@ -42,16 +42,16 @@
                     <option value="woman">女性</option>
                     <option value="notset">未設定</option>
                 </select><br>
-
+ 
                         <!--~~~~~~~~~入力欄の中の秒、回、セットを表示させるための部分~~~~~~~~~~-->
                         <div class="cm">
                             <p>cm</p>
                           </div>
-                    
+                   
                           <div class="kg">
                             <p>kg</p>
                           </div>
-                    
+                   
                           <div class="age">
                             <p>歳</p>
                           </div>
@@ -62,7 +62,7 @@
                     function clickButton() {        
                         var user_password = document.getElementById("user_password"); //変数user_passwordに入力途中のパスワードを入れとく
                         var toggleIcon = document.querySelector(".toggle-password"); //変数toggleIconにtoggle-passwordを入れとく
-                      
+                     
                         if (user_password.type === "password") { //パスワードのtype属性が[password](隠れている状態であること)確認 そうだった場合そのまま下のコードへ
                             user_password.type = "text"; //type属性を[text]に変更することでpasswordの中身を表示
                             toggleIcon.textContent = "👀"; // パスワードが見れるようになったら👀に絵文字を変更
@@ -73,13 +73,13 @@
                     }
                 </script>
 <!--~~~~~~~~~~~~~~ゾーン終わり~~~~~~~~~~~~~~~~-->
-
+ 
             <!--登録ボタン-->
                 <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
                     <input type="submit" value="登録">
                 </nav>
                 </div>
-            
+           
         </nav>
     </body>
 </html>
