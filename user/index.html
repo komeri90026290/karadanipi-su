@@ -39,6 +39,9 @@
     <p>体重: <span id="heitai"></span> kg</p> 
     <p>BMI: <span id="heibmi"></span>%</p> 
 
+    </div>
+
+
 
       </div>
   <div class="content">
@@ -71,10 +74,13 @@
 
     <!-- 各種ボタンとグラフ表示 -->
     <p>
+      <div class="button-container">
         <button id="care" class="custom-button care">アフターケア</button>
         <button id="tr" class="custom-button tr">トレーニング追加</button>
+      </div>
+        <h1>体重管理</h1>
         <canvas id="lineChart"></canvas>
-        <div>
+        <div >
         <button id="days" class="custom-button days" onclick="days_id()">日間</button>
         <button id="week" class="custom-button week" onclick="week_id()">週間</button>
         <button id="history" class="custom-button history" onclick="history_id()">過去記録</button>
@@ -85,47 +91,62 @@
 
        
         <tbody>
-
-             
-
+            </tr>
+            <tr>
+              <td class="test-cell">
+                <input type="text" class="test-input" placeholder="入力してください">
+              </td>
               <td class="test-cell">
                 <textarea class="text-breakfast" placeholder="入力してください"></textarea>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="test-cell">
+                  <input type="text" class="test-input" placeholder="入力してください">
                 </td>
 
                 <td class="test-cell">
                   <textarea class="text-lunch" placeholder="入力してください"></textarea>
                   </td>
-
                   <td class="test-cell">
-                    <textarea class="text-dinner" placeholder="入力してください"></textarea>
-                    </td>
+                    <input type="text" class="test-input" placeholder="入力してください">
+                  </td>
+              </tr>
+              <tr>
+                
+                
+                <td class="test-cell">
+                  <input type="number" class="test-input" placeholder="Kcal">
+                  <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+                </td>
+                <td class="test-cell">
+                    <input type="number" class="test-input" placeholder="Kcal">
+                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+                  </td>
+                  <td class="test-cell">
+                    <input type="number" class="test-input" placeholder="Kcal">
+                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
+                  </td>
+  
+              </tr>
 
           </tbody>
         </table>
+        <div>
+          
+      </div>
+      <div id="weight_change_container"></div>
+         
 
 
+      <div class="button-group">
+        <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
+        <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
+        <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
+    </div>
+      <div id="weight_change_container"></div>
 
-
-
-
-        <tr>
-               
-               
-          <td class="test-cell">
-            <input type="number" class="test-input" placeholder="Kcal">
-            <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-          </td>
-          <td class="test-cell">
-              <input type="number" class="test-input" placeholder="Kcal">
-              <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-            </td>
-            <td class="test-cell">
-              <input type="number" class="test-input" placeholder="Kcal">
-              <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-            </td>
-
-        </tr>
-   
   </div>
 
 
