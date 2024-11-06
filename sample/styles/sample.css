@@ -162,8 +162,15 @@
     background: linear-gradient(#F1FEFE, #FFFFFF);
 }
 
-.afterimage {
+.afterimage {/*水を飲む人のイメージ*/
     position:absolute;
-    top:90px;
+    top:17px;
     left:900px;
 }
+
+.afterimage-2 {/*休養を取る人のイメージ*/
+    position:absolute;
+    top:390px;
+    left:900px;
+}
+
