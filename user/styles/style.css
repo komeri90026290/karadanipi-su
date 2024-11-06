@@ -107,8 +107,6 @@ input[type="moku"]{
     text-align: center;/**/
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-
-
 }
 
 .care {
