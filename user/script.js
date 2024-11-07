@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}年${today.getMonth() + 1}/${today.getDate()}`;
+    const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
     document.getElementById('today').textContent = formattedDate;
 
     initializeChart();
@@ -44,19 +44,18 @@ function calculateBMI() {
     const userHeight = parseFloat(document.getElementById("user_height").value) / 100;
     const userWeight = parseFloat(document.getElementById("user_weight").value);
 
-    let bmi = 0, idealWeight = 0;
+    let bmi = 0, heitai = 0;
 
     if (userHeight > 0) { 
         bmi = (userWeight / (userHeight * userHeight)).toFixed(2);
         document.getElementById("result").textContent = bmi;
 
-        idealWeight = (userHeight * userHeight * 22).toFixed(1);
-        document.getElementById("heitai").textContent = idealWeight;
+        heitai = (userHeight * userHeight * 22).toFixed(1);
+        document.getElementById("heitai").textContent = heitai;
 
-        document.getElementById("heibmi").textContent = "22.0";
-    } else {
-        document.getElementById("result").textContent = "身長は0以外の数値を入力してください。";
-    }
+        heibmi = (heitai/ (userHeight * userHeight)).toFixed(2);
+        document.getElementById("heibmi").textContent = heibmi;
+    } 
 
     const date = new Date().toISOString().split('T')[0];
     weightData[date] = userWeight;

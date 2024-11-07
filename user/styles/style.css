@@ -5,25 +5,7 @@ body {
     
 }
 
-.sidebar {
-    width: 200px; /* サイドバーの幅を設定 */
-    padding: 20px; /* パディングを追加 */
-    border-right: 1px solid #ccc; /* サイドバーの右側に線を追加 */
-    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
-}
-
-.content {
-    flex: 1; /* 残りのスペースを占める */
-    padding: 0px; /* パディングを追加 */
-    margin-left: 100px; /* 左に20pxのスペースを追加 */
-}
-
-h1, h2 {
-    margin: 0 0 15px 0; /* 見出しのマージン設定 */
-}
-
-input[type="number"],
-input[type="text"] {
+input[type="number"]{
     width: 100px; /* 幅を小さくする */
     padding: 5px; /* パディングを追加 */
     font-size: 14px; /* フォントサイズを小さくする */
@@ -31,172 +13,258 @@ input[type="text"] {
     border-radius: 4px; /* 角を丸くする */
 }
 
-
-/* ピクトグラム全体の設定 */
-#body-parts {
-    cursor: pointer;
-}
- 
-/* 各部位の初期色 */
-.body-part {
-    fill: #ddd;
-    transition: fill 0.3s;
-}
- 
-.body-part:hover {
-    fill: #aaa;
-}
- 
-body {
-    background-color: #f0f0f0;
+.sidebar {
+    padding: 20px; /* パディングを追加 */
+    border-right: 5px solid #ccc; /* サイドバーの右側に線を追加 */
+    margin-right: 20px; /* サイドバーの右に余白を追加 */
 }
 
-#body-parts {
-    transform: scale(0.75); /* 縮小率: 75% */
-    transform-origin: center; /* 縮小の基準点を中心に設定 */
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 80px; /* 下に40px分のスペースを追加 */
-    
-    height: 100vh; /* 中央に配置するための高さ設定 */
-}
-
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 水平方向にセンタリング */
-    margin-top: 30px; /* アバターを上下方向に移動 */
-    margin-left: -1450px; /* アバターを左右方向に移動 */
-}
-
-
-
-input[type="text"],
-input[type="moku"]{
-    width: 700px;
-	font-size:  32px;
-	text-align: center;
-    box-shadow: 0 0 8px gray;
-    margin-top:50px; /* グループ全体の上に20pxのスペースを追加 */
-}
-
-
-    #lineChart {
-        width: 700px;/* グラフの幅　*/
-        height: 400px;/* グラフの高さ　*/
-    }
-
-
-
-
-.custom-button {
+.saveData{
     padding: 10px 20px; /* 共通のパディング */
     border: none; /* ボーダーなし */
     border-radius: 10px; /* 角を丸くする */
     cursor: pointer; /* ポインターを表示 */
     font-size: 16px; /* フォントサイズ */
+    background-color: #FFEA81; /* ボタンの背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
 .con {
-    width: 70;
-    height: 40px;
-    text-align: center;/**/
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-
-
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
+}
+
+.cm {
+    z-index: 9999; /*何があっても一番前に表示*/
+    position: absolute;     /*無敵*/
+    top: 105px;        /*上からの位置指定*/
+    left: 140px;      /*左からの位置指定*/ 
+    font-size: 17.5px;     /*文字の大きさ指定*/
+    padding: 0; /* 内側の余白をゼロに */
+    margin: 0; /* 外側の余白をゼロに */ 
+    line-height: 1; /* 行間を詰める */
+}
+
+.kg {
+    z-index: 9999;      /* 高い数値ほど前面に表示される */
+    position: absolute;       /*無敵*/
+    top: 150px;               /*上からの位置指定*/
+    left: 140px;            /*左からの位置指定*/   
+    font-size: 17.5px;          /*文字の大きさ指定*/
+    padding: 0; /* 内側の余白をゼロに */
+    margin: 0; /* 外側の余白をゼロに */ 
+    line-height: 1; /* 行間を詰める */    
+}
+
+/* 目標入力欄 */
+input[id="moku"] {
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    position: relative; /* ボタン位置調整のため relative */
+    width: 700px;
+    font-size: 35px;
+    left: 30px; /* 「目標」入力フィールドの右端に配置 */
+    text-align: center;
+    box-shadow: 0 0 8px gray;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#moku-keep {
+    width: 90px;
+    height: 45px;
+    position: absolute; /* 親要素である #moku 内の位置指定 */
+    top: 100px; /* 「目標」入力フィールドの下に配置 */
+    right: 320px; /* 「目標」入力フィールドの右端に配置 */
+    text-align: center; 
+    background-color: #FFEA81;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#lineChart {
+    margin-top: 25px; /*グラフの上にスペース*/
+    width: 700px;/* グラフの幅　*/
+    height: 400px;/* グラフの高さ　*/
+}
+
+.picto{
+    margin-top:-50px;
+}
+
+
+#body-parts {          /*大きさを調整する場所
+    cursor: pointer;  　　/* ピクトグラム全体をクリック可能に */
+    transform: scale(0.70); /* 縮小率の調整 */
+    transform-origin: center; /* 縮小の基準を中央に */
+}
+ 
+.body-part:hover {
+    fill: #aaa; /* ホバーしたときの色 */
+   
+    /*ホバーはピクトグラムにカーソルを置いたときに色が変わるやつ*/
+}
+ 
+.body-part {       /*ピクトグラム本体の色を変える場所*/
+    fill: #ddd;
+}
+ 
+/*トレーニング追加　アフターケアのボタン調整*/
+ 
 .care {
     width: 180px;
     height: 50px;
-    text-align: center;/**/
+    padding: 10px 20px;
+    margin: 30px;   /*ボタンの間に余白を設定する*/
+    margin-top: -40px; /*ボタンを上に動かす*/
+    text-align: center; /*真ん中に揃える*/
     background-color: #FFEA81; /* ボタンの背景色 */
+    border-radius: 10px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-    
-
-
+    border: none; /* ボーダーなし */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
 }
-
+ 
 .tr {
     width: 180px;
     height: 50px;
-    text-align: center;/**/
+    padding: 10px 20px;
+    margin: -10px;
+    text-align: center;/*真ん中に揃える*/
     background-color: #FFEA81; /* ボタンの背景色 */
+    border-radius: 10px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    border: none; /* ボーダーなし */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
 }
 
-/* CSSの追加 */
-.button-container {
-    display: flex;                   /* フレックスボックスを使用して横並びにする */
-    justify-content: center;         /* ボタンを中央に配置 */
-    margin-top: 20px; 
-    margin-left: -1370px;              /* ボタンの上部にスペースを設ける（必要に応じて調整） */
-    margin-bottom: 160px; /* 下に40px分のスペースを追加 */
+.scrollable-memo {
+    position: absolute;
+    z-index: 9999;
+    margin-top: 180px; /*上からの場所指定*/
+    margin-left: 600px; /*左からの場所指定*/
+    width: 350px;  /*幅*/
+    height: 300px;   /*高さ*/
+    padding: 0px;   /*内側余白*/
+    border: none;    /*枠線の色とか*/
+    font-size: 15px;  /*中の文字の大きさ*/
+    overflow-y: scroll; /*垂直方向にスクロールバー出す*/
+    /* background: linear-gradient(#F1FEFE, #FFFFFF); 背景色*/
+    white-space: pre-wrap;   /* 改行を維持 */
 }
-
-.custom-button {
-    margin: 0 10px;                 /* ボタン間の横方向のスペースを設定 */
+ 
+ 
+    /*~~~~~~~~~~~これ全部スクロールバーの設定のやつね~~~~~~~~~*/
+ 
+.scrollable-memo::-webkit-scrollbar {
+    width: 12px;            /*スクロールバー幅*/
 }
-
-
-
-
-.days {
-    width: 110px;
-    height:60px ;
-    text-align: center;/**/
-    
-
-    background-color: #FFEA81; /* ボタンの背景色 */
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-
-    
+ 
+.scrollable-memo::-webkit-scrollbar-track {
+    background: #f1f1f1;    /*スクロールトラックの背景*/
 }
-
-.week {
-    width: 110px;
-    height:60px ;
-    text-align: center;/**/
-    
-    
-    background-color: #FFEA81; /* ボタンの背景色 */
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-
-    
+ 
+.scrollable-memo::-webkit-scrollbar-thumb {
+    background: #888;       /*スクロールバーの色*/
+    border-radius: 6px;     /*スクロールバーの角を丸く*/
 }
-
-.history {
-    width: 110px;
-    height:60px ;
-    text-align: center;/**/
-    
-    
-    background-color: #FFEA81; /* ボタンの背景色 */
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-
-    
+ 
+.scrollable-memo::-webkit-scrollbar-thumb:hover {
+    background: #555;       /*ホバー時の色*/
 }
+ 
+    /*~~~~~~~~~~~~スクロールバー終わりんご~~~~~~~~~~~~~~~~~~~~~~*/
 
-.entry{
-    width: 90px;
-    height:50px ;
-    text-align: center;/**/
-    
-    background-color: #FFEA81; /* ボタンの背景色 */
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    .days {
+        padding: 10px 20px; /* 共通のパディング */
+        border: none; /* ボーダーなし */
+        border-radius: 10px; /* 角を丸くする */
+        cursor: pointer; /* ポインターを表示 */
+        font-size: 16px; /* フォントサイズ */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
+        border-radius: 10px;
+        width: 110px;
+        height:60px ;
+        text-align: center;/**/
+       
+     
+        background-color: #FFEA81; /* ボタンの背景色 */
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    }
+     
+    .week {
+        padding: 10px 20px; /* 共通のパディング */
+        border: none; /* ボーダーなし */
+        border-radius: 10px; /* 角を丸くする */
+        cursor: pointer; /* ポインターを表示 */
+        font-size: 16px; /* フォントサイズ */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
+        border-radius: 10px;
+        width: 110px;
+        height:60px ;
+        text-align: center;/**/
+       
+       
+        background-color: #FFEA81; /* ボタンの背景色 */
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+     
+       
+    }
+     
+    .history {
+        padding: 10px 20px; /* 共通のパディング */
+        border: none; /* ボーダーなし */
+        border-radius: 10px; /* 角を丸くする */
+        cursor: pointer; /* ポインターを表示 */
+        font-size: 16px; /* フォントサイズ */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
+        border-radius: 10px;
+        width: 110px;
+        height:60px ;
+        text-align: center;/**/
+       
+       
+        background-color: #FFEA81; /* ボタンの背景色 */
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+     
+    }
 
-}
+    .entry{
+        width: 90px;
+        height:50px ;
+        text-align: center;/**/
+       
+        background-color: #FFEA81; /* ボタンの背景色 */
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    }
 
-
-
-/* 格子スタイルのテキストエリア */
+    /* 格子スタイルのテキストエリア */
 .text-breakfast {
-    width: 15%; /* 全幅にする */
+    width: 26%; /* 全幅にする */
     height: 100px; /* 高さを調整 */
     padding: 2px;
     font-size: 14px;
@@ -204,20 +272,16 @@ input[type="moku"]{
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none; /* サイズ変更を無効化 */
-    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
-    background-size: 100% 24px; /* 横線の間隔と高さ */
-    position:  absolute;        /* 要素の配置方法を指定 */
-    padding:  20px;             /* 余白指定 */
-    left:  550px;                /* 左からの位置指定 */
-    top: 1200px;
+   
 }
-
-
-
-
+ 
+.food-input {
+    width: 100%;
+}
+ 
 /* 格子スタイルのテキストエリア */
 .text-lunch {
-    width: 15%; /* 全幅にする */
+    width: 26%; /* 全幅にする */
     height: 100px; /* 高さを調整 */
     padding:2px;
     font-size: 14px;
@@ -225,100 +289,87 @@ input[type="moku"]{
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none; /* サイズ変更を無効化 */
-    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
-    background-size: 100% 24px; /* 横線の間隔と高さ */
-    position:  absolute;        /* 要素の配置方法を指定 */
-    padding:  20px;             /* 余白指定 */
-    left:  300px;                /* 左からの位置指定 */
-    top: 1200px;
+   
 }
-
-
-
-
-
+ 
 /* 格子スタイルのテキストエリア */
 .text-dinner {
-    width: 15%; /* 全幅にする */
+    width: 26%; /* 全幅にする */
     height: 100px; /* 高さを調整 */
     padding: 2px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px; /* 横線の間隔 */
     border: 1px solid #ccc;
     border-radius: 4px;
     resize: none; /* サイズ変更を無効化 */
-    background-image: linear-gradient(to bottom, #ccc 1px, transparent 1px);
-    background-size: 100% 24px; /* 横線の間隔と高さ */
-
-    position:  absolute;        /* 要素の配置方法を指定 */
-    padding:  20px;             /* 余白指定 */
-    left:  820px;                /* 左からの位置指定 */
-    top: 1200px;
-    
+   
 }
-
-
+ 
+ 
 .breakfast {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
+    margin-top: 60px;
     width: 140px; /* 朝食ボタンの幅 */
     height: 100px; /* 朝食ボタンの高さ */
     background-color: #FADFD4; /* 朝食ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .lunch {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
     width: 140px; /* 昼食ボタンの幅 */
     height: 100px; /* 昼食ボタンの高さ */
     background-color: #FFEA81; /* 昼食ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
-
-.dinner {
+ 
+.dinner {padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
     width: 140px; /* 夕食ボタンの幅 */
     height: 100px; /* 夕食ボタンの高さ */
     background-color: #D9D9D9; /* 夕食ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
-/* ボタン全体を囲むコンテナにFlexbox設定を追加 */
-.button-group {
+    /*kcal数値入力のとこの幅とか指定*/
+.Kcal-input {
     display: flex;
-    justify-content: flex-start; /* 左寄せ */
-    gap: 450px; /* ボタン間のスペース */
-    min-width: 600px;
-    margin: 0; /* 左寄せにするために中央寄せを削除 */
-    margin-top: 15px; /* アバターとボタン間の空白を設定 */
+    gap: 86px; /*間の幅の大きさ指定*/
 }
-
-/* 各ボタンのスタイル */
-.custom-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+ 
+.food-input{
+    margin-top: 60px;
+    width: 40;
 }
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
+ 
+/*登録ボタン用のCSS*/
+#submit {
+    margin: 20px auto; /*外側の余白の大きさ*/
+    border-radius: 15px; /*枠の淵の丸みを指定*/
 }
-/*~~~~~~~~入力欄の中のやつを表示させるための部分~~~~~~~~~*/
-
-.cm {
+ 
+#submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 136px;        /*上からの位置指定*/
-    left: 113.5px;      /*左からの位置指定*/ 
-    font-size: 17.5px;     /*文字の大きさ指定*/
-    color: #333;         /*文字の色指定*/
+    top: 1500px;        /*上からの位置指定*/
+    left: 740px;      /*左からの位置指定*/
+    font-size: 17.5px; /*文字の大きさ指定*/
+    padding: 10px 18px; /*内側の余白の大きさ*/
+    background-color: #ffea81; /*ボタンの色を指定*/
+    color: black; /*文字の色指定*/
+    cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
+    border: none; /*枠削除*/
+    border-radius: 10px; /*枠の淵の丸みを指定*/
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
 }
-
-.kg {
-    z-index: 9999;      /* 高い数値ほど前面に表示される */
-    position: absolute;       /*無敵*/
-    top: 203px;               /*上からの位置指定*/
-    left: 118px;            /*左からの位置指定*/   
-    font-size: 17.5px;          /*文字の大きさ指定*/
-    color: #333;              /*文字の色指定*/     
-}
-
-/*入力欄の中のやつ終わり*/
-

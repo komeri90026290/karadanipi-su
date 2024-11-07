@@ -9,7 +9,7 @@
     <script src="script.js" defer></script>
     <title>肉体改造管理システム</title>
 </head>
-<body>
+<body id="home">
     <div class="sidebar">
     <!-- 今日の日付 -->
     <p id="today"></p>
@@ -32,7 +32,23 @@
     
     <!-- BMI計算ボタン -->
     <p>BMI: <span id="result"></span>%</p>
-    <p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p> 
+    <p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p>
+    
+    <script>
+      // ページが読み込まれたときにローカルストレージからデータを取得
+      window.onload = function() {
+          const heightkeep = localStorage.getItem('user_height');
+          if (heightkeep) {
+              document.getElementById('user_height').value = heightkeep;
+          }
+      };
+
+      function calculateBMI() {
+            const text = document.getElementById('user_height').value;
+            localStorage.setItem('user_height', number);
+            alert('データが保存されました!');
+        }
+    </script>
     
     <!-- 平均値表示 -->
     <h2>平均</h2>
@@ -44,16 +60,53 @@
 
 
       </div>
+        <!--トレーニングリスト表示-->
+    <div class="scrollable-memo">
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+      ・トレーニング名 何回 何秒 何セット
+    </div>
+
   <div class="content">
 
     <!-- 目標入力 -->
     <input type="text" id="moku" placeholder="目標">
+    <button onclick="saveData()" id="moku-keep">保存</button>
+
+    <script>
+      // ページが読み込まれたときにローカルストレージからデータを取得
+      window.onload = function() {
+          const savedData = localStorage.getItem('moku');
+          if (savedData) {
+              document.getElementById('moku').value = savedData;
+          }
+      };
+
+      function saveData() {
+            const text = document.getElementById('moku').value;
+            localStorage.setItem('moku', text);
+            alert('データが保存されました!');
+        }
+    </script>
 
 
 
-    <div class="container">
+    <div class="picto">
       <!-- 人型ピクトグラム -->
-      <svg id="body-parts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 250" width="400" height="800">
+      <svg id="body-parts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 250" width="400" height="600">
         <!-- 頭 -->
         <circle cx="60" cy="40" r="20" class="body-part" id="head" />
         <!-- 胸筋 -->
@@ -75,87 +128,40 @@
     <!-- 各種ボタンとグラフ表示 -->
     <p>
       <div class="button-container">
-        <button id="care" class="custom-button care">アフターケア</button>
-        <button id="tr" class="custom-button tr">トレーニング追加</button>
+        <button id="care" class="care">アフターケア</button>
+        <button id="tr" class="tr">トレーニング追加</button>
       </div>
-        <h1>体重管理</h1>
+       <h1>体重管理</h1>
+        <div>
+          <button id="days" class=" days" onclick="days_id()">日間</button>
+          <button id="week" class=" week" onclick="week_id()">週間</button>
+          <button id="history" class=" history" onclick="history_id()">過去記録</button>
+          </div>
         <canvas id="lineChart"></canvas>
-        <div >
-        <button id="days" class="custom-button days" onclick="days_id()">日間</button>
-        <button id="week" class="custom-button week" onclick="week_id()">週間</button>
-        <button id="history" class="custom-button history" onclick="history_id()">過去記録</button>
-        </div>
     </p>
 
-    
-
-       
-        <tbody>
-            </tr>
-            <tr>
-              <td class="test-cell">
-                <input type="text" class="test-input" placeholder="入力してください">
-              </td>
-              <td class="test-cell">
-                <textarea class="text-breakfast" placeholder="入力してください"></textarea>
-                </td>
-
-            </tr>
-            <tr>
-                <td class="test-cell">
-                  <input type="text" class="test-input" placeholder="入力してください">
-                </td>
-
-                <td class="test-cell">
-                  <textarea class="text-lunch" placeholder="入力してください"></textarea>
-                  </td>
-                  <td class="test-cell">
-                    <input type="text" class="test-input" placeholder="入力してください">
-                  </td>
-              </tr>
-              <tr>
-                
-                
-                <td class="test-cell">
-                  <input type="number" class="test-input" placeholder="Kcal">
-                  <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-                </td>
-                <td class="test-cell">
-                    <input type="number" class="test-input" placeholder="Kcal">
-                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-                  </td>
-                  <td class="test-cell">
-                    <input type="number" class="test-input" placeholder="Kcal">
-                    <button id="entry-button" class="custom-button entry" onclick="breakfast_id()">登録</button>
-                  </td>
-  
-              </tr>
-
-          </tbody>
-        </table>
-        <div>
-          
-      </div>
-      <div id="weight_change_container"></div>
-         
-
-
-      <div class="button-group">
-        <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
-        <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
-        <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
+    <div class="food-input">
+      <textarea class="text-breakfast" placeholder="入力してください"></textarea>
+      <textarea class="text-lunch" placeholder="入力してください"></textarea>
+      <textarea class="text-dinner" placeholder="入力してください"></textarea>
     </div>
-      <div id="weight_change_container"></div>
 
-  </div>
+    <div class="Kcal-input">
+      <input type="number" class="test-input" placeholder="Kcal">
+      <input type="number" class="test-input" placeholder="Kcal">
+      <input type="number" class="test-input" placeholder="Kcal">
+    </div>
 
+     <!--登録ボタン-->
+      <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
+          <input type="submit" value="登録">
+      </div>
+             
+      <div>
+          <button id="breakfast" class=" breakfast" onclick="breakfast_id()">朝食</button>
+          <button id="lunch" class=" lunch" onclick="lunch_id()">昼食</button>
+          <button id="dinner" class=" dinner" onclick="dinner_id()">夕食</button>
+      </div>
 
-
-  <div class ="button-group">
-    <button id="breakfast-button" class="custom-button breakfast" onclick="breakfast_id()">朝食</button>
-    <button id="lunch-button" class="custom-button lunch" onclick="lunch_id()">昼食</button>
-    <button id="dinner-button" class="custom-button dinner" onclick="dinner_id()">夕食</button>
-</div>
-<div id="weight_change_container"></div>
 </body>
 </html>
