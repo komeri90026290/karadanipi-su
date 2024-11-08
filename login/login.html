@@ -12,7 +12,7 @@
         </nav>
 
         <nav id="input">
-        <form>                                          
+        <form id="loginForm">                                          
             <!--ユーザーネーム、パスワード入力欄-->
             <label for="user_id">ユーザーネームを入力してください</label><br> <!--●ユーザーネームでラベル付け-->
             <input type="text" id="user_name" name="user_name"><br>
@@ -27,7 +27,6 @@
             <!--ログインボタン-->
         <nav id="submit"> <!--ログインボタンをCSSでいじるためのID[submit]-->
             <input type="submit" value="ログイン">
-
         </nav>
         </form>
         <!--新規会員登録リンク-->
@@ -50,7 +49,37 @@
                     user_password.type = "password"; //type属性をpasswordに変更することでpasswordの中身を隠す
                     toggleIcon.textContent = "🙈"; // パスワードが見れなくなったら🙈に絵文字を変更
                 }
-            }
+            };
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();  // ページのリロードを防ぐ
+ 
+      // フォームの入力データを取得
+      const username = document.getElementById('user_name').value;
+      const password = document.getElementById('user_password').value;
+ 
+      // サーバーにPOSTリクエストを送信
+      fetch('https://karadanipi-su-api.onrender.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'ログイン成功') {
+          alert('ログイン成功！');
+          console.log('ユーザーID:', data.userId);
+          // ここで次の画面に遷移したり、セッションを作成するなどの処理が可能
+        } else {
+          alert('ログイン失敗：' + data.error);
+        }
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        alert('ログイン処理に失敗しました');
+      });
+    });
         </script>
     </body>
 </html>

@@ -13,7 +13,7 @@
         </nav>
  
         <nav id="input"> <!--入力欄の大きさ等すべて操作するためのID[input]-->
-        <form>                                          
+        <form id="registerForm">                                          
             <!--ユーザーネーム、パスワード、身長、体重、年齢、性別入力-->
  
             <label for="user_name">●ユーザーネーム</label><br> <!--●ユーザーネームでラベル付け-->
@@ -32,16 +32,6 @@
             <label for="user_weight">●体重</label><br>
             <input type="number" id="user_weight" name="user_weight"><br> <!--kg付け足し忘れない-->
  
-            <label for="user_age">●年齢</label><br>
-            <input type="number" id="user_age" name="user_age" min="0" max="100" /><br> <!--入力の最低と最高を制限(0~100)-->
- 
-            <label for="user_sex">●性別</label><br>
-                <select id="user_sex" name="user_sex">
-                    <option value=""></option>
-                    <option value="man">男性</option>
-                    <option value="woman">女性</option>
-                    <option value="notset">未設定</option>
-                </select><br>
  
                         <!--~~~~~~~~~入力欄の中の秒、回、セットを表示させるための部分~~~~~~~~~~-->
                         <div class="cm">
@@ -51,11 +41,13 @@
                           <div class="kg">
                             <p>kg</p>
                           </div>
-                   
-                          <div class="age">
-                            <p>歳</p>
-                          </div>
                           <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
+                        <!--登録ボタン-->
+                        <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
+                            <input type="submit" value="登録">
+                        </nav>
+                        </div>
+                        </nav>
                 </form>
 <!--~~~~~~~~~~~~~~~パスワード表示、非表示切り替えゾーン~~~~~~~~~~~~~~~~~~~~-->
                 <script>
@@ -70,15 +62,42 @@
                             user_password.type = "password"; //type属性をpasswordに変更することでpasswordの中身を隠す
                             toggleIcon.textContent = "🙈"; // パスワードが見れなくなったら🙈に絵文字を変更
                         }
-                    }
+                    };
+
+      document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // ページのリロードを防ぐ
+
+      // 入力されたデータを取得
+      const username = document.getElementById('user_name').value;
+      const password = document.getElementById('user_password').value;
+      const height = document.getElementById('user_height').value;
+      const weight = document.getElementById('user_weight').value;
+
+
+      // フォームのデータをサーバーに送信
+      fetch('https://karadanipi-su-api.onrender.com/test', { //ゆうたが来たらレンダーのurlでやる
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({ username, password, height, weight })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('データが保存されました！');
+        console.log('サーバーからの応答:', data);
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        alert('データの保存に失敗しました:' + error.message);
+      });
+    });
+
+                    
                 </script>
 <!--~~~~~~~~~~~~~~ゾーン終わり~~~~~~~~~~~~~~~~-->
  
-            <!--登録ボタン-->
-                <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
-                    <input type="submit" value="登録">
-                </nav>
-                </div>
+
            
         </nav>
     </body>
