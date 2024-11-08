@@ -13,53 +13,37 @@
     <div class="sidebar">
     <!-- 今日の日付 -->
     <p id="today"></p>
-    
+   
     <p>ユーザー名</p>
-    
+   
     <!-- 身長と体重の入力 -->
-    <p><label  for="user_height">身長</label> <input type="number"  id="user_height" placeholder="例: 160"></p> 
-    <p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"></p> 
-
-                 <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
-                  <div class="cm">
-                     <p>cm</p>
-                  </div>
-                    
-                  <div class="kg">
-                      <p>kg</p>
-                  </div>
-                          <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
-    
-    <!-- BMI計算ボタン -->
-    <p>BMI: <span id="result"></span>%</p>
-    <p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p>
-    
-    <script>
-      // ページが読み込まれたときにローカルストレージからデータを取得
-      window.onload = function() {
-          const heightkeep = localStorage.getItem('user_height');
-          if (heightkeep) {
-              document.getElementById('user_height').value = heightkeep;
-          }
-      };
-
-      function calculateBMI() {
-            const text = document.getElementById('user_height').value;
-            localStorage.setItem('user_height', number);
-            alert('データが保存されました!');
-        }
-    </script>
-    
+    <p><label for="user_height">身長</label> <input type="number" id="user_height" placeholder="例: 160"></p>
+<p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"></p>
+ 
+<!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
+<div class="cm">
+    <p>cm</p>
+</div>
+ 
+<div class="kg">
+    <p>kg</p>
+</div>
+<!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
+ 
+<!-- BMI計算ボタン -->
+<p>BMI: <span id="result"></span></p>
+<p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p>
+ 
+ 
+   
     <!-- 平均値表示 -->
     <h2>平均</h2>
-    <p>体重: <span id="heitai"></span> kg</p> 
-    <p>BMI: <span id="heibmi"></span>%</p> 
-
+    <p>体重: <span id="heitai"></span> kg</p>
+    <p>BMI: <span id="heibmi"></span>%</p>
+ 
     </div>
-
-
-
-      </div>
+ 
+<div class="content">
         <!--トレーニングリスト表示-->
     <div class="scrollable-memo">
       ・トレーニング名 何回 何秒 何セット
@@ -79,31 +63,12 @@
       ・トレーニング名 何回 何秒 何セット
       ・トレーニング名 何回 何秒 何セット
     </div>
-
-  <div class="content">
-
+ 
     <!-- 目標入力 -->
     <input type="text" id="moku" placeholder="目標">
     <button onclick="saveData()" id="moku-keep">保存</button>
-
-    <script>
-      // ページが読み込まれたときにローカルストレージからデータを取得
-      window.onload = function() {
-          const savedData = localStorage.getItem('moku');
-          if (savedData) {
-              document.getElementById('moku').value = savedData;
-          }
-      };
-
-      function saveData() {
-            const text = document.getElementById('moku').value;
-            localStorage.setItem('moku', text);
-            alert('データが保存されました!');
-        }
-    </script>
-
-
-
+ 
+ 
     <div class="picto">
       <!-- 人型ピクトグラム -->
       <svg id="body-parts" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 250" width="400" height="600">
@@ -123,45 +88,102 @@
         <rect x="68" y="150" width="10" height="80" class="body-part legs" id="legs" transform="rotate(-15 72 142)" />
     </svg>
     </div>
-
-
+ 
+ 
     <!-- 各種ボタンとグラフ表示 -->
     <p>
-      <div class="button-container">
-        <button id="care" class="care">アフターケア</button>
-        <button id="tr" class="tr">トレーニング追加</button>
-      </div>
+        <div class="button-container">
+            <button id="care" class="care" onclick="location.href='../sample/after_care.html'; after_care();">アフターケア</button>
+            <button id="tr" class="tr" onclick="location.href='../tore/tore.html'; tore_care();">トレーニング追加</button>
+          </div>
        <h1>体重管理</h1>
-        <div>
+        <div id="taijyu">
           <button id="days" class=" days" onclick="days_id()">日間</button>
           <button id="week" class=" week" onclick="week_id()">週間</button>
           <button id="history" class=" history" onclick="history_id()">過去記録</button>
           </div>
         <canvas id="lineChart"></canvas>
     </p>
-
+ 
     <div class="food-input">
-      <textarea class="text-breakfast" placeholder="入力してください"></textarea>
-      <textarea class="text-lunch" placeholder="入力してください"></textarea>
-      <textarea class="text-dinner" placeholder="入力してください"></textarea>
+      <textarea id="text-breakfast" placeholder="入力してください"></textarea>
+      <textarea id="text-lunch" placeholder="入力してください"></textarea>
+      <textarea id="text-dinner" placeholder="入力してください"></textarea>
     </div>
-
+ 
+    <script>
+      // ページが読み込まれたときにローカルストレージからデータを取得
+      window.onload = function() {
+          const  savedData_breakfast = localStorage.getItem('text-breakfast');
+          const  savedData_lunch = localStorage.getItem('text-lunch');
+          const  savedData_dinner = localStorage.getItem('text-dinner');
+          const  save_moku = localStorage.getItem('moku');
+          const heightkeep = localStorage.getItem('user_height');
+          const weightkeep = localStorage.getItem('user_weight');
+          if (savedData_breakfast) {
+              document.getElementById('text-breakfast').value = savedData_breakfast;
+          }
+          if (savedData_lunch) {
+              document.getElementById('text-lunch').value = savedData_lunch;
+          }
+          if (savedData_dinner) {
+              document.getElementById('text-dinner').value = savedData_dinner;
+          }
+          if (save_moku) {
+              document.getElementById('moku').value = save_moku;
+          }
+          if (heightkeep) {
+             document.getElementById('user_height').value = heightkeep;
+          }
+          if (weightkeep) {
+             document.getElementById('user_weight').value = weightkeep;
+        }
+      };
+      // テキストエリアの内容をローカルストレージに保存
+      function saveFoodData() {
+          const breakfast = document.getElementById('text-breakfast').value;
+          localStorage.setItem('text-breakfast', breakfast);
+          const lunch = document.getElementById('text-lunch').value;
+          localStorage.setItem('text-lunch', lunch);
+          const dinner = document.getElementById('text-dinner').value;
+          localStorage.setItem('text-dinner', dinner);
+          alert('食事のデータが保存されました!');
+      }
+ 
+ 
+      function saveData() {
+            const textmoku = document.getElementById('moku').value;
+            localStorage.setItem('moku', textmoku);
+            alert('目標が保存されました!');
+        }
+ 
+        function calculateBMI() {
+            const height = document.getElementById('user_height').value;
+            const weight = document.getElementById('user_weight').value;
+            localStorage.setItem('user_height', height);
+            localStorage.setItem('user_weight', weight);
+            alert('身長・体重データが保存されました!');
+        }
+     
+  </script>
+ 
     <div class="Kcal-input">
-      <input type="number" class="test-input" placeholder="Kcal">
-      <input type="number" class="test-input" placeholder="Kcal">
-      <input type="number" class="test-input" placeholder="Kcal">
+      <input type="number" class="Kcal-breakfast" placeholder="Kcal">
+      <input type="number" class="Kcal-lunch" placeholder="Kcal">
+      <input type="number" class="Kcal-dinner" placeholder="Kcal">
     </div>
-
+ 
      <!--登録ボタン-->
       <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
-          <input type="submit" value="登録">
+          <input type="submit"  onclick="saveFoodData()" value="登録">
       </div>
              
-      <div>
-          <button id="breakfast" class=" breakfast" onclick="breakfast_id()">朝食</button>
-          <button id="lunch" class=" lunch" onclick="lunch_id()">昼食</button>
-          <button id="dinner" class=" dinner" onclick="dinner_id()">夕食</button>
-      </div>
-
+      <div class="goha">
+   
+            <button id="breakfast" class="breakfast" onclick="location.href='../sample/user_breakfast.html'; breakfast_id();">朝食</button>
+            <button id="lunch" class="lunch" onclick="location.href='../sample/user_lunch.html'; lunch_id();">昼食</button>
+            <button id="dinner" class="dinner" onclick="location.href='../sample/user_dinner.html'; dinner_id();">夜食</button>
+          </div>
+ 
 </body>
 </html>
