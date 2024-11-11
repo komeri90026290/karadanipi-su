@@ -1,6 +1,10 @@
 @charset "utf-8";
 /*メニューボタン全体位置指定指定*/
 
+
+
+/*~~~~~~~~~~~~~~~~~~~左側のアドミンサイドバーコード~~~~~~~~~~~~~~~~~~~~~~~~~~~~^*/
+
 #admin_nav {
     border-radius: 10px; /*枠の淵の丸み指定*/
     padding-top: 50px; /*上からの余白*/
@@ -36,6 +40,23 @@
     margin-bottom: 85px;
 }
  
+.logout {
+    margin-top: 10px;
+    margin-right: 60px;
+    border-radius: 10px;
+    width: 40px;
+    color: white;
+    position: absolute; /* 親要素である #logout 内の位置指定 */
+    top: 10px; /* 「目標」入力フィールドの下に配置 */
+    right: 10px; /* 「目標」入力フィールドの右端に配置 */
+ 
+}
+ 
+.logout::before {
+    content: url(logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg);
+    margin-right: 10px;
+    vertical-align: middle;
+}
  
 /* ボタン風のリンクスタイル */
 .button-link {
@@ -74,3 +95,96 @@ ul{
     display: flex;
     justify-content: center; /* ボタンを中央に配置 */
   }
+
+/*~~~~~~~~~~~~~~~~~~~左側のアドミンサイドバーコード終わり~~~~~~~~~~~~~~~~~~~~~~~~~~~~^*/
+
+
+
+
+#back {
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景のグラデーションカラーを指定*/
+    padding: 12px; /* 内側の余白を調整して内容が中央に収まるように */
+}
+
+
+
+
+
+/* ソートオプションを画面左上に固定する */
+#sortOption {
+    position: absolute;
+    top: 120px;   /* 上からの距離 */
+    left: 800px;  /* 左からの距離 */
+    z-index: 1001;  /* サイドバーよりも前に表示されるようにする */
+    padding: 5px;  /* 内側の余白 */
+    font-size: 16px; /* フォントサイズ */
+    min-width: 100px;      /*横幅の指定*/
+    min-height: 50px;       /*縦幅の指定*/
+    text-align: center;
+}
+
+/* select の選択肢の部分にも丸みをつける */
+select {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    
+}
+
+.select, button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 10px;
+}
+
+select:hover, button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* select の選択肢の部分に丸みをつけたり、色をつけたり */
+option {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+}
+
+option:hover {
+    background-color: white;
+    color: black;
+}
+
+/* select の選択肢の部分に丸みをつけたデザイン */
+select:focus {
+    outline: none;
+    border: 2px solid #fefefe;
+}
+
+
+/* admin.css に追加 */
+.nameset {
+    font-size: 30px; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字にする（任意） */
+  }
+  
+/* admin.css に追加 */
+#userList {
+    margin-top: 200px;
+    list-style: none;  /* デフォルトのリストマーカーを削除 */
+    padding-left: 0;   /* 左のインデントを0にする */
+  }
+  
+  #userList li {
+    padding-left: 30px;  /* 適度な左余白を追加 */
+    margin-bottom: 60px;   /* 各リスト項目の間隔を少し空ける */
+    text-indent: -300px;    /* テキスト部分を左に少し移動 */
+  }
+
+  
