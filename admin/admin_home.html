@@ -42,7 +42,7 @@
 
       // ページが読み込まれた際にデータを取得する
       window.onload = function() {
-        fetch('https://karadanipi-su-api.onrender.com/test')
+        fetch('https://karadanipi-su-api.onrender.com/users')
           .then(response => {
             if (!response.ok) {
               throw new Error('ネットワークのエラーが発生しました');
