@@ -192,7 +192,32 @@
             localStorage.setItem('user_weight', weight);
             alert('身長・体重データが保存されました!');
         }
-     
+     // 現在のURLからuserIdを取得
+const urlParams = new URLSearchParams(window.location.search);
+const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+ 
+        fetch('https://karadanipi-su-api.onrender.com/food', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+        userid: userId,
+        breakfast: savedData_breakfast,
+        lunch: savedData_lunch,
+        dinner: savedData_dinner
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('データが保存されました！');
+        console.log('サーバーからの応答:', data);
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        alert('データの保存に失敗しました:' + error.message);
+      });
+    
   </script>
  
     
