@@ -3,7 +3,10 @@ body {
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
+
+    
 }
+
 .content {
     margin-left: 110px;
 }
@@ -30,7 +33,6 @@ input[type="number"]{
     top: 10px; /* 「目標」入力フィールドの下に配置 */
     right: 10px; /* 「目標」入力フィールドの右端に配置 */
 
- 
 }
 
 .logout::before {
