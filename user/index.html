@@ -133,6 +133,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       <script>
         // ページが読み込まれたときにローカルストレージからデータを取得
         window.onload = function() {
+
+
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
@@ -169,6 +171,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             if (Kcal_dinner) {
                document.getElementById('kcal-dinner').value = Kcal_dinner;
             }
+
         };
       // テキストエリアの内容をローカルストレージに保存
       function saveFoodData() {
@@ -184,7 +187,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
           localStorage.setItem('kcal-lunch', Kcallunch);
           const Kcaldinner = document.getElementById('kcal-dinner').value;
           localStorage.setItem('kcal-dinner', Kcaldinner);
-          alert('食事のデータが保存されました!');  
+          //alert('食事のデータが保存されました!');  
       };
  
       function saveData() {
@@ -199,13 +202,47 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             localStorage.setItem('user_height', height);
             localStorage.setItem('user_weight', weight);
         }
+    function saveFood() {
+        // 現在のURLからuserIdを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+            const  savedData_breakfast = localStorage.getItem('text-breakfast');
+            const  savedData_lunch = localStorage.getItem('text-lunch');
+            const  savedData_dinner = localStorage.getItem('text-dinner');
+            console.log(userId);
+    
+            // リクエストの内容を設定
+            const requestData = {
+            userid: userId,
+            breakfast: savedData_breakfast,
+            lunch: savedData_lunch,
+            dinner: savedData_dinner
+            };
+    
+            fetch('https://karadanipi-su-api.onrender.com/foods', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('データが保存されました！');
+            console.log('サーバーからの応答:', data);
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+            alert('データの保存に失敗しました:' + error.message);
+        });
+    }
   </script>
  
     
  
      <!--登録ボタン-->
       <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
-          <input type="submit"  onclick="saveFoodData()" value="登録">
+          <input type="submit"  onclick=" saveFoodData();saveFood();" value="登録">
       </div>
              
       <div class="goha">
