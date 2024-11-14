@@ -3,9 +3,7 @@ body {
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
-   
 }
- 
 .content {
     margin-left: 110px;
 }
@@ -31,16 +29,16 @@ input[type="number"]{
     position: absolute; /* 親要素である #logout 内の位置指定 */
     top: 10px; /* 「目標」入力フィールドの下に配置 */
     right: 10px; /* 「目標」入力フィールドの右端に配置 */
+
  
 }
- 
+
 .logout::before {
-    content: url(logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg);
+    content: url(logout.svg);
     margin-right: 10px;
     vertical-align: middle;
 }
 
- 
 .saveData{
     padding: 10px 20px; /* 共通のパディング */
     border: none; /* ボーダーなし */
@@ -143,6 +141,7 @@ input[id="moku"] {
 .body-part {       /*ピクトグラム本体の色を変える場所*/
     fill: #ddd;
 }
+
  
 /*トレーニング追加　アフターケアのボタン調整*/
  

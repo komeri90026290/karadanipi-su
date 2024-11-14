@@ -1,32 +1,87 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>管理者ホーム</title>
-        <link rel="stylesheet" href="styles/admin.css">
-    </head>
-    <body>
-    <!--ヘッダー-->
+<head>
+    <meta charset="UTF-8">
+    <title>管理者ホーム</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
     <header>
         <!--左側メニュー-->
-        <nav id="admin_nav">
-            <ul>
-                <li class="custom-button" id="user">
-                    <a href="admin_home.html" class="button-link">ユーザー</a>
-                </li>
-               
-                <li class="custom-button" id="eat">
-                    <a href="admin_food.html" class="button-link">食事</a>
-                </li>
- 
-                <li class="custom-button" id="tore">
-                    <a href="admin_tore.html" class="button-link">トレーニング</a>
-                </li>
-            </ul>
-        </nav>
+            <nav id="admin_nav">
+                <ul>
+                    <li class="custom-button" id="user">
+                        <a href="admin_home.html" class="button-link">ユーザー</a>
+                    </li>
+                    <li class="custom-button" id="eat">
+                        <a href="admin_food.html" class="button-link">食事</a>
+                    </li>
+                    <li class="custom-button" id="tore">
+                        <a href="admin_tore.html" class="button-link">トレーニング</a>
+                    </li>
+                </ul>
+            </nav>
         <!--/左側メニュー-->
     </header>
-   
-    <!--/ヘッダー--> 
-    </body>
+
+<!--背景色-->
+<nav id="back"> 
+    <button  class="logout" onclick="location.href='user_logout.html'; user_logout();"></button>
+
+    <select  id="sortOption" onchange="sortArray()">
+        <option value="asc">昇順</option>
+        <option value="desc">降順</option>
+    </select>
+
+    <!-- ユーザーリスト -->
+    <ul id="userList"></ul>
+
+    <!-- JSのコード部分 -->
+    <script>
+      let userData = []; // データを一時的に保存するための変数
+
+      // ページが読み込まれた際にデータを取得する
+      window.onload = function() {
+        fetch('https://karadanipi-su-api.onrender.com/users')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('ネットワークのエラーが発生しました');
+            }
+            return response.json();
+          })
+          .then(data => {
+            userData = data; // 取得したデータを保存
+            renderUserList(userData); // 初期表示
+          })
+          .catch(error => {
+            console.error('データ取得エラー:', error);
+            alert('データの取得に失敗しました');
+          });
+      };
+
+      // データを表示する関数
+      function renderUserList(data) {
+        const userList = document.getElementById('userList');
+        userList.innerHTML = ''; // リストを初期化
+        data.forEach(user => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `•\u00A0\u00A0\u00A0\u00A0${user.username}`;
+          listItem.classList.add('nameset');
+          userList.appendChild(listItem);
+        });
+      }
+
+      // 並び替え用の関数
+      function sortArray() {
+        const sortOption = document.getElementById('sortOption').value;
+        const sortedData = [...userData].sort((a, b) => {
+          const dateA = new Date(a.created_at);
+          const dateB = new Date(b.created_at);
+          return sortOption === 'asc' ? dateA - dateB : dateB - dateA;
+        });
+        renderUserList(sortedData); // 並び替えたデータで表示を更新
+      }
+    </script>
+</nav>
+</body>
 </html>

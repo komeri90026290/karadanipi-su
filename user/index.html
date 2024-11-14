@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><!--ブラウザが Google Fonts のサーバーに早めに接続するように指示する-->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!--Google Fontsが別のサーバー (gstatic.com) からフォントのデータを取得する-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"><!--ここで Noto Sans JP フォントを実際に読み込みます-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js" defer></script>
     <title>肉体改造管理システム</title>
@@ -39,7 +42,7 @@
 <p>BMI: <span id="heibmi"></span>%</p>
 
     </div>
- 
+
     <div class="content">
      <!-- トレーニングリストを表示するためのスクロール可能なエリア -->
 <div class="scrollable-memo" id="exerciseList">
@@ -75,6 +78,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
 
     <!-- 目標入力 -->
     <input type="text" id="moku" placeholder="目標">
+    <!--保存ボタン-->
     <button onclick="saveData()" id="moku-keep">保存</button>
 
  
@@ -119,53 +123,52 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       <textarea id="text-lunch" placeholder="入力してください"></textarea>
       <textarea id="text-dinner" placeholder="入力してください"></textarea>
     </div>
-
     <div class="Kcal-input">
-      <input type="number" id="kcal-breakfast" placeholder="Kcal">
-      <input type="number" id="cal-lunch" placeholder="Kcal">
-      <input type="number" id="kcal-dinner" placeholder="Kcal">
-    </div>
- 
-    <script>
-      // ページが読み込まれたときにローカルストレージからデータを取得
-      window.onload = function() {
-          const  savedData_breakfast = localStorage.getItem('text-breakfast');
-          const  savedData_lunch = localStorage.getItem('text-lunch');
-          const  savedData_dinner = localStorage.getItem('text-dinner');
-          const  save_moku = localStorage.getItem('moku');
-          const  heightkeep = localStorage.getItem('user_height');
-          const  weightkeep = localStorage.getItem('user_weight');
-          const  Kcal_breakfast = localStorage.getItem('kcal-breakfast');
-          const  Kcal_lunch = localStorage.getItem('kcal-lunch');
-          const  Kcal_dinner = localStorage.getItem('kcal-dinner');
-          if (savedData_breakfast) {
-              document.getElementById('text-breakfast').value = savedData_breakfast;
-          }
-          if (savedData_lunch) {
-              document.getElementById('text-lunch').value = savedData_lunch;
-          }
-          if (savedData_dinner) {
-              document.getElementById('text-dinner').value = savedData_dinner;
-          }
-          if (save_moku) {
-              document.getElementById('moku').value = save_moku;
-          }
-          if (heightkeep) {
-             document.getElementById('user_height').value = heightkeep;
-          }
-          if (weightkeep) {
-             document.getElementById('user_weight').value = weightkeep;
-          }  
-          if (Kcal_breakfast) {
-             document.getElementById('kcal-breakfast').value = Kcal_breakfast;
-          }
-          if (Kcal_lunch) {
-             document.getElementById('kcal-lunch').value = Kcal_lunch;
-          }
-          if (Kcal_dinner) {
-             document.getElementById('kcal-dinner').value = Kcal_dinner;
-          }
-      };
+        <input type="number" id="kcal-breakfast" placeholder="Kcal">
+        <input type="number" id="kcal-lunch" placeholder="Kcal">
+        <input type="number" id="kcal-dinner" placeholder="Kcal">
+      </div>
+   
+      <script>
+        // ページが読み込まれたときにローカルストレージからデータを取得
+        window.onload = function() {
+            const  savedData_breakfast = localStorage.getItem('text-breakfast');
+            const  savedData_lunch = localStorage.getItem('text-lunch');
+            const  savedData_dinner = localStorage.getItem('text-dinner');
+            const  save_moku = localStorage.getItem('moku');
+            const  heightkeep = localStorage.getItem('user_height');
+            const  weightkeep = localStorage.getItem('user_weight');
+            const  Kcal_breakfast = localStorage.getItem('kcal-breakfast');
+            const  Kcal_lunch = localStorage.getItem('kcal-lunch');
+            const  Kcal_dinner = localStorage.getItem('kcal-dinner');
+            if (savedData_breakfast) {
+                document.getElementById('text-breakfast').value = savedData_breakfast;
+            }
+            if (savedData_lunch) {
+                document.getElementById('text-lunch').value = savedData_lunch;
+            }
+            if (savedData_dinner) {
+                document.getElementById('text-dinner').value = savedData_dinner;
+            }
+            if (save_moku) {
+                document.getElementById('moku').value = save_moku;
+            }
+            if (heightkeep) {
+               document.getElementById('user_height').value = heightkeep;
+            }
+            if (weightkeep) {
+               document.getElementById('user_weight').value = weightkeep;
+            }  
+            if (Kcal_breakfast) {
+               document.getElementById('kcal-breakfast').value = Kcal_breakfast;
+            }
+            if (Kcal_lunch) {
+               document.getElementById('kcal-lunch').value = Kcal_lunch;
+            }
+            if (Kcal_dinner) {
+               document.getElementById('kcal-dinner').value = Kcal_dinner;
+            }
+        };
       // テキストエリアの内容をローカルストレージに保存
       function saveFoodData() {
           const breakfast = document.getElementById('text-breakfast').value;
@@ -182,7 +185,6 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
           localStorage.setItem('kcal-dinner', Kcaldinner);
           alert('食事のデータが保存されました!');  
       };
-
  
       function saveData() {
             const textmoku = document.getElementById('moku').value;
@@ -207,7 +209,6 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       </div>
              
       <div class="goha">
-   
             <button id="breakfast" class="breakfast" onclick="location.href='../sample/user_breakfast.html'; breakfast_id();">朝食</button>
             <button id="lunch" class="lunch" onclick="location.href='../sample/user_lunch.html'; lunch_id();">昼食</button>
             <button id="dinner" class="dinner" onclick="location.href='../sample/user_dinner.html'; dinner_id();">夜食</button>

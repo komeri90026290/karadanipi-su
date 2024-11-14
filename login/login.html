@@ -68,16 +68,18 @@
       .then(response => response.json())
       .then(data => {
         if (data.message === 'ログイン成功') {
-          alert('ログイン成功！');
-          console.log('ユーザーID:', data.userId);
+         alert('ログイン成功！');
+          console.log('ユーザーID:', data.userId); // これでIDが正しく表示されるか確認
+          console.log('ユーザーネーム',data.username);
+          window.location.href = `http://127.0.0.1:5500/user/index.html?userId=${data.userId}`;
           // ここで次の画面に遷移したり、セッションを作成するなどの処理が可能
         } else {
           alert('ログイン失敗：' + data.error);
         }
       })
       .catch(error => {
-        console.error('エラー:', error);
-        alert('ログイン処理に失敗しました');
+        console.error('エラー:'+error);
+        alert('ログイン処理に失敗しました'+error);
       });
     });
         </script>
