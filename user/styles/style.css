@@ -1,15 +1,15 @@
 body {
-    
+   
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
-    
+   
 }
-
+ 
 .content {
     margin-left: 110px;
 }
-
+ 
 input[type="number"]{
     width: 100px; /* 幅を小さくする */
     padding: 5px; /* パディングを追加 */
@@ -17,13 +17,30 @@ input[type="number"]{
     border: 1px solid #ccc; /* ボーダーのスタイル */
     border-radius: 4px; /* 角を丸くする */
 }
-
+ 
 .sidebar {
     padding: 20px; /* パディングを追加 */
     border-right: 5px solid #ccc; /* サイドバーの右側に線を追加 */
     margin-right: 20px; /* サイドバーの右に余白を追加 */
 }
 
+.logout {
+    border-radius: 10px;
+    width: 40px;
+    color: white;
+    position: absolute; /* 親要素である #logout 内の位置指定 */
+    top: 10px; /* 「目標」入力フィールドの下に配置 */
+    right: 10px; /* 「目標」入力フィールドの右端に配置 */
+ 
+}
+ 
+.logout::before {
+    content: url(logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+ 
 .saveData{
     padding: 10px 20px; /* 共通のパディング */
     border: none; /* ボーダーなし */
@@ -33,7 +50,7 @@ input[type="number"]{
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .con {
     padding: 10px 20px; /* 共通のパディング */
     border: none; /* ボーダーなし */
@@ -43,34 +60,34 @@ input[type="number"]{
     background-color: #FFEA81; /* ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
-
+ 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; /*枠の右側の数字変わるボタン全部消せる*/
 }
-
+ 
 .cm {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
     top: 105px;        /*上からの位置指定*/
-    left: 140px;      /*左からの位置指定*/ 
+    left: 140px;      /*左からの位置指定*/
     font-size: 17.5px;     /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
-    margin: 0; /* 外側の余白をゼロに */ 
+    margin: 0; /* 外側の余白をゼロに */
     line-height: 1; /* 行間を詰める */
 }
-
+ 
 .kg {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
     top: 150px;               /*上からの位置指定*/
-    left: 140px;            /*左からの位置指定*/   
+    left: 140px;            /*左からの位置指定*/  
     font-size: 17.5px;          /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
-    margin: 0; /* 外側の余白をゼロに */ 
+    margin: 0; /* 外側の余白をゼロに */
     line-height: 1; /* 行間を詰める */    
 }
-
+ 
 /* 目標入力欄 */
 input[id="moku"] {
     border: none; /* ボーダーなし */
@@ -84,14 +101,14 @@ input[id="moku"] {
     margin-top: 20px;
     padding: 10px;
 }
-
+ 
 #moku-keep {
     width: 90px;
     height: 45px;
     position: absolute; /* 親要素である #moku 内の位置指定 */
     top: 100px; /* 「目標」入力フィールドの下に配置 */
     right: 200px; /* 「目標」入力フィールドの右端に配置 */
-    text-align: center; 
+    text-align: center;
     background-color: #FFEA81;
     border-radius: 10px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
@@ -99,18 +116,18 @@ input[id="moku"] {
     cursor: pointer;
     font-size: 20px;
 }
-
+ 
 #lineChart {
     margin-top: 25px; /*グラフの上にスペース*/
     width: 700px;/* グラフの幅　*/
-    height: 400px;/* グラフの高さ　*/
+    height: 350px;/* グラフの高さ　*/
 }
-
+ 
 .picto{
     margin-top:-50px;
 }
-
-
+ 
+ 
 #body-parts {          /*大きさを調整する場所
     cursor: pointer;  　　/* ピクトグラム全体をクリック可能に */
     transform: scale(0.70); /* 縮小率の調整 */
@@ -157,7 +174,7 @@ input[id="moku"] {
     cursor: pointer; /* ポインターを表示 */
     font-size: 16px; /* フォントサイズ */
 }
-
+ 
 .scrollable-memo {
     position: absolute;
     z-index: 9999;
@@ -194,13 +211,13 @@ input[id="moku"] {
 }
  
     /*~~~~~~~~~~~~スクロールバー終わりんご~~~~~~~~~~~~~~~~~~~~~~*/
-
-
+ 
+ 
 #taijyu{
     display: flex;
     gap:152px;
 }
-
+ 
     .days {
         padding: 10px 20px; /* 共通のパディング */
         border: none; /* ボーダーなし */
@@ -263,7 +280,7 @@ input[id="moku"] {
         box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
      
     }
-
+ 
     .entry{
         width: 90px;
         height:50px ;
@@ -272,7 +289,7 @@ input[id="moku"] {
         background-color: #FFEA81; /* ボタンの背景色 */
         box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
     }
-
+ 
     /* 格子スタイルのテキストエリア */
 #text-breakfast {
     width: 26%; /* 全幅にする */
@@ -286,7 +303,7 @@ input[id="moku"] {
    
 }
  
-
+ 
  
 /* 格子スタイルのテキストエリア */
 #text-lunch {
@@ -313,7 +330,7 @@ input[id="moku"] {
     resize: none; /* サイズ変更を無効化 */
    
 }
-
+ 
 .goha{
     display: flex;
     gap:200px;
@@ -358,17 +375,16 @@ input[id="moku"] {
     background-color: #D9D9D9; /* 夕食ボタンの背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
-
+ 
     /*kcal数値入力のとこの幅とか指定*/
 .Kcal-input {
     display: flex;
-    gap: 100px; /*間の幅の大きさ指定*/
-    
+    gap: 112px; /*間の幅の大きさ指定*/
 }
  
 .food-input{
-    display: flex;
-    gap: 5px; /*間の幅の大きさ指定*/
+    margin-top: 60px;
+    width: 40;
 }
  
 /*登録ボタン用のCSS*/
@@ -380,7 +396,7 @@ input[id="moku"] {
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 1470px;        /*上からの位置指定*/
+    top: 1500px;        /*上からの位置指定*/
     left: 925px;      /*左からの位置指定*/
     font-size: 17.5px; /*文字の大きさ指定*/
     padding: 10px 18px; /*内側の余白の大きさ*/

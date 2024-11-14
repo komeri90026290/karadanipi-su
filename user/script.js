@@ -7,102 +7,173 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeChart();
 });
 
-let myLineChart;
-const weightData = JSON.parse(localStorage.getItem('weightData')) || {};
+// 身長と体重の入力制限
+const heightkeep = document.getElementById('user_height');
+const weightInput = document.getElementById('user_weight');
 
-// グラフの初期化関数
-function initializeChart() {
-    const ctx = document.getElementById('lineChart').getContext('2d');
-    myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: Object.keys(weightData),
-            datasets: [{
-                label: '体重',
-                data: Object.values(weightData),
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.1
-            }]
-        },
-        options: {
-            responsive: false, // レスポンシブを無効にする
-            maintainAspectRatio: false, // アスペクト比を維持しない
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 10
-                    }
-                }
-            }
-        }
-    });
-}
+// 身長に小数点を使わせない
+heightkeep.addEventListener('input', function() {
+    // 身長が小数点を含んでいる場合は削除
+    heightkeep.value = heightkeep.value.replace(/\..*$/, ''); // 小数点以降を削除
+
+    // 身長が3桁を超えないように制限
+    if (heightkeep.value.length > 3) {
+        heightkeep.value = heightkeep.value.slice(0, 3); // 3桁に切り捨て
+    }
+    if (Number(heightkeep.value) > 999) {
+        heightkeep.value = 999; // 最大値999
+    }
+});
+
+weightInput.addEventListener('input', function() {
+    // 体重が4桁を超えないように制限
+    if (weightInput.value.length > 4) {
+        weightInput.value = weightInput.value.slice(0, 4); // 4桁に切り捨て
+    }
+    if (Number(weightInput.value) > 1000) {
+        weightInput.value = 1000; // 最大値1000
+    }
+});
 
 // BMI計算関数
 function calculateBMI() {
     const userHeight = parseFloat(document.getElementById("user_height").value) / 100;
     const userWeight = parseFloat(document.getElementById("user_weight").value);
 
-    let bmi = 0, heitai = 0;
+    let bmi = 0, heitai = 0, heibmi = 0;
 
-    if (userHeight > 0) { 
+    if (userHeight > 0 && userWeight > 0) { 
+        // BMI計算
         bmi = (userWeight / (userHeight * userHeight)).toFixed(2);
         document.getElementById("result").textContent = bmi;
 
+        // 標準体重計算 (BMI 22に基づく計算)
         heitai = (userHeight * userHeight * 22).toFixed(1);
         document.getElementById("heitai").textContent = heitai;
 
-        heibmi = (heitai/ (userHeight * userHeight)).toFixed(2);
+        // 理想的なBMI (BMI 22を基準にした体重)
+        heibmi = (heitai / (userHeight * userHeight)).toFixed(2);
         document.getElementById("heibmi").textContent = heibmi;
-    } 
+    }
 
+    // ローカルストレージに体重データを保存
     const date = new Date().toISOString().split('T')[0];
+    let weightData = JSON.parse(localStorage.getItem('weightData')) || {};
     weightData[date] = userWeight;
     localStorage.setItem('weightData', JSON.stringify(weightData));
+
+    // グラフの更新 (updateChartとupdateWeightChange関数を使っている場合)
     updateChart();
     updateWeightChange();
 }
 
-// 体重調整関数
-function adjustWeight(change) {
-    const date = document.getElementById("adjustment_date").value;
-    const weightInput = document.getElementById("adjustment_weight");
-    let weight = parseFloat(weightInput.value) || 0;
 
-    weight += change;
-    weightInput.value = weight.toFixed(1);
-
+let myLineChart;
+let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
+//ページ読み込み時にweightDataをlocalStorageから取得している
+ 
+// 体重データを7日分に制限して保存する関数
+function saveWeightData(date, weight) {
     weightData[date] = weight;
+ 
+    // 7件を超えた場合は古いデータを削除
+    const dates = Object.keys(weightData);
+    if (dates.length > 7) {
+        delete weightData[dates[0]]; // 最も古いデータを削除
+    }
+ 
+    // 更新後のデータを保存
     localStorage.setItem('weightData', JSON.stringify(weightData));
-    updateChart();
-    updateWeightChange();
-    displayWeightChange();
 }
-
-// グラフの更新
-function updateChart() {
-    myLineChart.data.labels = Object.keys(weightData);
-    myLineChart.data.datasets[0].data = Object.values(weightData);
-    myLineChart.update();
-}
-
-// 前日比を計算
-function updateWeightChange() {
-    const weightChangeContainer = document.getElementById("weight_change_container");
-    weightChangeContainer.innerHTML = "";
-
-    Object.keys(weightData).forEach(date => {
-        const currentWeight = weightData[date];
-        const previousDate = new Date(date);
-        previousDate.setDate(previousDate.getDate() - 1);
-        const previousDateString = previousDate.toISOString().split('T')[0];
-        const previousWeight = weightData[previousDateString] || 0;
-
-        const change = currentWeight - previousWeight;
-        const changeText = `${date}: ${change >= 0 ? `+${change.toFixed(1)} kg` : `${change.toFixed(1)} kg`}`;
-        const changeElement = document.createElement("p");
-        changeElement.textContent = changeText;
-        weightChangeContainer.appendChild(changeElement);
+ 
+// グラフの初期化関数
+function initializeChart() {
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    const recentData = getRecentWeightData(); //X軸（日付）とY軸（体重）のデータを取得
+ 
+    myLineChart = new Chart(ctx, {   //new Chart(ctx, {　で取得したデータをもとに折れ線グラフを生成し、myLineChartに代入してる
+        type: 'line',  //折れ線グラフにさせる
+        data: {
+            labels: recentData.dates,  // x軸に表示する日付
+            datasets: [{
+                label: '体重',
+                data: recentData.weights,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2,  // 線の太さ
+                tension: 0.1  // 線の曲がり具合
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,  // y軸を0から始める
+                    ticks: {
+                        stepSize: 10  // y軸の目盛りの間隔を1に設定
+                    }
+                }
+            }
+        }
     });
+}
+ 
+// 最新の7日間の体重データを取得する関数
+function getRecentWeightData() {  //getRecentWeightData関数を使って保存されたWightDataを表示させる
+    const dates = Object.keys(weightData).slice(-7); // 最新の7件を取得
+    const weights = dates.map(date => weightData[date]);  // その日付に対応する体重データを取得
+ 
+    return { dates, weights };
+}
+ 
+// 日間グラフ表示関数
+function showDailyChart() {
+    const recentData = getRecentWeightData();
+    myLineChart.data.labels = recentData.dates;
+    myLineChart.data.datasets[0].data = recentData.weights;
+    myLineChart.update(); //updateでグラフ更新
+}
+ 
+// 週間グラフ表示関数
+function showWeeklyChart() {
+    let dates = Object.keys(weightData).slice(-7); // 最新の7日分を取得
+    let weights = dates.map(date => weightData[date]);
+ 
+    // 7日間記録されていない場合、空のデータを表示
+    if (dates.length < 7) {
+        dates = Array(7).fill('');
+        weights = Array(7).fill(null);  // nullにすることでグラフに空のデータを表示
+    }
+ 
+    // 7日間記録が完了した場合、最終日のデータを週間に反映
+    if (dates.length === 7) {
+        const latestWeight = weights[weights.length - 1];
+        myLineChart.data.labels = dates;
+        myLineChart.data.datasets[0].data = weights;
+        myLineChart.update(); // 週間グラフを更新
+    } 
+}
+ 
+// 最終日の体重を表示する関数
+function showLatestWeight(weight) {
+    const latestWeightElement = document.getElementById("latest-weight"); //最終日の記録を表示させるためにlatest-weightをHTMLにも組み込んでいる
+    if (latestWeightElement) {
+        latestWeightElement.textContent = `最終日の体重: ${weight} kg`;
+    }
+}
+ 
+
+ 
+// グラフの更新関数
+function updateChart() {
+    showDailyChart(); // デフォルトは日間グラフで更新
+}
+ 
+// ボタンがクリックされた時の関数
+function days_id() {
+    showDailyChart(); // 日間ボタンをクリックしたら日間グラフを表示
+}
+ 
+function week_id() {
+    showWeeklyChart(); // 週間ボタンをクリックしたら週間グラフを表示
 }

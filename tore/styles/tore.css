@@ -114,7 +114,7 @@
  
  
  
-#submit input[type="submit"] {
+#submit button{
     left : 630px; /*左からの位置指定*/
     position: absolute; /*無敵*/
     margin: 25px auto; /*上の余白の大きさ指定*/
