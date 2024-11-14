@@ -2,65 +2,103 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--スマホとかとサイズ変更にも対応-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/tore.css">
+    <title>トレーニング追加</title>
 </head>
 <body>
-    <div id="back"> <!--背景色指定のためのID[back]-->
-        <nav id="input"> <!--タイトルの大きさ変更のためのID[title]-->
-
-<!--~~~~~~~~~~ここからユーザーが入力する欄を作るための部分~~~~~~~~~~~~~~~-->
-            <form>
-                <select id="part" name="kinntore"> <!--筋トレ部位をselectで選択させる-->
+    <div id="back">
+        <nav id="input">
+            <!-- トレーニング内容を入力するフォーム -->
+            <form id="trainingForm">
+                <!-- 筋トレ部位を選択するセレクトボックス -->
+                <select id="part" name="kinntore">
                     <option value="">肉体部位</option>
-                    <option value="ryoute" id="arms">両腕</option>
-                    <option value="kyoukinn" id="chest">胸筋</option>
-                    <option value="hukkinn" id="abs">腹筋</option>                        
-                    <option value="ryouasi" id="legs">両足</option>
+                    <option value="両腕" id="arms">両腕</option>
+                    <option value="胸筋" id="chest">胸筋</option>
+                    <option value="腹筋" id="abs">腹筋</option>                        
+                    <option value="両足" id="legs">両足</option>
                 </select>
 
-      <p><label for="tore"></label> <input type="text" id="tore" name="tore"></p> <!--トレーニング内容入力欄を作るための部分-->
+                <!-- トレーニングの内容を入力するテキストボックス -->
+                <p><label for="tore"></label> <input type="text" id="tore" name="tore" placeholder="トレーニング内容"></p>
 
-      <div class="byou">
-      <p><label for="byou"></label> <input type="number" id="byou" name="byou">  </p> <!--秒数入力欄を作るための部分-->
-      </div>
-
-      <div class="kai">
-        <p><label for="kai"></label> <input type="number" id="kai" name="kai">  </p> <!--回数入力欄を作るための部分-->
-      </div>
-
-      <div class="seto">
-        <p><label for="seto"></label> <input type="number" id="seto" name="seto">  </p> <!--セット回数を入力するための部分-->
-      </div>
-
-<!--~~~~~~~~~~~~~~~入力欄のためのコード終わり~~~~~~~~~~~~~~~~~~~~-->
-
-
-            <!--~~~~~~~~~入力欄の中の秒、回、セットを表示させるための部分~~~~~~~~~~-->
-            <div class="seconds">
-                <p>秒</p>
-              </div>
-        
-              <div class="numbertime">
-                <p>回</p>
-              </div>
-        
-              <div class="kakeru">
-                <p>×</p>
-              </div>
-        
-              <div class="set">
-                <p>セット</p>
-              </div>
-              <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
-
-
-
-        <!--追加ボタン作るよ～-->
-                <div id="submit">
-                   <input type="submit" value="追加">
+                <!-- 秒数を入力するボックス -->
+                <div class="byou">
+                    <p><label for="byou"></label> <input type="number" id="byou" name="byou"></p>
                 </div>
-            </nav>
-        </form>
+
+                <!-- 回数を入力するボックス -->
+                <div class="kai">
+                    <p><label for="kai"></label> <input type="number" id="kai" name="kai"></p>
+                </div>
+
+                <!-- セット数を入力するボックス -->
+                <div class="seto">
+                    <p><label for="seto"></label> <input type="number" id="seto" name="seto"></p>
+                </div>
+
+                <!-- 入力フィールド横の単位を表示するための部分 -->
+                <div class="seconds"><p>秒</p></div>
+                <div class="numbertime"><p>回</p></div>
+                <div class="kakeru"><p>×</p></div>
+                <div class="set"><p>セット</p></div>
+
+                <!-- トレーニングを追加するためのボタン -->
+                <div id="submit">
+                  <button type="submit">追加</button>
+                </div>
+            </form>
+        </nav>
     </div>
+
+    <!-- JavaScriptコード -->
+    <script>
+      // フォーム送信時の処理
+      document.getElementById('trainingForm').onsubmit = function(event) {
+          event.preventDefault();
+
+          // 各入力フィールドから値を取得
+          const part = document.getElementById('part').value;
+          const exercise = document.getElementById('tore').value;
+          const seconds = document.getElementById('byou').value;
+          const reps = document.getElementById('kai').value;
+          const sets = document.getElementById('seto').value;
+
+          // 必須項目の入力チェック：部位、トレーニング内容、セット数
+          if (!part || !exercise || !sets) {
+              alert('部位、トレーニング内容、セット数を入力してください。');
+              return;
+          }
+
+          // 秒数か回数のどちらか一方が入力されているかを確認
+          if (!seconds && !reps) {
+              alert('秒数か回数のどちらかを入力してください。');
+              return;
+          }
+
+          // 秒数と回数のどちらも入力されているかのチェック
+          if (seconds && reps) {
+              alert('秒数と回数のどちらか一方のみを入力してください。');
+              return;
+          }
+
+
+          // ローカルストレージに保存するトレーニングデータを作成
+          const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+          exercises.push({ part, exercise, seconds, reps, sets });
+          localStorage.setItem('exercises', JSON.stringify(exercises));
+
+          alert('トレーニング内容が追加されました');
+          document.getElementById('trainingForm').reset();
+
+           // 新しいデータを配列の先頭に追加
+          exercises.unshift({ part, exercise, seconds, reps, sets });
+          localStorage.setItem('exercises', JSON.stringify(exercises));
+
+          // 追加ボタンを押した後、別のページに移動する
+          window.location.href = '../user/index.html'; // index.htmlの部分を戻りたいページに変更
+      };
+    </script>
 </body>
+</html>

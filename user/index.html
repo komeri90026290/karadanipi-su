@@ -20,59 +20,68 @@
     <p>ユーザー名</p>
    
     <!-- 身長と体重の入力 -->
-    <p><label for="user_height">身長</label> <input type="number" id="user_height" placeholder="例: 160"></p>
-<p><label for="user_weight">体重</label> <input type="number" step="0.1" id="user_weight" placeholder="例: 55"></p>
- 
+<p><label for="user_height">身長</label><input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1"></p>
+<p><label for="user_weight">体重</label><input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1"></p>
+
 <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
 <div class="cm">
     <p>cm</p>
 </div>
- 
+
 <div class="kg">
     <p>kg</p>
 </div>
 <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
- 
 <!-- BMI計算ボタン -->
 <p>BMI: <span id="result"></span></p>
 <p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p>
- 
- 
-   
-    <!-- 平均値表示 -->
-    <h2>平均</h2>
-    <p>体重: <span id="heitai"></span> kg</p>
-    <p>BMI: <span id="heibmi"></span>%</p>
- 
+
+<!-- 平均値表示 -->
+<h2>平均</h2>
+<p>体重: <span id="heitai"></span> kg</p>
+<p>BMI: <span id="heibmi"></span>%</p>
+
     </div>
- 
-<div class="content">
-        <!--トレーニングリスト表示-->
-    <div class="scrollable-memo">
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-      ・トレーニング名 何回 何秒 何セット
-    </div>
- <!--ログアウトボタン-->
-    <button  class="logout" onclick="location.href='../kakunin/user_logout.html'; user_logout();"></button>
+
+    <div class="content">
+     <!-- トレーニングリストを表示するためのスクロール可能なエリア -->
+<div class="scrollable-memo" id="exerciseList">
+  <!-- ローカルストレージから読み込んだトレーニングリストがここに表示されます -->
+</div>
+
+<script>
+// トレーニングリストを表示する関数
+function displayExercises() {
+  const exerciseList = document.getElementById('exerciseList'); // トレーニングリストを表示する要素を取得
+  exerciseList.innerHTML = ''; // リストをクリア
+
+  // ローカルストレージからトレーニングデータを取得（なければ空配列）
+  const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+
+  // トレーニングデータを1つずつリストに追加
+  exercises.forEach((exercise) => {
+      const exerciseItem = document.createElement('p'); // 各トレーニングを表示する<p>タグを作成
+      
+      // トレーニングの部位、内容、秒数か回数、セット数を文字列にして設定
+      exerciseItem.textContent = `${exercise.part}：${exercise.exercise} ${exercise.seconds ? exercise.seconds + '秒' : ''} ${exercise.reps ? exercise.reps + '回' : ''} × ${exercise.sets}セット`;
+      
+      // 作成した<p>タグをリストに追加
+      exerciseList.appendChild(exerciseItem);
+  });
+}
+
+// ページ読み込み時にトレーニングリストを表示
+document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLoaded イベントで確実に読み込まれるタイミングで実行
+</script>
+
+<button  class="logout" onclick="location.href='../kakunin/user_logout.html';"></button>
+
+
     <!-- 目標入力 -->
     <input type="text" id="moku" placeholder="目標">
     <!--保存ボタン-->
     <button onclick="saveData()" id="moku-keep">保存</button>
- 
+
  
     <div class="picto">
       <!-- 人型ピクトグラム -->
@@ -98,8 +107,8 @@
     <!-- 各種ボタンとグラフ表示 -->
     <p>
         <div class="button-container">
-            <button id="care" class="care" onclick="location.href='../sample/after_care.html'; after_care();">アフターケア</button>
-            <button id="tr" class="tr" onclick="location.href='../tore/tore.html'; tore_care();">トレーニング追加</button>
+            <button id="care" class="care" onclick="location.href='../sample/after_care.html'; ">アフターケア</button>
+            <button id="tr" class="tr" onclick="location.href='../tore/tore.html'; ">トレーニング追加</button>
           </div>
        <h1>体重管理</h1>
         <div id="taijyu">
@@ -178,46 +187,18 @@
           alert('食事のデータが保存されました!');  
       };
  
- 
       function saveData() {
             const textmoku = document.getElementById('moku').value;
             localStorage.setItem('moku', textmoku);
             alert('目標が保存されました!');
         }
- 
+
         function calculateBMI() {
             const height = document.getElementById('user_height').value;
             const weight = document.getElementById('user_weight').value;
             localStorage.setItem('user_height', height);
             localStorage.setItem('user_weight', weight);
-            alert('身長・体重データが保存されました!');
         }
-     // 現在のURLからuserIdを取得
-const urlParams = new URLSearchParams(window.location.search);
-const userId = Number(urlParams.get('userId')); // userIdを数値として取得
- 
-        fetch('https://karadanipi-su-api.onrender.com/food', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify({
-        userid: userId,
-        breakfast: savedData_breakfast,
-        lunch: savedData_lunch,
-        dinner: savedData_dinner
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert('データが保存されました！');
-        console.log('サーバーからの応答:', data);
-      })
-      .catch(error => {
-        console.error('エラー:', error);
-        alert('データの保存に失敗しました:' + error.message);
-      });
-    
   </script>
  
     
