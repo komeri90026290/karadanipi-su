@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
               mokuhyou: textmoku
             };
              
-        fetch('https://karadanipi-su-api.onrender.com/users/{userId}', {
-        method: 'put',
+        fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         },
@@ -211,15 +211,14 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       })
       .then(response => response.json())
       .then(data => {
-        alert('データが保存されました！');
-        console.log('サーバーからの応答:', data);
+        alert('データが保存されました！'+ textmoku);
+        console.log('サーバーからの応答:');
       })
       .catch(error => {
         console.error('エラー:', error);
         alert('データの保存に失敗しました:' + error.message);
       });
-           
-          };
+    };
 
         function calculateBMI() {
             const height = document.getElementById('user_height').value;
@@ -231,7 +230,6 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
-            console.log(userId);
     
             // リクエストの内容を設定
             const requestData = {
