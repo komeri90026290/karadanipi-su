@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
               mokuhyou: textmoku
             };
              
-        fetch('https://karadanipi-su-api.onrender.com/users', {
+        fetch('https://karadanipi-su-api.onrender.com/users/{userId}', {
         method: 'put',
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
@@ -228,9 +228,6 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             localStorage.setItem('user_weight', weight);
         }
     function saveFood() {
-        // 現在のURLからuserIdを取得
-            const urlParams = new URLSearchParams(window.location.search);
-            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
