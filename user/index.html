@@ -192,9 +192,34 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
  
       function saveData() {
             const textmoku = document.getElementById('moku').value;
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             localStorage.setItem('moku', textmoku);
-            alert('目標が保存されました!');
-        }
+ 
+            // リクエストの内容を設定
+            const requestData = {
+              userid: userId,
+              mokuhyou: textmoku
+            };
+             
+        fetch('https://karadanipi-su-api.onrender.com/users', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('データが保存されました！');
+        console.log('サーバーからの応答:', data);
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        alert('データの保存に失敗しました:' + error.message);
+      });
+           
+          };
 
         function calculateBMI() {
             const height = document.getElementById('user_height').value;
