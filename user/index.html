@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
         window.onload = function() {
 
             const urlParams = new URLSearchParams(window.location.search);
-            userId = Number(urlParams.get('userId')); // userIdを数値として取得
+            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
 
                   // ユーザーデータを取得
           function fetchUsers() {
@@ -295,6 +295,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
     };
 
     function saveALL() {  //これ保存云々
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             const height = document.getElementById('user_height').value;
             const weight = document.getElementById('user_weight').value;
             // localStorage.setItem('user_height', height);
