@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
         window.onload = function() {
 
             const urlParams = new URLSearchParams(window.location.search);
-            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+            userId = Number(urlParams.get('userId')); // userIdを数値として取得
 
                   // ユーザーデータを取得
           function fetchUsers() {
