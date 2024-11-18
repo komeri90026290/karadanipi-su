@@ -64,7 +64,6 @@ function calculateBMI() {
 
     // グラフの更新 (updateChartとupdateWeightChange関数を使っている場合)
     updateChart();
-    updateWeightChange();
 }
 
 let myLineChart;
