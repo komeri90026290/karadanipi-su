@@ -137,6 +137,13 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             const urlParams = new URLSearchParams(window.location.search);
             const userId = Number(urlParams.get('userId')); // userIdを数値として取得
 
+
+              // userIdが取得できた場合、sessionStorageに保存
+            if (userId) {
+            sessionStorage.setItem('userId', userId);
+            }
+
+
                   // ユーザーデータを取得
           function fetchUsers() {
             return fetch('https://karadanipi-su-api.onrender.com/users')
@@ -266,8 +273,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       };
  
       function saveData() {
+            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const textmoku = document.getElementById('moku').value;
-
             localStorage.setItem('moku', textmoku);
  
             // リクエストの内容を設定
@@ -295,8 +302,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
     };
 
     function saveALL() {  //これ保存云々
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+        const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const height = document.getElementById('user_height').value;
             const weight = document.getElementById('user_weight').value;
             // localStorage.setItem('user_height', height);
@@ -335,6 +341,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             // localStorage.setItem('user_weight', weight);
         }
     function saveFood() {
+            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
