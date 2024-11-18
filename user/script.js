@@ -67,24 +67,84 @@ function calculateBMI() {
     updateWeightChange();
 }
 
-
 let myLineChart;
-let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
-//ページ読み込み時にweightDataをlocalStorageから取得している
+let weightData = {}; // 初期値は空のオブジェクト
  
-// 体重データを7日分に制限して保存する関数
-function saveWeightData(date, weight) {
-    weightData[date] = weight;
+// データベースから体重データを取得してオブジェクトに変換する
+async function loadWeightData() {
+    try {
+        const response = await fetch('https://karadanipi-su-api.onrender.com/users'); // 適切なAPIエンドポイントに置き換える
+        if (response.ok) {
+            const data = await response.json();
  
-    // 7件を超えた場合は古いデータを削除
-    const dates = Object.keys(weightData);
-    if (dates.length > 7) {
-        delete weightData[dates[0]]; // 最も古いデータを削除
+            // データベースの結果をweightDataに変換
+            weightData = data.reduce((acc, item) => {
+                acc[item.date] = item.weight;
+                return acc;
+            }, {});
+            console.log("体重データがロードされました:", weightData);
+        } else {
+            console.error("体重データの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.error("エラーが発生しました:", error);
     }
- 
-    // 更新後のデータを保存
-    localStorage.setItem('weightData', JSON.stringify(weightData));
 }
+ 
+// データベースに体重データを保存する関数
+async function saveWeightData(date, weight) {
+    try {
+        const response = await fetch('https://karadanipi-su-api.onrender.com/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: 1, // ユーザーIDを適宜変更
+                date: date,
+                weight: weight,
+            }),
+        });
+ 
+        if (response.ok) {
+            console.log("体重データが保存されました");
+ 
+            // ローカルのweightDataを更新
+            weightData[date] = weight;
+ 
+            // 最大7件に制限
+            const dates = Object.keys(weightData).sort(); // 日付順にソート
+            if (dates.length > 7) {
+                delete weightData[dates[0]]; // 最も古いデータを削除
+            }
+        } else {
+            console.error("体重データの保存に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.error("エラーが発生しました:", error);
+    }
+}
+// ページロード時の処理
+window.onload = async function () {
+    await loadWeightData(); // データベースから体重データをロード
+};
+// let myLineChart;
+// let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
+// //ページ読み込み時にweightDataをlocalStorageから取得している
+ 
+// // 体重データを7日分に制限して保存する関数
+// function saveWeightData(date, weight) {
+//     weightData[date] = weight;
+ 
+//     // 7件を超えた場合は古いデータを削除
+//     const dates = Object.keys(weightData);
+//     if (dates.length > 7) {
+//         delete weightData[dates[0]]; // 最も古いデータを削除
+//     }
+ 
+//     // 更新後のデータを保存
+//     localStorage.setItem('weightData', JSON.stringify(weightData));
+// }
  
 // グラフの初期化関数
 function initializeChart() {
