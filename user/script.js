@@ -99,7 +99,7 @@ async function saveWeightData(date, weight) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId: 1, // ユーザーIDを適宜変更
+                userId: userId, // ユーザーIDを適宜変更
                 date: date,
                 weight: weight,
             }),
