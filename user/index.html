@@ -273,7 +273,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       };
  
       function saveData() {
-            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             const textmoku = document.getElementById('moku').value;
             localStorage.setItem('moku', textmoku);
  
