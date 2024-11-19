@@ -22,6 +22,7 @@
     <!-- 身長と体重の入力 -->
 <p><label for="user_height">身長</label><input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1"></p>
 <p><label for="user_weight">体重</label><input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1"></p>
+<p><label for="moku">目標<br></label><input type="text" id="moku"placeholder="目標"></p>
 
 <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
 <div class="cm">
@@ -34,7 +35,7 @@
 <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
 <!-- BMI計算ボタン -->
 <p>BMI: <span id="result"></span></p>
-<p><button id="con" class="custom-button con" onclick="calculateBMI();saveALL();">確定</button></p>
+<p><button id="con" class="custom-button con" onclick="calculateBMI();saveALL();saveData();">確定</button></p>
 
 <!-- 平均値表示 -->
 <h2>平均</h2>
@@ -78,9 +79,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
 
 
     <!-- 目標入力 -->
-    <input type="text" id="moku" placeholder="目標">
-    <!--保存ボタン-->
-    <button onclick="saveData()" id="moku-keep">保存</button>
+    <ul id="mokuhyou"></ul>
 
  
     <div class="picto">
@@ -144,7 +143,36 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
               // userIdが取得できた場合、sessionStorageに保存
             if (userId) {
             sessionStorage.setItem('userId', userId);
+            }  //ここいらないかも
+
+            fetch('https://karadanipi-su-api.onrender.com/users')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('ネットワークのエラーが発生しました');
             }
+            return response.json();
+          })
+          .then(data => {
+            userData = data; // 取得したデータを保存
+            renderUserList(userData); // 初期表示
+          })
+          .catch(error => {
+            console.error('データ取得エラー:', error);
+            alert('データの取得に失敗しました');
+          });
+      };
+
+      // データを表示する関数
+      function renderUserList(data) {
+        const userList = document.getElementById('mokuhyou');
+        userList.innerHTML = ''; // リストを初期化
+        data.forEach(user => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${user.mokuhyou}`;
+          listItem.classList.add('nameset');
+          userList.appendChild(listItem);
+        });
+
 
           GetFood(); // script.jsにあるGetFood（）をここで動作する
                   // ユーザーデータを取得
@@ -272,13 +300,14 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       };
 
       function saveData() {
-            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             const textmoku = document.getElementById('moku').value;
             localStorage.setItem('moku', textmoku);
  
             // リクエストの内容を設定
             const requestData = {
-              userid: userId,
+              userId: userId,
               mokuhyou: textmoku
             };
              
@@ -301,7 +330,8 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
     };
 
     function saveALL() {  //これ保存云々
-        const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             const height = document.getElementById('user_height').value;
             const weight = document.getElementById('user_weight').value;
             // localStorage.setItem('user_height', height);
