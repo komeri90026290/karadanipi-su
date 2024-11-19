@@ -133,7 +133,10 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       <script>
         // ページが読み込まれたときにローカルストレージからデータを取得
         window.onload = function() {
-
+            
+          function abc() {
+            alert('aa')
+          }
             const urlParams = new URLSearchParams(window.location.search);
             const userId = Number(urlParams.get('userId')); // userIdを数値として取得
 
@@ -143,7 +146,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             sessionStorage.setItem('userId', userId);
             }
 
-
+          GetFood(); // script.jsにあるGetFood（）をここで動作する
                   // ユーザーデータを取得
           function fetchUsers() {
             return fetch('https://karadanipi-su-api.onrender.com/users')
@@ -194,11 +197,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
           });
       }
  
-          // ページが読み込まれた際にデータを取得する
-          window.onload = function() {
-            // usersデータとfoodsデータを順番に取得
-            fetchUsers().then(fetchFoods);
-          };
+          
  
           // データを表示する関数
           function renderFoodList(data) {
@@ -271,7 +270,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
           localStorage.setItem('kcal-dinner', dkcal);
           //alert('食事のデータが保存されました!');  
       };
- 
+
       function saveData() {
             const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const textmoku = document.getElementById('moku').value;
@@ -340,43 +339,74 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             // localStorage.setItem('user_height', height);
             // localStorage.setItem('user_weight', weight);
         }
-    function saveFood() {
-            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
-            const  savedData_breakfast = localStorage.getItem('text-breakfast');
-            const  savedData_lunch = localStorage.getItem('text-lunch');
-            const  savedData_dinner = localStorage.getItem('text-dinner');
-            const  savebkcal = localStorage.getItem('kcal-breakfast');
-            const  savelkcal = localStorage.getItem('kcal-lunch');
-            const  savedkcal = localStorage.getItem('kcal-dinner');
+    // function saveFood() {
+    //         const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
+    //         const  savedData_breakfast = localStorage.getItem('text-breakfast');
+    //         const  savedData_lunch = localStorage.getItem('text-lunch');
+    //         const  savedData_dinner = localStorage.getItem('text-dinner');
+    //         const  savebkcal = localStorage.getItem('kcal-breakfast');
+    //         const  savelkcal = localStorage.getItem('kcal-lunch');
+    //         const  savedkcal = localStorage.getItem('kcal-dinner');
     
-            // リクエストの内容を設定
-            const requestData = {
-            userid: userId,
-            breakfast: savedData_breakfast,
-            lunch: savedData_lunch,
-            dinner: savedData_dinner,
-            bkcal: savebkcal,
-            lkcal: savelkcal,
-            dkcal: savedkcal,
-            };
+    //         // リクエストの内容を設定
+    //         const requestData = {
+    //         userid: userId,
+    //         breakfast: savedData_breakfast,
+    //         lunch: savedData_lunch,
+    //         dinner: savedData_dinner,
+    //         bkcal: savebkcal,
+    //         lkcal: savelkcal,
+    //         dkcal: savedkcal,
+    //         };
     
-            fetch('https://karadanipi-su-api.onrender.com/foods', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify(requestData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert('データが保存されました！');
-            console.log('サーバーからの応答:', data);
-        })
-        .catch(error => {
-            console.error('エラー:', error);
-            alert('データの保存に失敗しました:' + error.message);
+    //         fetch('https://karadanipi-su-api.onrender.com/foods', {
+    //         method: 'POST',
+    //         headers: {
+    //         'Content-Type': 'application/json; charset=UTF-8'
+    //         },
+    //         body: JSON.stringify(requestData)
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         alert('データが保存されました！'+data.detail);
+    //         console.log('サーバーからの応答:', data);
+    //     })
+    //     .catch(error => {
+    //         console.error('エラー:', error);
+    //         alert('データの保存に失敗しました:' + error.message);
+    //     });
+    // }
+        // MutationObserverを使って、入力フィールドの変更を監視する
+function observeFieldChanges() {
+    // 監視する要素を取得
+    const fieldsToWatch = [
+        document.getElementById('text-breakfast'),
+        document.getElementById('text-lunch'),
+        document.getElementById('text-dinner')
+    ];
+
+    // 監視設定
+    const config = { attributes: false, childList: true, subtree: true };
+
+    // コールバック関数
+    const callback = (mutationsList, observer) => {
+        mutationsList.forEach(mutation => {
+            if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                console.log('入力内容が変更されました');
+                GetFood(); // 内容が変更されたらデータを再取得
+            }
         });
-    }
+    };
+
+    // 各フィールドに対してMutationObserverを設定
+    fieldsToWatch.forEach(field => {
+        if (field) {
+            const observer = new MutationObserver(callback);
+            observer.observe(field, config);
+        }
+    });
+}
+
   </script>
  
     

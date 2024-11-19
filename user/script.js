@@ -277,3 +277,71 @@ function saveFood() {
     alert('データの保存に失敗しました:' + error.message);
 });
 }
+
+function GetFood() {
+    // APIからデータを取得する
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+
+    if (!userId) {
+        alert('無効なユーザーIDです');
+        return;
+    }
+
+    fetch('https://karadanipi-su-api.onrender.com/foods', { // エンドポイントURLを適切に変更
+        method: 'GET', // GETリクエストを使用してデータを取得
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('データの取得に失敗しました');
+        }
+        return response.json(); // JSON形式でデータをパース
+    })
+     .then(data => {
+        // サーバーから取得したデータを利用する
+        
+        const savedData_breakfast = data.breakfast; // データ構造に合わせて取得
+        const savedData_lunch = data.lunch;
+        const savedData_dinner = data.dinner;
+        const savebkcal = data.bkcal;
+        const savelkcal = data.lkcal;
+        const savedkcal = data.dkcal;
+
+ 
+        // 取得したデータを適切な要素に表示
+        if (savedData_breakfast) {
+            document.getElementById('text-breakfast').value = savedData_breakfast;
+        }
+        if (savedData_lunch) {
+            document.getElementById('text-lunch').value = savedData_lunch;
+        }
+        if (savedData_dinner) {
+            document.getElementById('text-dinner').value = savedData_dinner;
+        }
+        if (savebkcal) {
+            document.getElementById('kcal-breakfast').value = savebkcal;
+        }
+        if (savelkcal) {
+            document.getElementById('kcal-lunch').value = savelkcal;
+        }
+        if (savedkcal) {
+            document.getElementById('kcal-dinner').value = savedkcal;
+        }
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+        alert('データの取得に失敗しました。');
+    });
+}
+
+
+
+// // ページが読み込まれたときに最初にデータを取得
+// window.onload = function() {
+//     GetFood();
+//     observeFieldChanges();  // フィールドの変更を監視開始
+// };
