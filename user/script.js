@@ -236,3 +236,44 @@ function days_id() {
 function week_id() {
     showWeeklyChart(); // 週間ボタンをクリックしたら週間グラフを表示
 }
+
+function saveFood() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    const  savedData_breakfast = localStorage.getItem('text-breakfast');
+    const  savedData_lunch = localStorage.getItem('text-lunch');
+    const  savedData_dinner = localStorage.getItem('text-dinner');
+    const  savebkcal = localStorage.getItem('kcal-breakfast');
+    const  savelkcal = localStorage.getItem('kcal-lunch');
+    const  savedkcal = localStorage.getItem('kcal-dinner');
+
+    // リクエストの内容を設定
+    const requestData = {
+    userid: userId,
+    breakfast: savedData_breakfast,
+    lunch: savedData_lunch,
+    dinner: savedData_dinner,
+    bkcal: savebkcal,
+    lkcal: savelkcal,
+    dkcal: savedkcal,
+    };
+
+    console.log(requestData)
+
+    fetch('https://karadanipi-su-api.onrender.com/foods', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify(requestData)
+})
+.then(response => response.json())
+.then(data => {
+    alert('データが保存されました！'+requestData);
+    console.log('サーバーからの応答:', data);
+})
+.catch(error => {
+    console.error('エラー:', error);
+    alert('データの保存に失敗しました:' + error.message);
+});
+}
