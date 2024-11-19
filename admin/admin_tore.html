@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>トレーニングホーム</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <header>
+        <!--左側メニュー-->
+        <nav id="admin_nav">
+            <ul>
+                <li class="custom-button" id="user">
+                    <a href="admin_home.html" class="button-link">ユーザー</a>
+                </li>
+                <li class="custom-button" id="eat">
+                    <a href="admin_food.html" class="button-link">食事</a>
+                </li>
+                <li class="custom-button" id="tore">
+                    <a href="admin_tore.html" class="button-link">トレーニング</a>
+                </li>
+            </ul>
+        </nav>
+        <!--/左側メニュー-->
+    </header>
+ 
+    <!--背景色-->
+    <nav id="back">
+        <button class="logout" onclick="location.href='user_logout.html';"></button>
+ 
+        <select id="sortOption" onchange="sortArray()">
+            <option value="asc">昇順</option>
+            <option value="desc">降順</option>
+        </select>
+
+        <!-- 食事リスト -->
+        <ul id="ToreList"></ul>
+ 
+        <!-- JSのコード部分 -->
+        <script>
+          let ToreData = []; // toreデータを一時的に保存する変数
+          let UserData = {}; // userデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
+ 
+          // ユーザーデータを取得
+          function fetchUsers() {
+            return fetch('https://karadanipi-su-api.onrender.com/users')
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('ネットワークのエラーが発生しました');
+                }
+                return response.json();
+              })
+              .then(data => {
+                data.forEach(user => {
+                  UserData[user.userid] = user.username; // ユーザーIDをキーにusernameを保存
+                });
+              })
+              .catch(error => {
+                console.error('ユーザーデータ取得エラー:', error);
+                alert('ユーザーデータの取得に失敗しました');
+              });
+          }
+ 
+          // トレーニングデータを取得
+          function fetchTore() {
+            return fetch('https://karadanipi-su-api.onrender.com/trainings')
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('ネットワークのエラーが発生しました');
+                }
+                return response.json();
+              })
+              .then(data => {
+                ToreData = data; // toreデータを保存
+                renderToreList(ToreData); // 初期表示
+              })
+              .catch(error => {
+                console.error('データ取得エラー:', error);
+                alert('とれデータの取得に失敗しました');
+              });
+          }
+
+          // ページが読み込まれた際にデータを取得する
+          window.onload = function() {
+            // usersデータとtoreデータを順番に取得
+            fetchUsers().then(fetchTore);
+          };
+ 
+          // データを表示する関数
+          function renderToreList(data) {
+            const ToreList = document.getElementById('ToreList');
+            ToreList.innerHTML = ''; // リストを初期化
+ 
+            data.forEach(Tore => {
+              const listItem = document.createElement('li');
+              const username = UserData[Tore.userid] || '不明なユーザー';
+              listItem.innerHTML = `ユーザー名: ${username}<br> | トレーニング内容: ${Tore.detail}`;
+              listItem.classList.add('Toreset');
+
+              listItem.style.textAlign = 'left';  // 左寄せ
+
+              
+              ToreList.appendChild(listItem);
+            });
+          }
+ 
+          // 並び替え用の関数
+          function sortArray() {
+            const sortOption = document.getElementById('sortOption').value;
+            const sortedData = [...ToreData].sort((a, b) => {
+              const dateA = new Date(a.created_at);
+              const dateB = new Date(b.created_at);
+              return sortOption === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+            renderToreList(sortedData); // 並び替えたデータで表示を更新
+          }
+ 
+        </script>
+    </nav>
+</body>
+</html>
