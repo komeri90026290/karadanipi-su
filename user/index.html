@@ -34,7 +34,7 @@
 <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
 <!-- BMI計算ボタン -->
 <p>BMI: <span id="result"></span></p>
-<p><button id="con" class="custom-button con" onclick="calculateBMI()">確定</button></p>
+<p><button id="con" class="custom-button con" onclick="calculateBMI();saveALL();">確定</button></p>
 
 <!-- 平均値表示 -->
 <h2>平均</h2>
@@ -134,7 +134,89 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
         // ページが読み込まれたときにローカルストレージからデータを取得
         window.onload = function() {
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
 
+
+              // userIdが取得できた場合、sessionStorageに保存
+            if (userId) {
+            sessionStorage.setItem('userId', userId);
+            }
+
+
+                  // ユーザーデータを取得
+          function fetchUsers() {
+            return fetch('https://karadanipi-su-api.onrender.com/users')
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('ネットワークのエラーが発生しました');
+                }
+                return response.json();
+              })
+              .then(data => {
+                data.forEach(user => {
+                  UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
+                });
+              })
+              .catch(error => {
+                console.error('ユーザーデータ取得エラー:', error);
+                alert('ユーザーデータの取得に失敗しました');
+              });
+          }
+ 
+ 
+        function fetchFoods() {
+        return fetch('https://karadanipi-su-api.onrender.com/foods')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('ネットワークのエラーが発生しました');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // 各ユーザーの最新の食事データを取得
+            data.forEach(food => {
+              // ユーザーのIDを使ってFoodDataを更新
+              // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
+              if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
+                FoodData[food.userid] = {
+                  breakfast: food.breakfast,
+                  lunch: food.lunch,
+                  dinner: food.dinner,
+                  created_at: food.created_at  // 最新のcreated_atも保存
+                };
+              }
+            });
+          })
+          .catch(error => {
+            console.error('食事データ取得エラー:', error);
+            alert('データの取得に失敗しました');
+          });
+      }
+ 
+          // ページが読み込まれた際にデータを取得する
+          window.onload = function() {
+            // usersデータとfoodsデータを順番に取得
+            fetchUsers().then(fetchFoods);
+          };
+ 
+          // データを表示する関数
+          function renderFoodList(data) {
+            const FoodList = document.getElementById('FoodList');
+            FoodList.innerHTML = ''; // リストを初期化
+ 
+            data.forEach(Food => {
+              const listItem = document.createElement('li');
+              const username = UserData[Food.userid] || '不明なユーザー';
+              listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
+              listItem.classList.add('Foodset');
+ 
+              listItem.style.textAlign = 'left';  // 左寄せ
+ 
+             
+              FoodList.appendChild(listItem);
+            });
+          }
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
@@ -181,19 +263,18 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
           localStorage.setItem('text-lunch', lunch);
           const dinner = document.getElementById('text-dinner').value;
           localStorage.setItem('text-dinner', dinner);
-          const Kcalbreakfast = document.getElementById('kcal-breakfast').value;
-          localStorage.setItem('kcal-breakfast', Kcalbreakfast);
-          const Kcallunch = document.getElementById('kcal-lunch').value;
-          localStorage.setItem('kcal-lunch', Kcallunch);
-          const Kcaldinner = document.getElementById('kcal-dinner').value;
-          localStorage.setItem('kcal-dinner', Kcaldinner);
+          const bkcal = document.getElementById('kcal-breakfast').value;
+          localStorage.setItem('kcal-breakfast', bkcal);
+          const lkcal = document.getElementById('kcal-lunch').value;
+          localStorage.setItem('kcal-lunch', lkcal);
+          const dkcal = document.getElementById('kcal-dinner').value;
+          localStorage.setItem('kcal-dinner', dkcal);
           //alert('食事のデータが保存されました!');  
       };
  
       function saveData() {
+            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const textmoku = document.getElementById('moku').value;
-            const urlParams = new URLSearchParams(window.location.search);
-            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
             localStorage.setItem('moku', textmoku);
  
             // リクエストの内容を設定
@@ -220,23 +301,63 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
       });
     };
 
+    function saveALL() {  //これ保存云々
+        const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
+            const height = document.getElementById('user_height').value;
+            const weight = document.getElementById('user_weight').value;
+            // localStorage.setItem('user_height', height);
+            // localStorage.setItem('user_weight', weight);
+ 
+            // リクエストの内容を設定
+              const requestData = {
+              userId: userId,
+              height: height,
+              weight: weight
+            };
+             
+        fetch(`https://karadanipi-su-api.onrender.com/users/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('身長体重が保存されました');
+        console.log('サーバーからの応答:');
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        console.error('スタックトレース:', error.stack); // スタックトレースを表示
+        alert('データの保存に失敗しました:' + error.message);
+      });
+        };
+
         function calculateBMI() {
             const height = document.getElementById('user_height').value;
             const weight = document.getElementById('user_weight').value;
-            localStorage.setItem('user_height', height);
-            localStorage.setItem('user_weight', weight);
+            // localStorage.setItem('user_height', height);
+            // localStorage.setItem('user_weight', weight);
         }
     function saveFood() {
+            const userId = sessionStorage.getItem('userId');  // sessionStorageからuserIdを取得
             const  savedData_breakfast = localStorage.getItem('text-breakfast');
             const  savedData_lunch = localStorage.getItem('text-lunch');
             const  savedData_dinner = localStorage.getItem('text-dinner');
+            const  savebkcal = localStorage.getItem('kcal-breakfast');
+            const  savelkcal = localStorage.getItem('kcal-lunch');
+            const  savedkcal = localStorage.getItem('kcal-dinner');
     
             // リクエストの内容を設定
             const requestData = {
             userid: userId,
             breakfast: savedData_breakfast,
             lunch: savedData_lunch,
-            dinner: savedData_dinner
+            dinner: savedData_dinner,
+            bkcal: savebkcal,
+            lkcal: savelkcal,
+            dkcal: savedkcal,
             };
     
             fetch('https://karadanipi-su-api.onrender.com/foods', {
