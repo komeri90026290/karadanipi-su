@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
 
 
     <!-- 目標入力 -->
-    <ul id="mokuhyou"></ul>
+    <div id="mokuhyou"></div>
 
  
     <div class="picto">
@@ -134,6 +134,33 @@ document.addEventListener('DOMContentLoaded', displayExercises); // DOMContentLo
             
             const urlParams = new URLSearchParams(window.location.search);
             const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+
+            // 目標を取得して表示する関数
+    function fetchAndRenderMokuhyou(userId) {
+        fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('サーバーエラーが発生しました');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // ユーザーの目標（mokuhyou）を取得
+                const mokuhyouElement = document.getElementById('mokuhyou'); // 表示先の要素を取得
+
+                if (data && data.mokuhyou) {
+                    mokuhyouElement.textContent = `目標: ${data.mokuhyou}`; // 目標を表示
+                    console.log(`目標が表示されました: ${data.mokuhyou}`);
+                } else {
+                    mokuhyouElement.textContent = '目標が設定されていません';
+                    console.log('ユーザーの目標が見つかりませんでした');
+                }
+            })
+            .catch(error => {
+                console.error('データ取得エラー:', error);
+                alert('データの取得に失敗しました');
+            });
+    }
 
 
 

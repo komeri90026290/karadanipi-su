@@ -1,3 +1,12 @@
+// ページロード時の処理
+window.onload = async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    console.log('取得したuserId:', userId); // ここでuserIdを確認
+    await loadWeightData(); // データベースから体重データをロード
+    await loadanddisplaymokuhyou(userId);
+};
+
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
@@ -6,6 +15,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
     initializeChart();
 });
+
+
+let mokuhyouData = {}; // 目標データ用のオブジェクト
+
+// データベースから目標データを取得してオブジェクトに変換する
+// 目標データを取得して表示する関数
+async function loadAndDisplayMokuhyou(userId) {
+    try {
+        // APIから目標データを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 目標データを表示する処理
+            const mokuhyouElement = document.getElementById('mokuhyou'); // 目標を表示する要素
+            if (data.mokuhyou) {
+                mokuhyouElement.textContent = `${data.mokuhyou}`; // 目標を表示
+                console.log(`ユーザーID ${userId} の目標が表示されました: ${data.mokuhyou}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} の目標は設定されていません`);
+            }
+        } else {
+            console.error("目標データの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
+// // ページ読み込み時に目標データをロード
+// window.onload = function() {
+//     loadmokuhyouData(); // 目標データをロード
+
+//     // 必要に応じてユーザーIDを指定して目標を表示
+//     const userId = 2; // ここに表示したいユーザーIDを指定
+//     displayMokuhyou(userId); // 指定されたユーザーIDの目標を表示
+// };
+
 
 // 身長と体重の入力制限
 const heightkeep = document.getElementById('user_height');
@@ -123,10 +173,7 @@ async function saveWeightData(date, weight) {
         console.error("エラーが発生しました:", error);
     }
 }
-// ページロード時の処理
-window.onload = async function () {
-    await loadWeightData(); // データベースから体重データをロード
-};
+
 // let myLineChart;
 // let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
 // //ページ読み込み時にweightDataをlocalStorageから取得している
