@@ -4,7 +4,7 @@ window.onload = async function () {
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
     console.log('取得したuserId:', userId); // ここでuserIdを確認
     await loadWeightData(); // データベースから体重データをロード
-    await loadanddisplaymokuhyou(userId);
+    await loadAndDisplayMokuhyou(userId);
 };
 
 document.addEventListener("DOMContentLoaded", function() {
