@@ -77,6 +77,38 @@ async function loadAndDisplayMokuhyou(userId) {
     }
 }
 
+async function loadAndDisplayFood(userId) {
+    try {
+        // APIから朝ごはんを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 朝ごはんを表示する処理
+            const breakfast = document.getElementById('text-breakfast'); // 朝ごはんを表示する要素
+            const lunch = document.getElementById('text-lunch');
+            const dinner = document.getElementById('text-dinner');
+            if (data.breakfast) {
+                breakfast.textContent = `${data.breakfast}`; // 朝ごはんを表示
+                lunch.textContent =`${data.lunch}`;
+                dinner.textContent =`${data.dinner}`
+                console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
+                console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
+                console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
+            }
+        } else {
+            console.error("朝ごはんの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
 // // ページ読み込み時に目標データをロード
 // window.onload = function() {
 //     loadmokuhyouData(); // 目標データをロード
