@@ -6,6 +6,7 @@ window.onload = async function () {
     await loadWeightData(); // データベースから体重データをロード
     await loadAndDisplayuserName(userId);
     await loadAndDisplayMokuhyou(userId);
+    await loadAndDisplayFood(userId);
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -18,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-let namaeData = {}; // 目標データ用のオブジェクト
 
 // データベースから目標データを取得してオブジェクトに変換する
 // 目標データを取得して表示する関数
