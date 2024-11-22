@@ -1,7 +1,7 @@
 @startuml
 skinparam ClassAttributeIconSize 0
  
-entity user {
+entity users {
 -ユーザーID:int
 -ユーザーネーム:String
 -ユーザーパスワード:int
@@ -14,10 +14,10 @@ entity user {
 +ログアウト():void
 }
  
-entity History {
+entity history {
 -ユーザーID:int
 -過去記録ID:int
--食事ID:text
+-食事ID:int
 -トレーニングID:int
 -作成日時:datetime
 +過去記録の削除():void
@@ -30,7 +30,6 @@ class food {
 -朝食:String
 -昼食:String
 -夕食:String
--詳細:String
 -作成日時:DateTime
 -朝食カロリー:int
 -昼食カロリー:int
@@ -57,10 +56,10 @@ class training {
  
  
  
-user <|-- food ://1と0.1
-user <|-- training :  //1と0.1
-user <|-- History : //
+users <|-- food ://1と0.1
+users <|-- training :  //1と0.1
+users <|-- history : //
  
-History <|-- training ://1と1
+history <|-- training ://1と1
  
-food <|--History: //1と1
+food <|--history: //1と1
