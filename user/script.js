@@ -4,7 +4,9 @@ window.onload = async function () {
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
     console.log('取得したuserId:', userId); // ここでuserIdを確認
     await loadWeightData(); // データベースから体重データをロード
+    await loadAndDisplayuserName(userId);
     await loadAndDisplayMokuhyou(userId);
+    await loadAndDisplayFood(userId);
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -17,7 +19,35 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-let mokuhyouData = {}; // 目標データ用のオブジェクト
+
+// データベースから目標データを取得してオブジェクトに変換する
+// 目標データを取得して表示する関数
+async function loadAndDisplayuserName(userId) {
+    try {
+        // APIから目標データを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 目標データを表示する処理
+            const mokuhyouElement = document.getElementById('username'); // 目標を表示する要素
+            if (data.username) {
+                mokuhyouElement.textContent = `${data.username}`; // 目標を表示
+                console.log(`ユーザーID ${userId} のユーザーネームが表示されました: ${data.username}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} のユーザーネームは設定されていません`);
+            }
+        } else {
+            console.error("ユーザーネームデータの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
 
 // データベースから目標データを取得してオブジェクトに変換する
 // 目標データを取得して表示する関数
@@ -41,6 +71,38 @@ async function loadAndDisplayMokuhyou(userId) {
             }
         } else {
             console.error("目標データの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
+async function loadAndDisplayFood(userId) {
+    try {
+        // APIから朝ごはんを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 朝ごはんを表示する処理
+            const breakfast = document.getElementById('text-breakfast'); // 朝ごはんを表示する要素
+            const lunch = document.getElementById('text-lunch');
+            const dinner = document.getElementById('text-dinner');
+            if (data.breakfast) {
+                breakfast.textContent = `${data.breakfast}`; // 朝ごはんを表示
+                lunch.textContent =`${data.lunch}`;
+                dinner.textContent =`${data.dinner}`
+                console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
+                console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
+                console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
+            }
+        } else {
+            console.error("朝ごはんの取得に失敗しました:", await response.text());
         }
     } catch (error) {
         console.log("エラーが発生しました:", error);
