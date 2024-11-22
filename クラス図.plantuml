@@ -7,11 +7,8 @@ entity user {
 -ユーザーパスワード:int
 -体重:int
 -身長:int
--年齢:int
--平均体重:int
--平均BMI:int
--性別:Stinrg
--管理者権限:boolean
+-目標:text
+-作成日時:datetime
 +サインアップ():boolean
 +ログイン():boolean
 +ログアウト():void
@@ -20,65 +17,50 @@ entity user {
 entity History {
 -ユーザーID:int
 -過去記録ID:int
--体重:int
--身長:int
--朝食:eatingHistory
--昼食:eatingHistory
--夕食:eatingHistory
--kcal:int
--食事履歴ID:int
--トレーニング履歴ID:int
--アフターケア履歴ID:
+-食事ID:text
+-トレーニングID:int
+-作成日時:datetime
 +過去記録の削除():void
 +食事履歴の削除():void
 }
  
-class eatingHistory {
+class food {
 -ユーザーID:int
--eatingHistoryID:int
--詳細:String
--作成日:DateTime
-}
- 
-entity foodSample {
--フードID:int
+-食事ID:int
 -朝食:String
 -昼食:String
 -夕食:String
--kcal:int
+-詳細:String
+-作成日時:DateTime
+-朝食カロリー:int
+-昼食カロリー:int
+-夕食カロリー:int
 }
  
-class trainingHistory {
+ 
+class training {
 -ユーザーID:int
 -トレーニングID:int
+-パーツ:String
+-エクササイズ:String
+-秒数:int
+-回数:int
+-セット:int
+-合計:int
+-作成日時:datetime
 -トレーニング履歴:list
 +トレーニング履歴削除():void
  
 }
  
-entity afterCare {
--アフターケアID:int
--アフターケア項目:String
-}
- 
-entity aftercareHistory {
--ユーザーID:int
--アフターケアメモリーID:int
--アフターケア履歴:list
--作成日:datetime
-}
+
  
  
  
-user <|-- eatingHistory ://1と0.1
-user <|-- trainingHistory :  //1と0.1
+user <|-- food ://1と0.1
+user <|-- training :  //1と0.1
 user <|-- History : //
  
-History <|-- trainingHistory ://1と1
+History <|-- training ://1と1
  
-afterCare <|-- aftercareHistory :1
- 
-aftercareHistory <|-- user ://0と0.1
-aftercareHistory <|-- History :1
- 
-eatingHistory <|--History: //1と1
+food <|--History: //1と1
