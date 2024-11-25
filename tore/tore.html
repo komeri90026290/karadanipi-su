@@ -11,94 +11,123 @@
         <nav id="input">
             <!-- トレーニング内容を入力するフォーム -->
             <form id="trainingForm">
-                <!-- 筋トレ部位を選択するセレクトボックス -->
                 <select id="part" name="kinntore">
                     <option value="">肉体部位</option>
-                    <option value="両腕" id="arms">両腕</option>
+                    <option value="右腕" id="rightarms">右腕</option>
+                    <option value="左腕" id="leftArm">左腕</option>
                     <option value="胸筋" id="chest">胸筋</option>
                     <option value="腹筋" id="abs">腹筋</option>                        
-                    <option value="両足" id="legs">両足</option>
+                    <option value="右脚" id="rightlegs">右脚</option>
+                    <option value="左脚" id="leftlegs">左脚</option>
                 </select>
-
-                <!-- トレーニングの内容を入力するテキストボックス -->
+ 
                 <p><label for="tore"></label> <input type="text" id="tore" name="tore" placeholder="トレーニング内容"></p>
-
-                <!-- 秒数を入力するボックス -->
+ 
                 <div class="byou">
                     <p><label for="byou"></label> <input type="number" id="byou" name="byou"></p>
                 </div>
-
-                <!-- 回数を入力するボックス -->
+ 
                 <div class="kai">
                     <p><label for="kai"></label> <input type="number" id="kai" name="kai"></p>
                 </div>
-
-                <!-- セット数を入力するボックス -->
+ 
                 <div class="seto">
                     <p><label for="seto"></label> <input type="number" id="seto" name="seto"></p>
                 </div>
-
-                <!-- 入力フィールド横の単位を表示するための部分 -->
+ 
+                <div id="result"></div>
+ 
                 <div class="seconds"><p>秒</p></div>
                 <div class="numbertime"><p>回</p></div>
                 <div class="kakeru"><p>×</p></div>
                 <div class="set"><p>セット</p></div>
-
-                <!-- トレーニングを追加するためのボタン -->
+ 
                 <div id="submit">
                   <button type="submit">追加</button>
                 </div>
             </form>
         </nav>
     </div>
-
-    <!-- JavaScriptコード -->
+ 
     <script>
-      // フォーム送信時の処理
-      document.getElementById('trainingForm').onsubmit = function(event) {
-          event.preventDefault();
+        document.getElementById('trainingForm').onsubmit = async function (event) {
+            event.preventDefault();
 
-          // 各入力フィールドから値を取得
-          const part = document.getElementById('part').value;
-          const exercise = document.getElementById('tore').value;
-          const seconds = document.getElementById('byou').value;
-          const reps = document.getElementById('kai').value;
-          const sets = document.getElementById('seto').value;
+            const part = document.getElementById('part').value;
+            const exercise = document.getElementById('tore').value;
+            const seconds = parseInt(document.getElementById('byou').value) || 0;
+            const reps = parseInt(document.getElementById('kai').value) || 0;
+            const sets = parseInt(document.getElementById('seto').value) || 0;
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = Number(urlParams.get('userId'));
 
-          // 必須項目の入力チェック：部位、トレーニング内容、セット数
-          if (!part || !exercise || !sets) {
-              alert('部位、トレーニング内容、セット数を入力してください。');
-              return;
-          }
+            // 必須項目の入力チェック：部位、トレーニング内容、セット数
+            if (!part || !exercise || !sets) {
+                alert('部位、トレーニング内容、セット数を入力してください。');
+                return;
+            }
 
-          // 秒数か回数のどちらか一方が入力されているかを確認
-          if (!seconds && !reps) {
-              alert('秒数か回数のどちらかを入力してください。');
-              return;
-          }
+            // 秒数か回数のどちらか一方が入力されているかを確認
+            if (!seconds && !reps) {
+                alert('秒数か回数のどちらかを入力してください。');
+                return;
+            }
 
-          // 秒数と回数のどちらも入力されているかのチェック
-          if (seconds && reps) {
-              alert('秒数と回数のどちらか一方のみを入力してください。');
-              return;
-          }
+            // 秒数と回数のどちらも入力されているかのチェック
+            if (seconds && reps) {
+                alert('秒数と回数のどちらか一方のみを入力してください。');
+                return;
+            }
+
+              // 秒数または回数が入力されているが、その値が 0 の場合のチェック
+             if (seconds === 0 && !reps) {
+                alert('秒数は0秒以上を設定してください。');
+                return;
+            }
+
+            if (reps === 0 && !seconds) {
+               alert('回数は0回以上を設定してください。');
+               return;
+            }
 
 
-          // ローカルストレージに保存するトレーニングデータを作成
-          const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-          exercises.push({ part, exercise, seconds, reps, sets });
-          localStorage.setItem('exercises', JSON.stringify(exercises));
+            const totalTimeOrReps = seconds ? seconds * sets / 2 : reps * sets;
 
-          alert('トレーニング内容が追加されました');
-          document.getElementById('trainingForm').reset();
+            const trainingData = {
+                userid: userId,
+                part: part,
+                exercise: exercise,
+                seconds: seconds,
+                reps: reps,
+                sets: sets,
+                totaltimeorreps: totalTimeOrReps
+            };
 
-           // 新しいデータを配列の先頭に追加
-          exercises.unshift({ part, exercise, seconds, reps, sets });
-          localStorage.setItem('exercises', JSON.stringify(exercises));
+            // **ここで送信するデータを確認**
+            console.log('送信データ:', trainingData);
 
-          // 追加ボタンを押した後、別のページに移動する
-          window.location.href = '../user/index.html'; // index.htmlの部分を戻りたいページに変更
-      };
+            try {
+                const response =   await fetch('https://karadanipi-su-api.onrender.com/trainings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(trainingData)
+                });
+                console.log(response);
+                
+
+                if (response.ok) {
+                    alert('トレーニング内容が追加されました');
+                    document.getElementById('trainingForm').reset();
+                } else {
+                    alert('トレーニングデータの追加に失敗しました'+response.json);
+                }
+            } catch (error) {
+                    console.error('送信エラー:', error);
+                    alert('エラーが発生しました');
+            }
+        };
     </script>
 </body>
 </html>
