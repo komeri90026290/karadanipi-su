@@ -7,8 +7,6 @@ window.onload = async function () {
     await loadAndDisplayuserName(userId);
     await loadAndDisplayMokuhyou(userId);
     await loadAndDisplayFood(userId);
-    fetchUsers();
-    fetchFoods();
     fetchAndRenderMokuhyou(userId); 
     GetFood();
     renderFoodList(data);

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com"><!--ブラウザが Google Fonts のサーバーに早めに接続するように指示する-->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!--Google Fontsが別のサーバー (gstatic.com) からフォントのデータを取得する-->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"><!--ここで Noto Sans JP フォントを実際に読み込みます-->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><!--Google Fontsが別のサーバー (gstatic.com) からフォントのデータを取得する-->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"><!--ここで Noto Sans JP フォントを実際に読み込みます-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js" defer></script>
     <title>肉体改造管理システム</title>
@@ -102,7 +102,65 @@
         <input type="number" id="kcal-breakfast" placeholder="Kcal">
         <input type="number" id="kcal-lunch" placeholder="Kcal">
         <input type="number" id="kcal-dinner" placeholder="Kcal">
-    </div>
+      </div>
+   
+      <script>
+        // ページが読み込まれたときにローカルストレージからデータを取得
+        window.onload = function() {
+
+          //ここ二つロード時やらせる
+function fetchUsers() {
+    return fetch('https://karadanipi-su-api.onrender.com/users')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('ネットワークのエラーが発生しました');
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(user => {
+          UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
+        });
+      })
+      .catch(error => {
+        console.error('ユーザーデータ取得エラー:', error);
+        alert('ユーザーデータの取得に失敗しました');
+      });
+  }
+
+function fetchFoods() {
+    return fetch('https://karadanipi-su-api.onrender.com/foods')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('ネットワークのエラーが発生しました');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // 各ユーザーの最新の食事データを取得
+        data.forEach(food => {
+          // ユーザーのIDを使ってFoodDataを更新
+          // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
+          if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
+            FoodData[food.userid] = {
+              breakfast: food.breakfast,
+              lunch: food.lunch,
+              dinner: food.dinner,
+              created_at: food.created_at  // 最新のcreated_atも保存
+            };
+          }
+        });
+      })
+      .catch(error => {
+        console.error('食事データ取得エラー:', error);
+        alert('データの取得に失敗しました');
+      });
+  }
+        };
+  </script>
+ 
+    
+ 
      <!--登録ボタン-->
       <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
           <input type="submit"  onclick=" saveFoodData();saveFood();" value="登録">
