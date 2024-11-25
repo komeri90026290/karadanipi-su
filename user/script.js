@@ -1,17 +1,3 @@
-// ページロード時の処理
-window.onload = async function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
-    console.log('取得したuserId:', userId); // ここでuserIdを確認
-    await loadWeightData(); // データベースから体重データをロード
-    await loadAndDisplayuserName(userId);
-    await loadAndDisplayMokuhyou(userId);
-    await loadAndDisplayFood(userId);
-    fetchAndRenderMokuhyou(userId); 
-    GetFood();
-    renderFoodList(data);
-};
-
 // 目標を取得して表示する関数
 function fetchAndRenderMokuhyou(userId) {
                 fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`)
@@ -26,7 +12,7 @@ function fetchAndRenderMokuhyou(userId) {
                         const mokuhyouElement = document.getElementById('mokuhyou'); // 表示先の要素を取得
         
                         if (data && data.mokuhyou) {
-                            mokuhyouElement.textContent = `目標: ${data.mokuhyou}`; // 目標を表示
+                            mokuhyouElement.textContent = `${data.mokuhyou}`; // 目標を表示
                             console.log(`目標が表示されました: ${data.mokuhyou}`);
                         } else {
                             mokuhyouElement.textContent = '目標が設定されていません';

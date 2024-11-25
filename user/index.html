@@ -106,9 +106,20 @@
    
       <script>
         // ページが読み込まれたときにローカルストレージからデータを取得
-        window.onload = function() {
+        // ページロード時の処理
+window.onload = async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    console.log('取得したuserId:', userId); // ここでuserIdを確認
+    await loadWeightData(); // データベースから体重データをロード
+    await loadAndDisplayuserName(userId);
+    await loadAndDisplayMokuhyou(userId);
+    await loadAndDisplayFood(userId);
+    fetchAndRenderMokuhyou(userId); 
+    GetFood();
+    renderFoodList(data);
 
-          //ここ二つロード時やらせる
+  //ここ二つロード時やらせる
 function fetchUsers() {
     return fetch('https://karadanipi-su-api.onrender.com/users')
       .then(response => {
