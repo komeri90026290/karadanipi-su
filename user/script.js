@@ -531,6 +531,30 @@ function fetchUsers() {
       });
   }
 
+
+  async function foodonedayData(userid) {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid }), // ユーザーIDをサーバーに送信
+      });
+ 
+      const result = await response.json();
+ 
+      if (response.ok) {
+        console.log('Empty data added successfully:', result.data);
+      } else {
+        console.error('Failed to add empty data:', result.message);
+      }
+    } catch (error) {
+      console.error('Error adding empty data:', error);
+    }
+  }
+
+  
 function fetchFoods() {
     return fetch('https://karadanipi-su-api.onrender.com/foods')
       .then(response => {
