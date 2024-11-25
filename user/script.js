@@ -463,6 +463,12 @@ function saveFood() {
 });
 }
 
+
+function torepage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../tore/tore.html?userId=${userId}`;
+  }
 //なんだこれ
 function GetFood() {
     // APIからデータを取得する
@@ -544,6 +550,30 @@ function fetchUsers() {
       });
   }
 
+
+  async function foodonedayData(userid) {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid }), // ユーザーIDをサーバーに送信
+      });
+ 
+      const result = await response.json();
+ 
+      if (response.ok) {
+        console.log('Empty data added successfully:', result.data);
+      } else {
+        console.error('Failed to add empty data:', result.message);
+      }
+    } catch (error) {
+      console.error('Error adding empty data:', error);
+    }
+  }
+
+  
 function fetchFoods() {
     return fetch('https://karadanipi-su-api.onrender.com/foods')
       .then(response => {
