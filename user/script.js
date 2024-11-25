@@ -444,6 +444,12 @@ function saveFood() {
 });
 }
 
+
+function torepage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../tore/tore.html?userId=${userId}`;
+  }
 //なんだこれ
 function GetFood() {
     // APIからデータを取得する
