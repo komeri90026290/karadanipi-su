@@ -1,3 +1,49 @@
+// 目標を取得して表示する関数
+function fetchAndRenderMokuhyou(userId) {
+                fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('サーバーエラーが発生しました');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // ユーザーの目標（mokuhyou）を取得
+                        const mokuhyouElement = document.getElementById('mokuhyou'); // 表示先の要素を取得
+        
+                        if (data && data.mokuhyou) {
+                            mokuhyouElement.textContent = `${data.mokuhyou}`; // 目標を表示
+                            console.log(`目標が表示されました: ${data.mokuhyou}`);
+                        } else {
+                            mokuhyouElement.textContent = '目標が設定されていません';
+                            console.log('ユーザーの目標が見つかりませんでした');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('データ取得エラー:', error);
+                        alert('データの取得に失敗しました');
+                    });
+}
+
+//データ表示関数
+function renderFoodList(data) {
+    const FoodList = document.getElementById('FoodList');
+    FoodList.innerHTML = ''; // リストを初期化
+
+    data.forEach(Food => {
+      const listItem = document.createElement('li');
+      const username = UserData[Food.userid] || '不明なユーザー';
+      listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
+      listItem.classList.add('Foodset');
+
+      listItem.style.textAlign = 'left';  // 左寄せ
+
+     
+      FoodList.appendChild(listItem);
+    });
+  }
+
+//今日の日付
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
@@ -6,6 +52,123 @@ document.addEventListener("DOMContentLoaded", function() {
 
     initializeChart();
 });
+
+// テキストエリアの内容をローカルストレージに保存
+function saveFoodData() {
+        const breakfast = document.getElementById('text-breakfast').value;
+        localStorage.setItem('text-breakfast', breakfast);
+        const lunch = document.getElementById('text-lunch').value;
+        localStorage.setItem('text-lunch', lunch);
+        const dinner = document.getElementById('text-dinner').value;
+        localStorage.setItem('text-dinner', dinner);
+        const bkcal = document.getElementById('kcal-breakfast').value;
+        localStorage.setItem('kcal-breakfast', bkcal);
+        const lkcal = document.getElementById('kcal-lunch').value;
+        localStorage.setItem('kcal-lunch', lkcal);
+        const dkcal = document.getElementById('kcal-dinner').value;
+        localStorage.setItem('kcal-dinner', dkcal);
+        //alert('食事のデータが保存されました!');  
+};
+
+// データベースからユーザーネームを取得してオブジェクトに変換する
+// ユーザーネームを取得して表示する関数
+async function loadAndDisplayuserName(userId) {
+    try {
+        // APIから目標データを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 目標データを表示する処理
+            const mokuhyouElement = document.getElementById('username'); // 目標を表示する要素
+            if (data.username) {
+                mokuhyouElement.textContent = `${data.username}`; // 目標を表示
+                console.log(`ユーザーID ${userId} のユーザーネームが表示されました: ${data.username}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} のユーザーネームは設定されていません`);
+            }
+        } else {
+            console.error("ユーザーネームデータの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
+
+// データベースから目標データを取得してオブジェクトに変換する
+// 目標データを取得して表示する関数
+async function loadAndDisplayMokuhyou(userId) {
+    try {
+        // APIから目標データを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 目標データを表示する処理
+            const mokuhyouElement = document.getElementById('mokuhyou'); // 目標を表示する要素
+            if (data.mokuhyou) {
+                mokuhyouElement.textContent = `${data.mokuhyou}`; // 目標を表示
+                console.log(`ユーザーID ${userId} の目標が表示されました: ${data.mokuhyou}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} の目標は設定されていません`);
+            }
+        } else {
+            console.error("目標データの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
+//データベースからご飯を取得
+async function loadAndDisplayFood(userId) {
+    try {
+        // APIから朝ごはんを取得
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/${userId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // 朝ごはんを表示する処理
+            const breakfast = document.getElementById('text-breakfast'); // 朝ごはんを表示する要素
+            const lunch = document.getElementById('text-lunch');
+            const dinner = document.getElementById('text-dinner');
+            if (data.breakfast) {
+                breakfast.textContent = `${data.breakfast}`; // 朝ごはんを表示
+                lunch.textContent =`${data.lunch}`;
+                dinner.textContent =`${data.dinner}`
+                console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
+                console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
+                console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
+            } else {
+                mokuhyouElement.textContent = '目標が設定されていません';
+                console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
+            }
+        } else {
+            console.error("朝ごはんの取得に失敗しました:", await response.text());
+        }
+    } catch (error) {
+        console.log("エラーが発生しました:", error);
+    }
+}
+
+// // ページ読み込み時に目標データをロード
+// window.onload = function() {
+//     loadmokuhyouData(); // 目標データをロード
+
+//     // 必要に応じてユーザーIDを指定して目標を表示
+//     const userId = 2; // ここに表示したいユーザーIDを指定
+//     displayMokuhyou(userId); // 指定されたユーザーIDの目標を表示
+// };
+
 
 // 身長と体重の入力制限
 const heightkeep = document.getElementById('user_height');
@@ -25,6 +188,7 @@ heightkeep.addEventListener('input', function() {
     }
 });
 
+//体重4桁超えないように
 weightInput.addEventListener('input', function() {
     // 体重が4桁を超えないように制限
     if (weightInput.value.length > 4) {
@@ -66,6 +230,7 @@ function calculateBMI() {
     updateChart();
 }
 
+//チャート系入れ物
 let myLineChart;
 let weightData = {}; // 初期値は空のオブジェクト
  
@@ -123,10 +288,7 @@ async function saveWeightData(date, weight) {
         console.error("エラーが発生しました:", error);
     }
 }
-// ページロード時の処理
-window.onload = async function () {
-    await loadWeightData(); // データベースから体重データをロード
-};
+
 // let myLineChart;
 // let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
 // //ページ読み込み時にweightDataをlocalStorageから取得している
@@ -146,6 +308,10 @@ window.onload = async function () {
 // }
  
 // グラフの初期化関数
+
+
+//チャート関数
+
 function initializeChart() {
     const ctx = document.getElementById('lineChart').getContext('2d');
     const recentData = getRecentWeightData(); //X軸（日付）とY軸（体重）のデータを取得
@@ -228,7 +394,7 @@ function updateChart() {
     showDailyChart(); // デフォルトは日間グラフで更新
 }
  
-// ボタンがクリックされた時の関数
+// 日間週間の関数
 function days_id() {
     showDailyChart(); // 日間ボタンをクリックしたら日間グラフを表示
 }
@@ -276,4 +442,199 @@ function saveFood() {
     console.error('エラー:', error);
     alert('データの保存に失敗しました:' + error.message);
 });
+}
+
+
+function torepage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../tore/tore.html?userId=${userId}`;
+  }
+//なんだこれ
+function GetFood() {
+    // APIからデータを取得する
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+
+    if (!userId) {
+        alert('無効なユーザーIDです');
+        return;
+    }
+
+    fetch('https://karadanipi-su-api.onrender.com/foods', { // エンドポイントURLを適切に変更
+        method: 'GET', // GETリクエストを使用してデータを取得
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('データの取得に失敗しました');
+        }
+        return response.json(); // JSON形式でデータをパース
+    })
+     .then(data => {
+        // サーバーから取得したデータを利用する
+        
+        const savedData_breakfast = data.breakfast; // データ構造に合わせて取得
+        const savedData_lunch = data.lunch;
+        const savedData_dinner = data.dinner;
+        const savebkcal = data.bkcal;
+        const savelkcal = data.lkcal;
+        const savedkcal = data.dkcal;
+
+ 
+        // 取得したデータを適切な要素に表示
+        if (savedData_breakfast) {
+            document.getElementById('text-breakfast').value = savedData_breakfast;
+        }
+        if (savedData_lunch) {
+            document.getElementById('text-lunch').value = savedData_lunch;
+        }
+        if (savedData_dinner) {
+            document.getElementById('text-dinner').value = savedData_dinner;
+        }
+        if (savebkcal) {
+            document.getElementById('kcal-breakfast').value = savebkcal;
+        }
+        if (savelkcal) {
+            document.getElementById('kcal-lunch').value = savelkcal;
+        }
+        if (savedkcal) {
+            document.getElementById('kcal-dinner').value = savedkcal;
+        }
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+        alert('データの取得に失敗しました。');
+    });
+}
+
+//ここ二つロード時やらせる
+function fetchUsers() {
+    return fetch('https://karadanipi-su-api.onrender.com/users')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('ネットワークのエラーが発生しました');
+        }
+        return response.json();
+      })
+      .then(data => {
+        data.forEach(user => {
+          UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
+        });
+      })
+      .catch(error => {
+        console.error('ユーザーデータ取得エラー:', error);
+        alert('ユーザーデータの取得に失敗しました');
+      });
+  }
+
+function fetchFoods() {
+    return fetch('https://karadanipi-su-api.onrender.com/foods')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('ネットワークのエラーが発生しました');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // 各ユーザーの最新の食事データを取得
+        data.forEach(food => {
+          // ユーザーのIDを使ってFoodDataを更新
+          // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
+          if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
+            FoodData[food.userid] = {
+              breakfast: food.breakfast,
+              lunch: food.lunch,
+              dinner: food.dinner,
+              created_at: food.created_at  // 最新のcreated_atも保存
+            };
+          }
+        });
+      })
+      .catch(error => {
+        console.error('食事データ取得エラー:', error);
+        alert('データの取得に失敗しました');
+      });
+  }
+
+function saveData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    const textmoku = document.getElementById('moku').value.trim(); // 入力値を取得して余分な空白を除去
+
+    // 入力が空の場合は処理を中断
+    if (!textmoku) {
+        return;
+    }
+
+    localStorage.setItem('moku', textmoku); // ローカルストレージに保存
+
+    // リクエストの内容を設定
+    const requestData = {
+        userId: userId,
+        mokuhyou: textmoku
+    };
+
+    fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('データが保存されました！: ' + textmoku);
+        console.log('サーバーからの応答:', data);
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+        alert('データの保存に失敗しました: ' + error.message);
+    });
+};
+
+
+function saveALL() {  //これ保存云々
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+        const height = document.getElementById('user_height').value;
+        const weight = document.getElementById('user_weight').value;
+        // localStorage.setItem('user_height', height);
+        // localStorage.setItem('user_weight', weight);
+
+        // リクエストの内容を設定
+          const requestData = {
+          userId: userId,
+          height: height,
+          weight: weight
+        };
+         
+    fetch(`https://karadanipi-su-api.onrender.com/users/add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    body: JSON.stringify(requestData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert('身長体重が保存されました');
+    console.log('サーバーからの応答:');
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+    console.error('スタックトレース:', error.stack); // スタックトレースを表示
+    alert('データの保存に失敗しました:' + error.message);
+  });
+};
+
+
+function calculateBMI() {
+    const height = document.getElementById('user_height').value;
+    const weight = document.getElementById('user_weight').value;
+    // localStorage.setItem('user_height', height);
+    // localStorage.setItem('user_weight', weight);
 }

@@ -56,6 +56,14 @@
       // フォームの入力データを取得
       const username = document.getElementById('user_name').value;
       const password = document.getElementById('user_password').value;
+
+              // 特定のユーザーネームとパスワードをチェック
+              if (username === '絶対時間' && password === 'futarisezon') {
+            // 条件が一致した場合、特定のページにリダイレクト
+            alert('知性は金で買えないよ。アマモト...  クラピカがログインしました!!');
+            window.location.href = 'http://127.0.0.1:5500/admin/admin_home.html'; // 特定ページのURLに置き換えてください
+            return; // ここで処理を終了
+        }
  
       // サーバーにPOSTリクエストを送信
       fetch('https://karadanipi-su-api.onrender.com/login', {
