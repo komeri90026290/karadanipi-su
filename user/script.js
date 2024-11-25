@@ -26,22 +26,22 @@ function fetchAndRenderMokuhyou(userId) {
 }
 
 //データ表示関数
-function renderFoodList(data) {
-    const FoodList = document.getElementById('FoodList');
-    FoodList.innerHTML = ''; // リストを初期化
+// function renderFoodList(data) {
+//     const FoodList = document.getElementById('FoodList');
+//     FoodList.innerHTML = ''; // リストを初期化
 
-    data.forEach(Food => {
-      const listItem = document.createElement('li');
-      const username = UserData[Food.userid] || '不明なユーザー';
-      listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
-      listItem.classList.add('Foodset');
+//     data.forEach(Food => {
+//       const listItem = document.createElement('li');
+//       const username = UserData[Food.userid] || '不明なユーザー';
+//       listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
+//       listItem.classList.add('Foodset');
 
-      listItem.style.textAlign = 'left';  // 左寄せ
+//       listItem.style.textAlign = 'left';  // 左寄せ
 
      
-      FoodList.appendChild(listItem);
-    });
-  }
+//       FoodList.appendChild(listItem);
+//     });
+//   }
 
 //今日の日付
 document.addEventListener("DOMContentLoaded", function() {
@@ -129,27 +129,21 @@ async function loadAndDisplayMokuhyou(userId) {
 
 //データベースからご飯を取得
 async function loadAndDisplayFood(userId) {
+    console.log("ユーザーID:", userId);  // userIdが正しく取得されているか確認
     try {
-        // APIから朝ごはんを取得
-        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/${userId}`);
-        
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/${userId}`); // APIエンドポイントにリクエスト
+
         if (response.ok) {
             const data = await response.json();
             console.log(data);
 
-            // 朝ごはんを表示する処理
-            const breakfast = document.getElementById('text-breakfast'); // 朝ごはんを表示する要素
-            const lunch = document.getElementById('text-lunch');
-            const dinner = document.getElementById('text-dinner');
+            // 目標データを表示する処理
+            const textElement = document.getElementById('text-breakfast'); // 目標を表示する要素
             if (data.breakfast) {
-                breakfast.textContent = `${data.breakfast}`; // 朝ごはんを表示
-                lunch.textContent =`${data.lunch}`;
-                dinner.textContent =`${data.dinner}`
+                textElement.textContent = `${data.breakfast}`; // 目標を表示
                 console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
-                console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
-                console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
             } else {
-                mokuhyouElement.textContent = '目標が設定されていません';
+                textElement.textContent = '朝ごはんが設定されていません';
                 console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
             }
         } else {
@@ -159,6 +153,9 @@ async function loadAndDisplayFood(userId) {
         console.log("エラーが発生しました:", error);
     }
 }
+
+        
+
 
 // // ページ読み込み時に目標データをロード
 // window.onload = function() {
@@ -402,6 +399,28 @@ function days_id() {
 function week_id() {
     showWeeklyChart(); // 週間ボタンをクリックしたら週間グラフを表示
 }
+
+async function foodonedayData(userid) {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid }), // ユーザーIDをサーバーに送信
+      });
+ 
+      const result = await response.json();
+ 
+      if (response.ok) {
+        console.log('Empty data added successfully:', result.data);
+      } else {
+        console.error('Failed to add empty data:', result.message);
+      }
+    } catch (error) {
+      console.error('Error adding empty data:', error);
+    }
+  }
 
 function saveFood() {
     const urlParams = new URLSearchParams(window.location.search);
