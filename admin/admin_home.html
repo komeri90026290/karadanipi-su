@@ -50,6 +50,7 @@
             return response.json();
           })
           .then(data => {
+            console.log('受け取ったデータ', data)
             userData = data; // 取得したデータを保存
             renderUserList(userData); // 初期表示
           })
