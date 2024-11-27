@@ -127,6 +127,7 @@ async function loadAndDisplayMokuhyou(userId) {
     }
 }
 
+
 //データベースからご飯を取得
 async function loadAndDisplayFood(userId) {
     console.log("ユーザーID:", userId);  // userIdが正しく取得されているか確認
@@ -137,17 +138,43 @@ async function loadAndDisplayFood(userId) {
             const data = await response.json();
             console.log(data);
 
-            // 目標データを表示する処理
-            const textElement = document.getElementById('text-breakfast'); // 目標を表示する要素
+            // ご飯データを表示する処理
+            const textElement = document.getElementById('text-breakfast'); // 朝ご飯を表示する要素
+            const lunchElement = document.getElementById('text-lunch'); // 昼ご飯を表示する要素
+            const dinnerElement = document.getElementById('text-dinner'); // 夜ご飯を表示する要素
+
+        if (textElement) {
             if (data.breakfast) {
-                textElement.textContent = `${data.breakfast}`; // 目標を表示
+                textElement.value = `${data.breakfast}`; // ごはんを表示
                 console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
             } else {
-                textElement.textContent = '朝ごはんが設定されていません';
+                textElement.value = '朝ごはんが設定されていません';
                 console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
             }
+        }
+
+        if (lunchElement) {
+            if (data.lunch) {
+                lunchElement.value = `${data.lunch}`; // ごはんを表示
+                console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
+            } else {
+                lunchElement.value = '昼ごはんが設定されていません';
+                console.log(`ユーザーID ${userId} の昼ごはんは設定されていません`);
+            }
+        }
+            
+        if (dinnerElement) {
+            if (data.dinner) {
+                dinnerElement.value = `${data.dinner}`; // ごはんを表示
+                console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
+            } else {
+                dinnerElement.value = '夜ごはんが設定されていません';
+                console.log(`ユーザーID ${userId} の夜ごはんは設定されていません`);
+            }
+        }
+        
         } else {
-            console.error("朝ごはんの取得に失敗しました:", await response.text());
+            console.error("ごはんの取得に失敗しました:", await response.text());
         }
     } catch (error) {
         console.log("エラーが発生しました:", error);
@@ -428,27 +455,6 @@ function week_id() {
     showWeeklyChart(); // 週間ボタンをクリックしたら週間グラフを表示
 }
 
-async function foodonedayData(userid) {
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userid }), // ユーザーIDをサーバーに送信
-      });
- 
-      const result = await response.json();
- 
-      if (response.ok) {
-        console.log('Empty data added successfully:', result.data);
-      } else {
-        console.error('Failed to add empty data:', result.message);
-      }
-    } catch (error) {
-      console.error('Error adding empty data:', error);
-    }
-  }
 
 function saveFood() {
     const urlParams = new URLSearchParams(window.location.search);
