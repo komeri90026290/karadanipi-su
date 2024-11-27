@@ -43,7 +43,7 @@
                 <div class="set"><p>セット</p></div>
  
                 <div id="submit">
-                  <button type="submit">追加</button>
+                  <button type="submit" onclick="torepage()">追加</button>
                 </div>
             </form>
         </nav>
@@ -127,9 +127,13 @@
                     console.error('送信エラー:', error);
                     alert('エラーが発生しました');
             }
-             // 追加ボタンを押した後、別のページに移動する
-          window.location.href = '../user/index.html'; // index.htmlの部分を戻りたいページに変更
         };
+            function torepage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+            window.location.href = `../user/index.html?userId=${userId}`;
+            }
+
     </script>
 </body>
 </html>

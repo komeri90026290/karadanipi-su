@@ -38,6 +38,13 @@
  
         <!-- JSのコード部分 -->
         <script>
+
+          // ページが読み込まれた際にデータを取得する
+          window.onload = function() {
+          // usersデータとfoodsデータを順番に取得
+          fetchUsers().then(fetchTore);
+          };
+
           let ToreData = []; // toreデータを一時的に保存する変数
           let UserData = {}; // userデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
  
@@ -80,12 +87,6 @@
               });
           }
 
-          // ページが読み込まれた際にデータを取得する
-          window.onload = function() {
-            // usersデータとtoreデータを順番に取得
-            fetchUsers().then(fetchTore);
-          };
- 
           // データを表示する関数
           function renderToreList(data) {
             const ToreList = document.getElementById('ToreList');
@@ -94,7 +95,7 @@
             data.forEach(Tore => {
               const listItem = document.createElement('li');
               const username = UserData[Tore.userid] || '不明なユーザー';
-              listItem.innerHTML = `ユーザー名: ${username}<br> | トレーニング内容: ${Tore.detail}`;
+              listItem.innerHTML = `ユーザー名: ${username}<br> ${Tore.part} : ${Tore.exercise} :${Tore.sets}セット `;
               listItem.classList.add('Toreset');
 
               listItem.style.textAlign = 'left';  // 左寄せ
