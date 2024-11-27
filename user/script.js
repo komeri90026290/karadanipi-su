@@ -121,7 +121,6 @@ async function loadAndDisplayFood(userId) {
                 textElement.value = `${data.breakfast}`; // ごはんを表示
                 console.log(`ユーザーID ${userId} の朝ごはんが表示されました: ${data.breakfast}`);
             } else {
-                textElement.value = '朝ごはんが設定されていません';
                 console.log(`ユーザーID ${userId} の朝ごはんは設定されていません`);
             }
         }
@@ -131,7 +130,6 @@ async function loadAndDisplayFood(userId) {
                 lunchElement.value = `${data.lunch}`; // ごはんを表示
                 console.log(`ユーザーID ${userId} の昼ごはんが表示されました: ${data.lunch}`);
             } else {
-                lunchElement.value = '昼ごはんが設定されていません';
                 console.log(`ユーザーID ${userId} の昼ごはんは設定されていません`);
             }
         }
@@ -141,7 +139,6 @@ async function loadAndDisplayFood(userId) {
                 dinnerElement.value = `${data.dinner}`; // ごはんを表示
                 console.log(`ユーザーID ${userId} の夜ごはんが表示されました: ${data.dinner}`);
             } else {
-                dinnerElement.value = '夜ごはんが設定されていません';
                 console.log(`ユーザーID ${userId} の夜ごはんは設定されていません`);
             }
         }
