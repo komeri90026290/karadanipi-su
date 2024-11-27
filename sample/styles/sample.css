@@ -8,61 +8,61 @@
 
 .bfimage {       /*納豆ご飯画像*/
     position:absolute;
-    left:920px;
-    bottom:320px;
+    left:850px;
+    bottom:255px;
 }
 
 .bfimage2 {       /*温泉卵*/
     position:absolute;
-    left:893px;
-    bottom:17px;
+    left:855px;
+    top:420px;
 }
 
 .bfimage3 {       /*ツナチーズトースト*/
     position:absolute;
-    left:895px;
+    left:880px;
     top: 702px;
 }
 
 .bfimage4 {       /*ヨーグルト*/
     position:absolute;
-    left:893px;
+    left:880px;
     top: 1000px;
 }
 
 .luimage {       /*サラダチキン*/
     position:absolute;
-    left:910px;
-    bottom:310px;
+    left:866px;
+    bottom:270px;
 }
 
 .luimage3 {      /*肉サラダ*/
     position:absolute;
-    left:930px;
+    left:896px;
     top:720px;
 }
 
 .diimage {       /*ポトフ*/
     position:absolute;
-    left:982.6px;
-    bottom:303px;
+    left:940px;
+    bottom:260px;
 }
 
 .diimage2 {     /*餃子*/
     position:absolute;
-    left:930px;
+    left:890px;
     top:433px;
 }
 
 .diimage3 {     /*うどんげ*/
     position:absolute;
-    left:903px;
+    left:840px;
     top:708px;
 }
 
 .diimage4 {     /*生姜焼き*/
     position:absolute;
-    left:920px;
+    left:870px;
     top:984px;
 }
 
@@ -81,25 +81,25 @@
 .sample-text {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
     top: 70px;
-    left: 185px;
+    left: 165px;
 }
 
 .sample-text-2 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
-    bottom: 203px;
-    left: 185px;
+    bottom: 155px;
+    left: 165px;
 }
 
 .sample-text-3 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
-    bottom: -80px;
-    left: 185px;
+    bottom: -120px;
+    left: 165px;
 }
 
 .sample-text-4 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
-    bottom: -360px;
-    left: 185px;
+    bottom: -400px;
+    left: 165px;
 }
 
 .breakfast {
@@ -133,13 +133,13 @@
 .kintore_title {     /*「筋トレ」の配置変更*/
     position:absolute;
     top:630px;
-    left:130px;
+    left:170px;
 }
 
 .kintore_title2 {    /*「筋トレ」の配置変更*/
     position:absolute;
     top:910px;
-    left:180px;
+    left:170px;
 }
 
 .after_main {

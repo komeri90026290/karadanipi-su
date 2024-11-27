@@ -1,30 +1,3 @@
-// 目標を取得して表示する関数
-function fetchAndRenderMokuhyou(userId) {
-                fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('サーバーエラーが発生しました');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // ユーザーの目標（mokuhyou）を取得
-                        const mokuhyouElement = document.getElementById('mokuhyou'); // 表示先の要素を取得
-        
-                        if (data && data.mokuhyou) {
-                            mokuhyouElement.textContent = `${data.mokuhyou}`; // 目標を表示
-                            console.log(`目標が表示されました: ${data.mokuhyou}`);
-                        } else {
-                            mokuhyouElement.textContent = '目標が設定されていません';
-                            console.log('ユーザーの目標が見つかりませんでした');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('データ取得エラー:', error);
-                        alert('データの取得に失敗しました');
-                    });
-}
-
 //データ表示関数
 // function renderFoodList(data) {
 //     const FoodList = document.getElementById('FoodList');
@@ -174,10 +147,10 @@ async function loadAndDisplayFood(userId) {
         }
         
         } else {
-            console.error("ごはんの取得に失敗しました:", await response.text());
+            console.log("まだご飯が登録されてないよ～！");
         }
     } catch (error) {
-        console.log("エラーが発生しました:", error);
+        console.log();
     }
 }
 
@@ -565,24 +538,24 @@ function GetFood() {
 }
 
 //ここ二つロード時やらせる
-function fetchUsers() {
-    return fetch('https://karadanipi-su-api.onrender.com/users')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('ネットワークのエラーが発生しました');
-        }
-        return response.json();
-      })
-      .then(data => {
-        data.forEach(user => {
-          UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
-        });
-      })
-      .catch(error => {
-        console.error('ユーザーデータ取得エラー:', error);
-        alert('ユーザーデータの取得に失敗しました');
-      });
-  }
+// function fetchUsers() {
+//     return fetch('https://karadanipi-su-api.onrender.com/users')
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('ネットワークのエラーが発生しました');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         data.forEach(user => {
+//           UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
+//         });
+//       })
+//       .catch(error => {
+//         console.error('ユーザーデータ取得エラー:', error);
+//         alert('ユーザーデータの取得に失敗しました');
+//       });
+//   }
 
 
   async function foodonedayData(userid) {
@@ -608,34 +581,34 @@ function fetchUsers() {
   }
 
   
-function fetchFoods() {
-    return fetch('https://karadanipi-su-api.onrender.com/foods')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('ネットワークのエラーが発生しました');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // 各ユーザーの最新の食事データを取得
-        data.forEach(food => {
-          // ユーザーのIDを使ってFoodDataを更新
-          // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
-          if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
-            FoodData[food.userid] = {
-              breakfast: food.breakfast,
-              lunch: food.lunch,
-              dinner: food.dinner,
-              created_at: food.created_at  // 最新のcreated_atも保存
-            };
-          }
-        });
-      })
-      .catch(error => {
-        console.error('食事データ取得エラー:', error);
-        alert('データの取得に失敗しました');
-      });
-  }
+// async function fetchFoods() {
+//     return fetch('https://karadanipi-su-api.onrender.com/foods')
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('ネットワークのエラーが発生しました');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         // 各ユーザーの最新の食事データを取得
+//         data.forEach(food => {
+//           // ユーザーのIDを使ってFoodDataを更新
+//           // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
+//           if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
+//             FoodData[food.userid] = {
+//               breakfast: food.breakfast,
+//               lunch: food.lunch,
+//               dinner: food.dinner,
+//               created_at: food.created_at  // 最新のcreated_atも保存
+//             };
+//           }
+//         });
+//       })
+//       .catch(error => {
+//         console.error('食事データ取得エラー:', error);
+//         alert('データの取得に失敗しました');
+//       });
+//   }
 
 function saveData() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -666,6 +639,11 @@ function saveData() {
     .then(data => {
         alert('データが保存されました！: ' + textmoku);
         console.log('サーバーからの応答:', data);
+
+        
+        // 保存成功後に目標を表示
+        const mokuhyouDiv = document.getElementById('mokuhyou');
+        mokuhyouDiv.textContent = `${textmoku}`;
     })
     .catch(error => {
         console.error('エラー:', error);
