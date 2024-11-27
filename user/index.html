@@ -116,8 +116,11 @@ window.onload = async function () {
     await loadAndDisplayMokuhyou(userId);
     await loadAndDisplayFood(userId);
     GetFood();
-    addTodayHistory(userId);
-    initCreateData(userId);
+    addTodayHistory(userId)
+  initCreateData(userId);
+
+    transferFoodIdToHistory(userId);
+
 
 
   //ここ二つロード時やらせる
