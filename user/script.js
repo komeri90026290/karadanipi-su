@@ -721,53 +721,6 @@ function getToday(){
     return `${year}-${month}-${day}`;
 }
 
-async function createFirstFood(userId){
-    const requestData = {
-        userid: userId,
-        breakfast: '',
-        lunch: '',
-        dinner: '',
-        bkcal: '',
-        lkcal: '',
-        dkcal: '',
-    };
-    const response =  await fetch(`http://localhost:3000/foods`, {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    });
-    if (response.ok) {
-        const data =  response.json();
-        return data;
-    } else {
-        console.error('Failed to create data:', response.status);
-        return null;
-    }
-}
-async function createFirstTrainingHistories(userId){
-    const requestData = {
-        userid: userId,
-        trainingidlist:[],
-    };
-    const response =  await fetch(`http://localhost:3000/traininghistories`, {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-    });
-    if (response.ok) {
-        const data =  response.json();
-        return data;
-    } else {
-        console.error('Failed to create data:', response.status);
-        return null;
-    }
-}
-
-
 async function initCreateData(userId) {
     let todayFood = {};
     let todayTrainingHistory = {};
@@ -810,7 +763,58 @@ async function initCreateData(userId) {
         console.error('Error init traininghistories data:', error);
     }
 
-
     console.log(todayFood)
     console.log(todayTrainingHistory)
 }
+
+
+
+
+async function createFirstFoodDate(userId){
+    const requestData = {
+        userid: userId,
+        breakfast: '',
+        lunch: '',
+        dinner: '',
+        bkcal: '',
+        lkcal: '',
+        dkcal: '',
+    };
+    const response =  await fetch(`http://localhost:3000/foods`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    });
+    if (response.ok) {
+        const data =  response.json();
+        return data;
+    } else {
+        console.error('Failed to create data:', response.status);
+        return null;
+    }
+}
+
+async function createFirstTrainingHistories(userId){
+    const requestData = {
+        userid: userId,
+        trainingidlist:[],
+    };
+    const response =  await fetch(`http://localhost:3000/traininghistories`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    });
+    if (response.ok) {
+        const data =  response.json();
+        return data;
+    } else {
+        console.error('Failed to create data:', response.status);
+        return null;
+    }
+}
+
+
