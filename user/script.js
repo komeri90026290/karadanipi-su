@@ -147,10 +147,10 @@ async function loadAndDisplayFood(userId) {
         }
         
         } else {
-            console.error("ごはんの取得に失敗しました:", await response.text());
+            console.log("まだご飯が登録されてないよ～！");
         }
     } catch (error) {
-        console.log("エラーが発生しました:", error);
+        console.log();
     }
 }
 
