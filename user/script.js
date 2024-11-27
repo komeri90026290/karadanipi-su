@@ -16,6 +16,34 @@
 //     });
 //   }
 
+// APIを呼び出してfoodidをhistoryテーブルに転送する関数
+async function transferFoodIdToHistory(userId) {
+    try {
+      // APIにPOSTリクエストを送る
+      const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/getfood/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // レスポンスが正常の場合
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message); // 成功メッセージをアラートで表示
+        console.log('サーバーからの応答:', data);
+      } else {
+        const errorData = await response.json();
+        alert('エラー: ' + errorData.error); // エラーメッセージを表示
+        console.error('エラー:', errorData.error);
+      }
+    } catch (error) {
+      // リクエストが失敗した場合
+      console.error('リクエスト中にエラーが発生しました:', error);
+      alert('サーバーと通信中にエラーが発生しました');
+    }
+  }
+
 //今日の日付
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
