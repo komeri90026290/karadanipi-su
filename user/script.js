@@ -172,10 +172,10 @@ async function loadAndDisplayFood(userId) {
         }
         
         } else {
-            console.log("まだご飯が登録されてないよ～！");
+            console.error("ごはんの取得に失敗しました:", await response.text());
         }
     } catch (error) {
-        console.log();
+        console.log("エラーが発生しました:", error);
     }
 }
 
@@ -606,7 +606,7 @@ function GetFood() {
   }
 
   
-// async function fetchFoods() {
+// function fetchFoods() {
 //     return fetch('https://karadanipi-su-api.onrender.com/foods')
 //       .then(response => {
 //         if (!response.ok) {
@@ -665,7 +665,7 @@ function saveData() {
         alert('データが保存されました！: ' + textmoku);
         console.log('サーバーからの応答:', data);
 
-        
+
         // 保存成功後に目標を表示
         const mokuhyouDiv = document.getElementById('mokuhyou');
         mokuhyouDiv.textContent = `${textmoku}`;
@@ -711,10 +711,106 @@ function saveALL() {  //これ保存云々
   });
 };
 
+function getToday(){
+    const now = new Date();
 
-function calculateBMI() {
-    const height = document.getElementById('user_height').value;
-    const weight = document.getElementById('user_weight').value;
-    // localStorage.setItem('user_height', height);
-    // localStorage.setItem('user_weight', weight);
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 月を2桁に
+    const day = String(now.getDate()).padStart(2, '0');       // 日を2桁に
+
+    return `${year}-${month}-${day}`;
+}
+
+async function createFirstFood(userId){
+    const requestData = {
+        userid: userId,
+        breakfast: '',
+        lunch: '',
+        dinner: '',
+        bkcal: '',
+        lkcal: '',
+        dkcal: '',
+    };
+    const response =  await fetch(`http://localhost:3000/foods`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    });
+    if (response.ok) {
+        const data =  response.json();
+        return data;
+    } else {
+        console.error('Failed to create data:', response.status);
+        return null;
+    }
+}
+async function createFirstTrainingHistories(userId){
+    const requestData = {
+        userid: userId,
+        trainingidlist:[],
+    };
+    const response =  await fetch(`http://localhost:3000/traininghistories`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+    });
+    if (response.ok) {
+        const data =  response.json();
+        return data;
+    } else {
+        console.error('Failed to create data:', response.status);
+        return null;
+    }
+}
+
+
+async function initCreateData(userId) {
+    let todayFood = {};
+    let todayTrainingHistory = {};
+    try {
+        const response = await fetch(`http://localhost:3000/foods/recent/${userId}`, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (response.status == '200') {
+            console.log(response.status)
+            todayFood = await response.json();
+        } else{
+            console.log('フードデータなし')
+            todayFood = createFirstFoodDate(userId);              
+        }
+    } catch (error) {
+        console.error('Error init Food data:', error);
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/traininghistories/recent/${userId}`, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (response.ok) {
+            console.log(response.status)
+            todayTrainingHistory = await response.json();
+        }else{
+            console.log('response.status')
+            console.log(response.status)
+            console.log('トレーニングヒストリーデータなし')
+            todayTrainingHistory = createFirstTrainingHistories(userId);              
+        }
+
+    } catch(error){
+        console.error('Error init traininghistories data:', error);
+    }
+
+
+    console.log(todayFood)
+    console.log(todayTrainingHistory)
 }
