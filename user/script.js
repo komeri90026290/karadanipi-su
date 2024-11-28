@@ -306,40 +306,6 @@ async function loadWeightData() {
     }
 }
  
-// データベースに体重データを保存する関数
-async function saveWeightData(date, weight) {
-    try {
-        const response = await fetch('https://karadanipi-su-api.onrender.com/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: userId, // ユーザーIDを適宜変更
-                date: date,
-                weight: weight,
-            }),
-        });
- 
-        if (response.ok) {
-            console.log("体重データが保存されました");
- 
-            // ローカルのweightDataを更新
-            weightData[date] = weight;
- 
-            // 最大7件に制限
-            const dates = Object.keys(weightData).sort(); // 日付順にソート
-            if (dates.length > 7) {
-                delete weightData[dates[0]]; // 最も古いデータを削除
-            }
-        } else {
-            console.error("体重データの保存に失敗しました:", await response.text());
-        }
-    } catch (error) {
-        console.error("エラーが発生しました:", error);
-    }
-}
-
 
 //ログイン時にhistoryテーブルに追加するコード
 async function addTodayHistory(userId) {
@@ -667,20 +633,26 @@ function GetFood() {
 function saveData() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    const numberheight = Number(document.getElementById('user_height').value.trim()); // 入力値を取得して余分な空白を除去
+    const numberweight = Number(document.getElementById('user_weight').value.trim()); // 入力値を取得して余分な空白を除去
     const textmoku = document.getElementById('moku').value.trim(); // 入力値を取得して余分な空白を除去
 
-    // 入力が空の場合は処理を中断
-    if (!textmoku) {
-        return;
+    // ローカルストレージに保存（目標のみ）
+    if (textmoku) {
+        localStorage.setItem('moku', textmoku);
     }
 
-    localStorage.setItem('moku', textmoku); // ローカルストレージに保存
-
-    // リクエストの内容を設定
+    // リクエストの内容を設定（空のプロパティは含めない）
     const requestData = {
         userId: userId,
-        mokuhyou: textmoku
+        height: numberheight || null, // 数値がない場合はnull
+        weight: numberweight || null // 数値がない場合はnull
     };
+
+    // mokuが入力されていれば追加
+    if (textmoku) {
+        requestData.mokuhyou = textmoku;
+    }
 
     fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
         method: 'PUT',
@@ -691,54 +663,22 @@ function saveData() {
     })
     .then(response => response.json())
     .then(data => {
-        alert('データが保存されました！: ' + textmoku);
+        alert('データが保存されました！');
         console.log('サーバーからの応答:', data);
 
-
         // 保存成功後に目標を表示
-        const mokuhyouDiv = document.getElementById('mokuhyou');
-        mokuhyouDiv.textContent = `${textmoku}`;
+        if (textmoku) {
+            const mokuhyouDiv = document.getElementById('mokuhyou');
+            mokuhyouDiv.textContent = `${textmoku}`;
+        }
     })
     .catch(error => {
         console.error('エラー:', error);
         alert('データの保存に失敗しました: ' + error.message);
     });
-};
+}
 
 
-function saveALL() {  //これ保存云々
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
-        const height = document.getElementById('user_height').value;
-        const weight = document.getElementById('user_weight').value;
-        // localStorage.setItem('user_height', height);
-        // localStorage.setItem('user_weight', weight);
-
-        // リクエストの内容を設定
-          const requestData = {
-          userId: userId,
-          height: height,
-          weight: weight
-        };
-         
-    fetch(`https://karadanipi-su-api.onrender.com/users/add`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify(requestData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert('身長体重が保存されました');
-    console.log('サーバーからの応答:');
-  })
-  .catch(error => {
-    console.error('エラー:', error);
-    console.error('スタックトレース:', error.stack); // スタックトレースを表示
-    alert('データの保存に失敗しました:' + error.message);
-  });
-};
 
 
 
