@@ -490,6 +490,25 @@ function saveFood() {
 });
 }
 
+function breakfastpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_breakfast.html?userId=${userId}`;
+  }
+
+  function lunchpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_lunch.html?userId=${userId}`;
+  }
+
+  function dinnerpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_dinner.html?userId=${userId}`;
+  }
+
+
 
 function torepage() {
     const urlParams = new URLSearchParams(window.location.search);
