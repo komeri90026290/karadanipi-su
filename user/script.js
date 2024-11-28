@@ -725,7 +725,7 @@ async function initCreateData(userId) {
     let todayFood = {};
     let todayTrainingHistory = {};
     try {
-        const response = await fetch(`http://localhost:3000/foods/recent/${userId}`, {
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/recent/${userId}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
@@ -743,7 +743,7 @@ async function initCreateData(userId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/traininghistories/recent/${userId}`, {
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/traininghistories/recent/${userId}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
@@ -780,7 +780,7 @@ async function createFirstFoodDate(userId){
         lkcal: '',
         dkcal: '',
     };
-    const response =  await fetch(`http://localhost:3000/foods`, {
+    const response =  await fetch(`https://karadanipi-su-api.onrender.com/foods`, {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
@@ -801,7 +801,7 @@ async function createFirstTrainingHistories(userId){
         userid: userId,
         trainingidlist:[],
     };
-    const response =  await fetch(`http://localhost:3000/traininghistories`, {
+    const response =  await fetch(`https://karadanipi-su-api.onrender.com/traininghistories`, {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json',
