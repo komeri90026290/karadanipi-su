@@ -496,6 +496,12 @@ function torepage() {
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
     window.location.href = `../tore/tore.html?userId=${userId}`;
   }
+
+  function kakopage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../kako/kako.html?userId=${userId}`;
+  }
 //なんだこれ
 function GetFood() {
     // APIからデータを取得する
@@ -649,37 +655,56 @@ function saveData() {
         weight: numberweight || null // 数値がない場合はnull
     };
 
-    // mokuが入力されていれば追加
+    // 1. `users`テーブルに目標を保存するリクエスト
     if (textmoku) {
-        requestData.mokuhyou = textmoku;
-    }
-
-    fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify(requestData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('データが保存されました！');
-        console.log('サーバーからの応答:', data);
-
-        // 保存成功後に目標を表示
-        if (textmoku) {
-            const mokuhyouDiv = document.getElementById('mokuhyou');
-            mokuhyouDiv.textContent = `${textmoku}`;
+        const userUpdateData = { mokuhyou: textmoku };
+        fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(userUpdateData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('ユーザーの目標が保存されました:', data);
+    
+                // 保存成功後に目標を表示
+                const mokuhyouDiv = document.getElementById('mokuhyou');
+                mokuhyouDiv.textContent = `${textmoku}`;
+            })
+            .catch(error => {
+                console.error('ユーザー目標の保存エラー:', error);
+                alert('ユーザー目標の保存に失敗しました: ' + error.message);
+            });
         }
-    })
-    .catch(error => {
-        console.error('エラー:', error);
-        alert('データの保存に失敗しました: ' + error.message);
-    });
+    
+        // 2. `history`テーブルに身長と体重を保存するリクエスト
+        if (numberheight || numberweight) { // 身長か体重のどちらかが入力されている場合に送信
+            const historyData = {
+                userId: userId,
+                height: numberheight || null, // 数値がない場合はnull
+                weight: numberweight || null // 数値がない場合はnull
+            };
+    
+            fetch(`https://karadanipi-su-api.onrender.com/histories/updateheight/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify(historyData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('履歴が保存されました:', data);
+                alert('身長と体重が履歴に保存されました！');
+            })
+            .catch(error => {
+                console.error('履歴の保存エラー:', error);
+                alert('身長と体重の履歴保存に失敗しました: ' + error.message);
+            });
+        }
 }
-
-
-
 
 
 async function initCreateData(userId) {

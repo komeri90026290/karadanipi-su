@@ -88,7 +88,7 @@
         <div id="taijyu">
           <button id="days" class=" days" onclick="days_id()">日間</button>
           <button id="week" class=" week" onclick="week_id()">週間</button>
-          <button id="history" class=" history" onclick="history_id()">過去記録</button>
+          <button id="history" class=" history" onclick="kakopage()">過去記録</button>
           </div>
         <canvas id="lineChart"></canvas>
     </p>
@@ -98,11 +98,6 @@
       <textarea id="text-lunch" placeholder="入力してください"></textarea>
       <textarea id="text-dinner" placeholder="入力してください"></textarea>
     </div>
-    <div class="Kcal-input">
-        <input type="number" id="kcal-breakfast" placeholder="Kcal">
-        <input type="number" id="kcal-lunch" placeholder="Kcal">
-        <input type="number" id="kcal-dinner" placeholder="Kcal">
-      </div>
    
       <script>
         // ページが読み込まれたときにローカルストレージからデータを取得

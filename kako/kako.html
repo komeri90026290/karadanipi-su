@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
         <title>過去記録</title>
         <link rel="stylesheet" href="styles/kako.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="kako.js" defer></script>
 </head>
 
 <body>
+
+    <!--ユーザーネーム表示-->
+    <div id="username"></div>
+
+    <!--トレーニング履歴表示-->
+    <div class="scrollable-memo" id="exerciseList"></div>
+
 
     <script>
         // ページが読み込まれたときにローカルストレージからデータを取得
         // ページロード時の処理
     window.onload = async function () {
-    
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+        console.log('取得したuserId:', userId); // ここでuserIdを確認
+        await loadAndDisplayuserName(userId);
     }
     </script>
 </body>
