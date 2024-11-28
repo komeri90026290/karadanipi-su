@@ -16,6 +16,35 @@
 //     });
 //   }
 
+// APIを呼び出してtorehisidをhistoryテーブルに転送する関数
+async function transferTorehisIdToHistory(userId) {
+    try {
+      // APIにPOSTリクエストを送る
+      const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/gettore/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // レスポンスが正常の場合
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message); // 成功メッセージをアラートで表示
+        console.log('サーバーからの応答:', data);
+      } else {
+        const errorData = await response.json();
+        alert('エラー: ' + errorData.error); // エラーメッセージを表示
+        console.error('エラー:', errorData.error);
+      }
+    } catch (error) {
+      // リクエストが失敗した場合
+      console.error('リクエスト中にエラーが発生しました:', error);
+      alert('サーバーと通信中にエラーが発生しました');
+    }
+  }
+
+
 // APIを呼び出してfoodidをhistoryテーブルに転送する関数
 async function transferFoodIdToHistory(userId) {
     try {
@@ -711,15 +740,7 @@ function saveALL() {  //これ保存云々
   });
 };
 
-function getToday(){
-    const now = new Date();
 
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // 月を2桁に
-    const day = String(now.getDate()).padStart(2, '0');       // 日を2桁に
-
-    return `${year}-${month}-${day}`;
-}
 
 async function initCreateData(userId) {
     let todayFood = {};
