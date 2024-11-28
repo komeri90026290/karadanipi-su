@@ -86,6 +86,8 @@
       .then(data => {
         alert('データが保存されました！');
         console.log('サーバーからの応答:', data);
+         // ログイン画面にリダイレクト
+    location.href = 'login.html'; // ログイン画面のURLに置き換えてください
       })
       .catch(error => {
         console.error('エラー:', error);

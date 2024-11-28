@@ -50,7 +50,7 @@
 </div>
 
 
-<button  class="logout" onclick="location.href='../kakunin/login.html';"></button>
+<button  class="logout" onclick="location.href='../login/login.html';"></button>
 
 
     <!-- 目標入力 -->
@@ -110,6 +110,7 @@ window.onload = async function () {
     await loadAndDisplayuserName(userId);
     await loadAndDisplayMokuhyou(userId);
     await loadAndDisplayFood(userId);
+    // await loadAndDisplayTrainings(userId);
     GetFood();
     addTodayHistory(userId);
     initCreateData(userId);
