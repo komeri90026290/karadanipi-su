@@ -77,7 +77,7 @@ async function transferFoodIdToHistory(userId) {
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+    const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
     document.getElementById('today').textContent = formattedDate;
 
     initializeChart();
