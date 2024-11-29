@@ -77,7 +77,7 @@ async function transferFoodIdToHistory(userId) {
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+    const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
     document.getElementById('today').textContent = formattedDate;
 
     initializeChart();
@@ -92,7 +92,6 @@ function saveFoodData() {
         const dinner = document.getElementById('text-dinner').value;
         localStorage.setItem('text-dinner', dinner);
 
-        //alert('食事のデータが保存されました!');  
 };
 
 // データベースからユーザーネームを取得してオブジェクトに変換する
@@ -447,39 +446,75 @@ function week_id() {
 function saveFood() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
-    const  savedData_breakfast = localStorage.getItem('text-breakfast');
-    const  savedData_lunch = localStorage.getItem('text-lunch');
-    const  savedData_dinner = localStorage.getItem('text-dinner');
 
+    const savedData_breakfast = localStorage.getItem('text-breakfast');
+    const savedData_lunch = localStorage.getItem('text-lunch');
+    const savedData_dinner = localStorage.getItem('text-dinner');
 
     // リクエストの内容を設定
     const requestData = {
-    userid: userId,
-    breakfast: savedData_breakfast,
-    lunch: savedData_lunch,
-    dinner: savedData_dinner,
+        userid: userId,
+        breakfast: savedData_breakfast,
+        lunch: savedData_lunch,
+        dinner: savedData_dinner,
 
     };
 
-    console.log(requestData)
+    console.log(requestData);
 
-    fetch('https://karadanipi-su-api.onrender.com/foods', {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify(requestData)
-})
-.then(response => response.json())
-.then(data => {
-    alert('データが保存されました！'+requestData);
-    console.log('サーバーからの応答:', data);
-})
-.catch(error => {
-    console.error('エラー:', error);
-    alert('データの保存に失敗しました:' + error.message);
-});
+    // アラート用のメッセージを作成
+    const messages = [];
+    if (savedData_breakfast) messages.push("朝ごはん");
+    if (savedData_lunch) messages.push("昼ごはん");
+    if (savedData_dinner) messages.push("晩ごはん");
+
+    const alertMessage = messages.length > 0 
+        ? `${messages.join("、")}が入力されました！` 
+        : "何も入力されていませんでした。";
+
+    fetch(`https://karadanipi-su-api.onrender.com/foods/tuika/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(alertMessage); // アラートをわかりやすく表示
+        console.log('サーバーからの応答:', data);
+    })
+    .catch(error => {
+        console.error('エラー:', error);
+        alert('データの保存に失敗しました: ' + error.message);
+    });
 }
+
+function carepage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/after_care.html?userId=${userId}`;
+  }
+
+
+function breakfastpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_breakfast.html?userId=${userId}`;
+  }
+
+  function lunchpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_lunch.html?userId=${userId}`;
+  }
+
+  function dinnerpage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/user_dinner.html?userId=${userId}`;
+  }
+
 
 
 function torepage() {
@@ -629,12 +664,7 @@ function saveData() {
         localStorage.setItem('moku', textmoku);
     }
 
-    // リクエストの内容を設定（空のプロパティは含めない）
-    const requestData = {
-        userId: userId,
-        height: numberheight || null, // 数値がない場合はnull
-        weight: numberweight || null // 数値がない場合はnull
-    };
+
 
     // 1. `users`テーブルに目標を保存するリクエスト
     if (textmoku) {
@@ -691,6 +721,7 @@ function saveData() {
 async function initCreateData(userId) {
     let todayFood = {};
     let todayTrainingHistory = {};
+    let todayTrainingList = [];
     try {
         const response = await fetch(`https://karadanipi-su-api.onrender.com/foods/recent/${userId}`, {
             method: 'GET', 
@@ -732,6 +763,51 @@ async function initCreateData(userId) {
 
     console.log(todayFood)
     console.log(todayTrainingHistory)
+
+    for (i=0 ;i < todayTrainingHistory.trainingidlist.length; i ++) {
+       const training = await fetchTrainig(todayTrainingHistory.trainingidlist[i]);
+       todayTrainingList.push(training);
+    }
+    const exerciseList = document.getElementById('exerciseList'); // トレーニングデータを表示する要素
+
+    console.log(todayTrainingList.length);
+    if (exerciseList) {
+        exerciseList.innerHTML = ''; // 既存の内容をクリア
+
+        todayTrainingList.forEach(training => {
+            
+            const item = document.createElement('div');
+                    
+                    // reps または seconds のどちらが入っているか確認
+            const detail = training.reps ? `${training.reps} 回` : `${training.seconds} 秒`;
+
+            item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
+
+             // リストの先頭に追加
+        exerciseList.insertBefore(item, exerciseList.firstChild);
+        });
+
+        console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
+    } else {
+        console.error("exerciseList 要素が見つかりません。");
+    }
+}
+
+async function fetchTrainig(trainingId){
+    const response =   await fetch(`https://karadanipi-su-api.onrender.com/trainings/${trainingId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    if(response.ok){
+       
+        const data = response.json();
+        return data;
+    }else{
+        
+        return null;
+    }
 }
 
 
@@ -780,5 +856,3 @@ async function createFirstTrainingHistories(userId){
         return null;
     }
 }
-
-
