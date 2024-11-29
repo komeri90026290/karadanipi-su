@@ -490,6 +490,13 @@ function saveFood() {
 });
 }
 
+function carepage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+    window.location.href = `../sample/after_care.html?userId=${userId}`;
+  }
+
+
 function breakfastpage() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
@@ -791,8 +798,8 @@ async function initCreateData(userId) {
 
             item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
 
-                    // リストの末尾に追加
-            exerciseList.appendChild(item);
+             // リストの先頭に追加
+        exerciseList.insertBefore(item, exerciseList.firstChild);
         });
 
         console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
