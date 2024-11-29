@@ -11,6 +11,10 @@ body {
     margin-left: 110px;
 }
 
+#today {
+    font-size: 38px;
+}
+
 #newmoku {
     width: 130px; /* 幅を小さくする */
     height: 25px;
@@ -78,7 +82,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .cm {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 105px;        /*上からの位置指定*/
+    top: 173px;        /*上からの位置指定*/
     left: 140px;      /*左からの位置指定*/
     font-size: 17.5px;     /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
@@ -89,8 +93,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .kg {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
-    top: 150px;               /*上からの位置指定*/
-    left: 140px;            /*左からの位置指定*/  
+    top: 218px;               /*上からの位置指定*/
+    left: 144px;            /*左からの位置指定*/  
     font-size: 17.5px;          /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
     margin: 0; /* 外側の余白をゼロに */
