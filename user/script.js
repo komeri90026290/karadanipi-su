@@ -77,7 +77,7 @@ async function transferFoodIdToHistory(userId) {
 document.addEventListener("DOMContentLoaded", function() {
     // 今日の日付の表示
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
+    const formattedDate = `${today.getMonth() + 1}/${today.getDate()}`;
     document.getElementById('today').textContent = formattedDate;
 
     initializeChart();
@@ -91,6 +91,7 @@ function saveFoodData() {
         localStorage.setItem('text-lunch', lunch);
         const dinner = document.getElementById('text-dinner').value;
         localStorage.setItem('text-dinner', dinner);
+
 };
 
 // データベースからユーザーネームを取得してオブジェクトに変換する
@@ -445,6 +446,7 @@ function week_id() {
 function saveFood() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
+
     const savedData_breakfast = localStorage.getItem('text-breakfast');
     const savedData_lunch = localStorage.getItem('text-lunch');
     const savedData_dinner = localStorage.getItem('text-dinner');
@@ -455,6 +457,7 @@ function saveFood() {
         breakfast: savedData_breakfast,
         lunch: savedData_lunch,
         dinner: savedData_dinner,
+
     };
 
     console.log(requestData);
@@ -555,9 +558,7 @@ function GetFood() {
         const savedData_breakfast = data.breakfast; // データ構造に合わせて取得
         const savedData_lunch = data.lunch;
         const savedData_dinner = data.dinner;
-        const savebkcal = data.bkcal;
-        const savelkcal = data.lkcal;
-        const savedkcal = data.dkcal;
+
 
  
         // 取得したデータを適切な要素に表示
@@ -570,15 +571,7 @@ function GetFood() {
         if (savedData_dinner) {
             document.getElementById('text-dinner').value = savedData_dinner;
         }
-        if (savebkcal) {
-            document.getElementById('kcal-breakfast').value = savebkcal;
-        }
-        if (savelkcal) {
-            document.getElementById('kcal-lunch').value = savelkcal;
-        }
-        if (savedkcal) {
-            document.getElementById('kcal-dinner').value = savedkcal;
-        }
+
     })
     .catch(error => {
         console.error('エラー:', error);
@@ -826,9 +819,6 @@ async function createFirstFoodDate(userId){
         breakfast: '',
         lunch: '',
         dinner: '',
-        bkcal: '',
-        lkcal: '',
-        dkcal: '',
     };
     const response =  await fetch(`https://karadanipi-su-api.onrender.com/foods`, {
         method: 'POST', 
