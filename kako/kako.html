@@ -33,7 +33,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         const userId = Number(urlParams.get('userId')); // userIdを数値として取得
         console.log('取得したuserId:', userId); // ここでuserIdを確認
+        // userIdを使用してユーザーネームと過去記録を読み込む
         await loadAndDisplayuserName(userId);
+        await loadRecord(userId, currentOffset); // 初期オフセット0で過去記録を読み込む
     }
 
     
