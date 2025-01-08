@@ -779,35 +779,80 @@ async function initCreateData(userId) {
     console.log(todayFood)
     console.log(todayTrainingHistory)
 
-    for (i=0 ;i < todayTrainingHistory.trainingidlist.length; i ++) {
-       const training = await fetchTrainig(todayTrainingHistory.trainingidlist[i]);
-       todayTrainingList.push(training);
-    }
-    const exerciseList = document.getElementById('exerciseList'); // トレーニングデータを表示する要素
-
-    console.log(todayTrainingList.length);
-    if (exerciseList) {
-        exerciseList.innerHTML = ''; // 既存の内容をクリア
-
-        todayTrainingList.forEach(training => {
-            
-            const item = document.createElement('div');
-                    
-                    // reps または seconds のどちらが入っているか確認
-            const detail = training.reps ? `${training.reps} 回` : `${training.seconds} 秒`;
-
-            item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
-
+     // トレーニングデータを反映
+     for (i=0 ;i < todayTrainingHistory.trainingidlist.length; i ++) {
+        const training = await fetchTrainig(todayTrainingHistory.trainingidlist[i]);
+        todayTrainingList.push(training);
+     }
+     const exerciseList = document.getElementById('exerciseList'); // トレーニングデータを表示する要素
+ 
+     console.log(todayTrainingList.length);
+     if (exerciseList) {
+         exerciseList.innerHTML = ''; // 既存の内容をクリア
+ 
+         todayTrainingList.forEach(training => {
+             const item = document.createElement('div');
+             // reps または seconds のどちらが入っているか確認
+             const detail = training.reps ? `${training.reps} 回` : `${training.seconds} 秒`;
+             item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
+ 
              // リストの先頭に追加
-        exerciseList.insertBefore(item, exerciseList.firstChild);
-        });
+             exerciseList.insertBefore(item, exerciseList.firstChild);
+ 
+             // 各部位に色をつける処理
+             changeColorForPart(training.part, training.sets);
+         });
+ 
+         console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
+     } else {
+         console.error("exerciseList 要素が見つかりません。");
+     }
+ }
+ // 事前に計算された `totalTimeOrReps` を使用
+ const totaltimeorreps = training.totaltimeorreps;
+ 
+ function changeColorForPart(part, totaltimeorreps) {
+    let color;
 
-        console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
-    } else {
-        console.error("exerciseList 要素が見つかりません。");
+    // totalTimeOrReps に基づいて色を変更 (4段階)
+    if (totaltimeorreps > 30) {
+        color = 'rgba(255, 0, 0, 0.2)'; // 薄い赤
+    } else if (totaltimeorreps > 60) {
+        color = 'rgba(255, 0, 0, 0.4)'; // 少し濃い赤
+    } else if (totaltimeorreps > 90) {
+        color = 'rgba(255, 0, 0, 0.6)'; // 中間の赤
+    } else if (totaltimeorreps > 120) {
+        color = 'rgba(255, 0, 0, 0.8)'; // 濃い赤
+    } 
+
+    // 部位ごとに色を適用
+    switch (part) {
+        case '右腕':
+            document.getElementById('rightarms').style.fill = color; // 右腕
+            break;
+        case '左腕':
+            document.getElementById('leftArm').style.fill = color; // 左腕
+            break;
+        case '胸筋':
+            document.getElementById('chest').style.fill = color; // 胸筋
+            break;
+        case '腹筋':
+            document.getElementById('abs').style.fill = color; // 腹筋
+            break;
+        case '右脚':
+            document.getElementById('rightlegs').style.fill = color; // 右脚
+            break;
+        case '左脚':
+            document.getElementById('leftlegs').style.fill = color; // 左脚
+            break;
+        case '頭':
+            document.getElementById('head').style.fill = color; // 頭
+            break;
+        default:
+            console.log('Unknown part: ' + part);
+            break;
     }
 }
-
 async function fetchTrainig(trainingId){
     const response =   await fetch(`https://karadanipi-su-api.onrender.com/trainings/${trainingId}`, {
         method: 'GET',
@@ -824,7 +869,6 @@ async function fetchTrainig(trainingId){
         return null;
     }
 }
-
 
 
 
