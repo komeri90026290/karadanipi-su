@@ -9,6 +9,15 @@
 </head>
 
 <body>
+    <div id="record-container">
+        <h2>過去記録</h2>
+        <div id="history-details">
+          <!-- 動的に内容を表示 -->
+        </div>
+        <button id="prev-button">前の記録</button>
+        <button id="next-button">次の記録</button>
+      </div>
+      
 
     <!--ユーザーネーム表示-->
     <div id="username"></div>
@@ -24,8 +33,12 @@
         const urlParams = new URLSearchParams(window.location.search);
         const userId = Number(urlParams.get('userId')); // userIdを数値として取得
         console.log('取得したuserId:', userId); // ここでuserIdを確認
+        // userIdを使用してユーザーネームと過去記録を読み込む
         await loadAndDisplayuserName(userId);
+        await loadRecord(userId, currentOffset); // 初期オフセット0で過去記録を読み込む
     }
+
+    
     </script>
 </body>
 
