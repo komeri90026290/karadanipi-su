@@ -21,7 +21,9 @@
                     <option value="右脚" id="rightlegs">右脚</option>
                     <option value="左脚" id="leftlegs">左脚</option>
                 </select>
- 
+
+                <!-- トレーニング入力欄 -->
+
                 <p><label for="tore"></label> <input type="text" id="tore" name="tore" placeholder="トレーニング内容"></p>
  
                 <div class="byou">
@@ -51,7 +53,8 @@
     </div>
  
     <script>
-
+        
+        //入力されたものをテーブルに保存
         document.getElementById('trainingForm').onsubmit = async function (event) {
             event.preventDefault();
 
