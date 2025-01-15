@@ -800,13 +800,13 @@ async function initCreateData(userId) {
     let color;
 
     // totalTimeOrReps に基づいて色を変更 (4段階)
-    if (totaltimeorreps > 30) {
+    if (totaltimeorreps >= 30) {
         color = 'rgba(255, 0, 0, 0.2)'; // 薄い赤
-    } else if (totaltimeorreps > 60) {
+    } else if (30 < totaltimeorreps >= 60) {
         color = 'rgba(255, 0, 0, 0.4)'; // 少し濃い赤
-    } else if (totaltimeorreps > 90) {
+    } else if (60 <totaltimeorreps >= 90) {
         color = 'rgba(255, 0, 0, 0.6)'; // 中間の赤
-    } else if (totaltimeorreps > 120) {
+    } else if (90 < totaltimeorreps) {
         color = 'rgba(255, 0, 0, 0.8)'; // 濃い赤
     } 
 
