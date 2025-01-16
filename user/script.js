@@ -734,78 +734,101 @@ async function initCreateData(userId) {
     } catch (error) {
         console.error('Error init Food data:', error);
     }
+    
+// 部位ごとの合計値を保持するオブジェクト
+const partTotals = {};
 
-    try {
-        const response = await fetch(`https://karadanipi-su-api.onrender.com/traininghistories/recent/${userId}`, {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        if (response.ok) {
-            console.log(response.status)
-            todayTrainingHistory = await response.json();
-        }else{
-            console.log('response.status')
-            console.log(response.status)
-            console.log('トレーニングヒストリーデータなし')
-            todayTrainingHistory = createFirstTrainingHistories(userId);              
+// 最新のトレーニング履歴をAPIから取得
+try {
+    const response = await fetch(`https://karadanipi-su-api.onrender.com/traininghistories/recent/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
         }
-
-    } catch(error){
-        console.error('Error init traininghistories data:', error);
+    });
+    if (response.ok) {
+        console.log(response.status); // レスポンスステータスをログに出力
+        todayTrainingHistory = await response.json(); // トレーニング履歴データを取得
+    } else {
+        console.log('response.status');
+        console.log(response.status); // エラー時のステータスをログに出力
+        console.log('トレーニングヒストリーデータなし');
+        todayTrainingHistory = createFirstTrainingHistories(userId); // 初回データを作成
     }
+} catch (error) {
+    console.error('Error init traininghistories data:', error); // エラーをキャッチしてログ出力
+}
 
-    console.log(todayFood)
-    console.log(todayTrainingHistory)
+console.log(todayTrainingHistory); // トレーニング履歴の中身を確認
 
-     // トレーニングデータを反映
-     for (i=0 ;i < todayTrainingHistory.trainingidlist.length; i ++) {
-        const training = await fetchTrainig(todayTrainingHistory.trainingidlist[i]);
-        todayTrainingList.push(training);
-     }
-     const exerciseList = document.getElementById('exerciseList'); // トレーニングデータを表示する要素
- 
-     console.log(todayTrainingList.length);
-     if (exerciseList) {
-         exerciseList.innerHTML = ''; // 既存の内容をクリア
- 
-         todayTrainingList.forEach(training => {
-             const item = document.createElement('div');
-             // reps または seconds のどちらが入っているか確認
-             const detail = training.reps ? `${training.reps} 回` : `${training.seconds} 秒`;
-             item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
- 
-             // リストの先頭に追加
-             exerciseList.insertBefore(item, exerciseList.firstChild);
- 
-             // 各部位に色をつける処理
-             changeColorForPart(training.part, training.sets);
-         });
- 
-         console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
-     } else {
-         console.error("exerciseList 要素が見つかりません。");
-     }
- }
- // 事前に計算された `totalTimeOrReps` を使用
- const totaltimeorreps = training.totaltimeorreps;
- 
- function changeColorForPart(part, totaltimeorreps) {
+// トレーニングIDリストを基にトレーニングデータを取得
+for (let i = 0; i < todayTrainingHistory.trainingidlist.length; i++) {
+    const training = await fetchTrainig(todayTrainingHistory.trainingidlist[i]);
+    todayTrainingList.push(training); // 取得したトレーニングデータをリストに追加
+}
+
+// 各トレーニングの `totaltimeorreps` を計算し、部位ごとに合算
+todayTrainingList.forEach(training => {
+    // secondsが存在する場合は秒数に基づいた計算、存在しない場合はrepsを基に計算
+    const totaltimeorreps = training.seconds
+        ? (training.seconds * training.sets) / 2
+        : training.reps * training.sets;
+
+    // 部位ごとに合算
+    if (partTotals[training.part]) {
+        partTotals[training.part] += totaltimeorreps; // 既存値に加算
+    } else {
+        partTotals[training.part] = totaltimeorreps; // 初回値を設定
+    }
+});
+
+// 合算後の各部位に対して色を適用
+Object.keys(partTotals).forEach(part => {
+    const totalForPart = partTotals[part]; // 合算された値
+    changeColorForPart(part, totalForPart); // 色付け
+});
+
+const exerciseList = document.getElementById('exerciseList'); // トレーニングデータを表示する要素を取得
+
+if (exerciseList) {
+    exerciseList.innerHTML = ''; // 既存の表示内容をクリア
+
+    todayTrainingList.forEach(training => {
+        // 表示用のトレーニング情報を生成
+        const item = document.createElement('div');
+        const detail = training.reps ? `${training.reps} 回` : `${training.seconds} 秒`; // 表示内容をセット
+        item.textContent = `${training.part}: ${training.exercise} - ${detail} × ${training.sets} セット`;
+
+        // トレーニングデータをリストに追加
+        exerciseList.insertBefore(item, exerciseList.firstChild);
+
+        // トレーニング部位に応じた色付けを実施
+        // ここでも合算された色を更新するために`partTotals`を使って色を適用
+        const totalForPart = partTotals[training.part];
+        changeColorForPart(training.part, totalForPart);
+    });
+
+    console.log(`ユーザーID ${userId} のトレーニングデータが表示されました。`);
+} else {
+    console.error("exerciseList 要素が見つかりません。"); // エラー時のログ出力
+}
+
+// 部位に色を付ける関数
+function changeColorForPart(part, totaltimeorreps) {
     let color;
 
-    // totalTimeOrReps に基づいて色を変更 (4段階)
-    if (totaltimeorreps >= 30) {
+    // トレーニング量に基づいて色の濃さを決定 (4段階)
+    if (totaltimeorreps < 30) {
         color = 'rgba(255, 0, 0, 0.2)'; // 薄い赤
-    } else if (30 < totaltimeorreps >= 60) {
+    } else if (totaltimeorreps >= 30 && totaltimeorreps < 60) {
         color = 'rgba(255, 0, 0, 0.4)'; // 少し濃い赤
-    } else if (60 <totaltimeorreps >= 90) {
+    } else if (totaltimeorreps >= 60 && totaltimeorreps < 90) {
         color = 'rgba(255, 0, 0, 0.6)'; // 中間の赤
-    } else if (90 < totaltimeorreps) {
+    } else if (totaltimeorreps >= 90) {
         color = 'rgba(255, 0, 0, 0.8)'; // 濃い赤
-    } 
+    }
 
-    // 部位ごとに色を適用
+    // 部位ごとのSVG要素に色を適用
     switch (part) {
         case '右腕':
             document.getElementById('rightarms').style.fill = color; // 右腕
@@ -829,9 +852,10 @@ async function initCreateData(userId) {
             document.getElementById('head').style.fill = color; // 頭
             break;
         default:
-            console.log('Unknown part: ' + part);
+            console.log('Unknown part: ' + part); // 想定外の部位をログ出力
             break;
     }
+}   
 }
 async function fetchTrainig(trainingId){
     const response =   await fetch(`https://karadanipi-su-api.onrender.com/trainings/${trainingId}`, {
