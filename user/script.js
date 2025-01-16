@@ -478,6 +478,7 @@ function saveFood() {
     })
     .then(response => response.json())
     .then(data => {
+        alert(alertMessage); // アラートをわかりやすく表示
         console.log('サーバーからの応答:', data);
     })
     .catch(error => {
