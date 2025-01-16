@@ -202,11 +202,19 @@ select:focus {
     text-indent: -350px;    /* テキスト部分を左に少し移動 */
     border: 1px solid #ddd;
     list-style-type: none;
-    
   }
 
-#FoodList li a {
-    text-align: left !important; /* 強制的に左寄せ */
+  #FoodList li .user-info {
+    display: flex; /* 横並びに配置 */
+    font-size: 20px; /* ユーザーネームと日付のフォントサイズを調整 */
 }
 
-  
+#FoodList li .meal-info {
+    position: relative;   
+    display: flex;          /* 横並びに配置 */
+    flex-direction: column; /* 上から下に配置 */
+    gap: 10px;              /* 各食事情報間のスペース */
+    font-size: 20px;         /* 食事情報のフォントサイズ */
+    text-align: right;       /* 右寄せ */
+    margin-top: 20px;        /* ユーザー名と日付の下にスペースを追加 */
+}
