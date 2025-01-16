@@ -59,6 +59,7 @@ async function transferFoodIdToHistory(userId) {
       if (response.ok) {
         const data = await response.json();
         console.log('サーバーからの応答:', data);
+        alert(data.message); // 成功メッセージをアラートで表示
       } else {
         const errorData = await response.json();
         alert('エラー: ' + errorData.error); // エラーメッセージを表示
