@@ -94,12 +94,20 @@
             data.forEach(Food => {
               const listItem = document.createElement('li');
               const username = UserData[Food.userid] || '不明なユーザー';
-              listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
+              // created_atの日付部分だけを抽出する
+              const createdDate = Food.created_at ? Food.created_at.split('T')[0] : '日付なし';
+              listItem.innerHTML = `
+                      <div class="user-info">
+                          ユーザー名: ${username} | 日付: ${createdDate}<br>
+                      </div>
+                      <div class="meal-info">
+                          | 朝食: ${Food.breakfast}<br> 
+                          | 昼食: ${Food.lunch}<br> 
+                          | 夕食: ${Food.dinner}
+                      </div>`;
+
               listItem.classList.add('Foodset');
-
               listItem.style.textAlign = 'left';  // 左寄せ
-
-              
               FoodList.appendChild(listItem);
             });
           }
