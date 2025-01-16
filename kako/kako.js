@@ -42,7 +42,7 @@ async function loadRecord(userId,offset) {
 function displayRecord(data) {
   const container = document.getElementById('history-details');
   container.innerHTML = `
-    <p><strong>日付:</strong> ${data.history.created_at}</p>
+    <p><strong>日付:</strong> ${data.history.created_at.split('T')[0]}</p>
     <p><strong>体重:</strong> ${data.history.weight || '記録なし'} kg</p>
     <p><strong>朝食:</strong> ${data.food.breakfast || '記録なし'}</p>
     <p><strong>昼食:</strong> ${data.food.lunch || '記録なし'}</p>
