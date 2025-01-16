@@ -77,7 +77,6 @@ async function updateTrainingHistories(userId, trainingData) {
 
         if (response.ok) {
             console.log('トレーニング履歴更新成功');
-            alert('トレーニング履歴が更新されました。');
         } else {
             console.error('トレーニング履歴更新失敗:', response.status);
             alert('トレーニング履歴の更新に失敗しました。');
