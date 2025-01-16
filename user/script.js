@@ -30,7 +30,6 @@ async function transferTorehisIdToHistory(userId) {
       // レスポンスが正常の場合
       if (response.ok) {
         const data = await response.json();
-        alert(data.message); // 成功メッセージをアラートで表示
         console.log('サーバーからの応答:', data);
       } else {
         const errorData = await response.json();
@@ -59,7 +58,6 @@ async function transferFoodIdToHistory(userId) {
       // レスポンスが正常の場合
       if (response.ok) {
         const data = await response.json();
-        alert(data.message); // 成功メッセージをアラートで表示
         console.log('サーバーからの応答:', data);
       } else {
         const errorData = await response.json();
@@ -317,7 +315,6 @@ async function addTodayHistory(userId) {
       if (response.ok) {
         const result = await response.json();
         console.log(`API成功: ${result.message}`);
-        alert(result.message); // 結果をユーザーに通知
       } else {
         const error = await response.json();
         console.error(`APIエラー: ${error.error}`);
@@ -481,7 +478,6 @@ function saveFood() {
     })
     .then(response => response.json())
     .then(data => {
-        alert(alertMessage); // アラートをわかりやすく表示
         console.log('サーバーからの応答:', data);
     })
     .catch(error => {
@@ -708,7 +704,6 @@ function saveData() {
             .then(response => response.json())
             .then(data => {
                 console.log('履歴が保存されました:', data);
-                alert('身長と体重が履歴に保存されました！');
             })
             .catch(error => {
                 console.error('履歴の保存エラー:', error);
