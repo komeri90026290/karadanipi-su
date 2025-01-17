@@ -12,6 +12,16 @@
     gap:200px;
 }
 
+
+
+.resize-image {
+    position: absolute;
+    width: 60px; /* 幅を200ピクセルに設定 */
+    height: 60px; /* 高さを100ピクセルに設定 */
+    left: 12px;
+    top: -6px;
+  }
+
 .rear {            /* もどるボタン */
     position: absolute;
     border: none; /*ボーダーなし */
@@ -19,8 +29,8 @@
     cursor: pointer; /* ポインターを表示 */
     font-size: 16px; /* フォントサイズ */
     margin-top: 120px;
-    bottom: 480px;
-    left: 1100px;
+    bottom: 460px;
+    left: 1150px;
     width: 80px; /* もどるボタンの幅 */
     height: 50px; /* もどるボタンの高さ */
     background-color: #f3efef; 
@@ -45,7 +55,7 @@
 .bfimage {       /*納豆ご飯画像*/
     position:absolute;
     left:850px;
-    bottom:250px;
+    bottom:215px;
 }
 
 .bfimage2 {       /*温泉卵*/
@@ -69,7 +79,7 @@
 .luimage {       /*サラダチキン*/
     position:absolute;
     left:866px;
-    bottom:260px;
+    bottom:215px;
 }
 
 .luimage3 {      /*肉サラダ*/
@@ -81,7 +91,7 @@
 .diimage {       /*ポトフ*/
     position:absolute;
     left:940px;
-    bottom:250px;
+    bottom:215px;
 }
 
 .diimage2 {     /*餃子*/
