@@ -1,3 +1,8 @@
+body {
+    display: flex; /* ボディ全体をフレックスコンテナに */
+    font-family: Arial, sans-serif; /* フォント設定 */
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/    
+}
 .text {
     padding-left:10em;
 }
@@ -54,61 +59,61 @@
 
 .bfimage {       /*納豆ご飯画像*/
     position:absolute;
-    left:850px;
+    left: 735px;
     bottom:215px;
 }
 
 .bfimage2 {       /*温泉卵*/
     position:absolute;
-    left:851px;
+    left:735px;
     top:430px;
 }
 
 .bfimage3 {       /*ツナチーズトースト*/
     position:absolute;
-    left:880px;
+    left:735px;
     top: 710px;
 }
 
 .bfimage4 {       /*ヨーグルト*/
     position:absolute;
-    left:880px;
+    left:735px;
     top: 1000px;
 }
 
 .luimage {       /*サラダチキン*/
     position:absolute;
-    left:866px;
+    left:735px;
     bottom:215px;
 }
 
 .luimage3 {      /*肉サラダ*/
     position:absolute;
-    left:896px;
+    left: 775px;
     top:720px;
 }
 
 .diimage {       /*ポトフ*/
     position:absolute;
-    left:940px;
+    left:820px;
     bottom:215px;
 }
 
 .diimage2 {     /*餃子*/
     position:absolute;
-    left:890px;
+    left:770px;
     top:440px;
 }
 
 .diimage3 {     /*うどんげ*/
     position:absolute;
-    left:840px;
+    left:740px;
     top:710px;
 }
 
 .diimage4 {     /*生姜焼き*/
     position:absolute;
-    left:870px;
+    left:735px;
     top:984px;
 }
 
