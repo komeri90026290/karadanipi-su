@@ -13,6 +13,11 @@ body {
 
 #today {
     font-size: 38px;
+    font-weight: bold;
+    color: #00ffc3;  /* ミントっぽい青色 */
+    text-align: center;  /* テキストの中央寄せ */
+    margin-bottom: 20px;  /* 上下マージンを追加 */
+    text-shadow: 0 0 5px rgba(0, 255, 195, 0.5);  /* 外側の縁取り */
 }
 
 #newmoku {
@@ -131,20 +136,23 @@ input[type="number"]::-webkit-inner-spin-button {
  
 /* 目標欄*/
 /* 表示用のスタイル */
+/* 目標欄 */
 #mokuhyou {
     border: none; /* ボーダーなし */
     border-radius: 10px; /* 角を丸くする */
     display: inline-block; /* 幅と高さを指定可能に */
-    width: 700px;
-    font-size: 35px;
+    width: 700px;  /* 幅を広げる */
+    font-size: 35px;  /* フォントサイズを大きくする */
     text-align: center;
-    box-shadow: 0 0 8px gray;
+    box-shadow: 0 4px 12px rgba(53, 249, 155, 0.1); /* グレーの柔らかな影 */
     margin-top: 20px;
-    padding: 10px;
-    background-color: #f9f9f9; /* 背景色を設定（任意） */
-    color: #333; /* 文字色（任意） */
-  }
-  
+    padding: 20px;  /* パディングを広げる */
+    background-color: #ffffff; /* 白背景 */
+    color: #333; /* 文字色 */
+    font-weight: bold; /* 太文字にする */
+    border: 2px solid #cef1eb; /* ミントグリーンのボーダー */
+}
+
  
 #moku-keep {
     width: 90px;
