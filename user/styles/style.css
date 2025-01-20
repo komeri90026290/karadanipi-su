@@ -24,13 +24,41 @@ body {
     border-radius: 4px; /* 角を丸くする */
 }
 
-input[type="number"]{
-    width: 100px; /* 幅を小さくする */
-    padding: 5px; /* パディングを追加 */
-    font-size: 14px; /* フォントサイズを小さくする */
-    border: 1px solid #ccc; /* ボーダーのスタイル */
-    border-radius: 4px; /* 角を丸くする */
+input[type="text"] {
+    width: 150px;  /* 幅を維持 */
+    padding: 5px;  /* パディング */
+    font-size: 14px;  /* フォントサイズ */
+    border: none;  /* 枠をなしにする */
+    border-radius: 6px;  /* 角を少し丸くする */
+    background-color: #f9f9f9;  /* 透け感のある背景 */
+    transition: box-shadow 0.2s ease;  /* 効果的な動き */
 }
+
+input[type="text"]:focus {
+    background-color: #FFFEFE;  /* フォーカス時の背景色変更 */
+    box-shadow: 0 2px 10px rgba(0, 0, 255, 0.2);  /* クリック時の影 */
+    outline: none;  /* フォーカス時の境界線を取り除く */
+}
+
+
+
+input[type="number"] {
+    width: 100px;  /* 幅を維持 */
+    padding: 5px;  /* パディング */
+    font-size: 14px;  /* フォントサイズ */
+    border: none;  /* 枠をなしにする */
+    border-radius: 6px;  /* 角を少し丸くする */
+    background-color: #f9f9f9;  /* 透け感のある背景 */
+    transition: box-shadow 0.2s ease;  /* 効果的な動き */
+}
+
+input[type="number"]:focus {
+    background-color: #FFFEFE;  /* フォーカス時の背景色変更 */
+    box-shadow: 0 2px 10px rgba(0, 0, 255, 0.2);  /* クリック時の影 */
+    outline: none;  /* フォーカス時の境界線を取り除く */
+}
+
+
  
 .sidebar {
     padding: 20px; /* パディングを追加 */
@@ -306,47 +334,32 @@ input[type="number"]::-webkit-inner-spin-button {
         background-color: #FFEA81; /* ボタンの背景色 */
         box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
     }
- 
-    /* 格子スタイルのテキストエリア */
-#text-breakfast {
-    width: 26%; /* 全幅にする */
-    height: 100px; /* 高さを調整 */
-    padding: 2px;
-    font-size: 14px;
-    line-height: 24px; /* 横線の間隔 */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none; /* サイズ変更を無効化 */
-   
-}
- 
- 
- 
-/* 格子スタイルのテキストエリア */
-#text-lunch {
-    width: 26%; /* 全幅にする */
-    height: 100px; /* 高さを調整 */
-    padding:2px;
-    font-size: 14px;
-    line-height: 24px; /* 横線の間隔 */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none; /* サイズ変更を無効化 */
-   
-}
- 
-/* 格子スタイルのテキストエリア */
-#text-dinner {
-    width: 26%; /* 全幅にする */
-    height: 100px; /* 高さを調整 */
-    padding: 2px;
-    font-size: 15px;
-    line-height: 24px; /* 横線の間隔 */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none; /* サイズ変更を無効化 */
-   
-}
+
+    .food-input {
+        margin-top: 60px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+    
+    textarea {
+        width: calc(33.33% - 15px);
+        height: 100px;
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid rgba(0, 0, 255, 0.2); /* 柔らかい青色の枠 */
+        border-radius: 8px;
+        resize: none;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    textarea:focus {
+        background-color: #FfFEFE;  /* フォーカス時の背景色変更 */
+        box-shadow: 0 2px 10px rgba(0, 0, 255, 0.2);  /* クリック時の影 */
+        outline: none;  /* フォーカス時の境界線を取り除く */
+    }
+    
+
  
 .goha{
     display: flex;
@@ -399,10 +412,7 @@ input[type="number"]::-webkit-inner-spin-button {
     gap: 112px; /*間の幅の大きさ指定*/
 }
  
-.food-input{
-    margin-top: 60px;
-    width: 40;
-}
+
  
 /*登録ボタン用のCSS*/
 #submit {
@@ -413,10 +423,10 @@ input[type="number"]::-webkit-inner-spin-button {
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 1500px;        /*上からの位置指定*/
-    left: 925px;      /*左からの位置指定*/
+    top: 1530px;        /*上からの位置指定*/
+    left: 1030px;      /*左からの位置指定*/
     font-size: 17.5px; /*文字の大きさ指定*/
-    padding: 10px 18px; /*内側の余白の大きさ*/
+    padding: 17px 40px; /*内側の余白の大きさ*/
     background-color: #ffea81; /*ボタンの色を指定*/
     color: black; /*文字の色指定*/
     cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
