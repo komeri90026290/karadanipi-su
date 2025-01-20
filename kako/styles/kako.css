@@ -118,3 +118,27 @@ button:hover {
     margin-right: 300px;
 }
   
+
+/* Base styles for buttons */
+button, input[type="submit"], .con, .care, .tr {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* 枠線なし */
+    border-radius: 10px; /* 角丸 */
+    cursor: pointer; /* ホバー時にカーソル */
+    font-size: 16px; /* フォントサイズ */
+    background-color: #FFEA81; /* 背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out; /* 滑らかなエフェクトのトランジション */
+}
+
+/* Hover state for buttons */
+button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
+    transform: scale(1.05); /* 少し拡大 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* シャドウを強調 */
+}
+
+/* Active state for buttons */
+button:active, input[type="submit"]:active, .con:active, .care:active, .tr:active {
+    transform: translateY(5px); /* 下方向に移動 */
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4); /* シャドウを調整 */
+}
