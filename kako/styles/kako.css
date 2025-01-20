@@ -4,25 +4,19 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-    position: relative;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between; /* 中央寄せのために追加 */
+    height: 100vh;
 }
 
-/* 見出しと日付 */
+/* 見出し */
 h2 {
     font-size: 28px;
     margin: 10px 0 5px;
     color: #333;
     text-align: center;
-}
-
-#record-date {
-    font-size: 20px;
-    color: #666;
-    margin-bottom: 15px;
 }
 
 /* ボタンのスタイル */
@@ -43,7 +37,7 @@ button:hover {
 
 /* 左右矢印ボタン */
 #prev-button, #next-button {
-    position: absolute;
+    position: fixed; /* 親要素からの相対位置にするためfixedに変更 */
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
@@ -67,54 +61,84 @@ button:hover {
     right: 10px;
 }
 
-/* 左上の白い箱（朝昼晩の食事） */
-#meal-box {
-    position: absolute;
-    top: 70px;
-    left: 20px;
-    width: 300px;
-    height: 250px;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+/* スクロール可能なリスト */
+.scrollable-memo {
+    max-height: 400px; /* 高さを固定 */
+    overflow-y: scroll; /* 縦スクロールを有効にする */
+    width: 100%;
+}
+
+/* ユーザーネーム表示 */
+#username {
+    font-size: 18px;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* レコード表示エリア */
+#record-container {
+    width: 100%;
+    max-width: 600px; /* 幅を最大600pxに設定 */
+    padding: 10px;
     text-align: center;
 }
 
-#meal-box h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+/* トレーニング履歴表示 */
+#exerciseList {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.meal-item {
-    margin: 5px 0;
-    font-size: 16px;
+/* rearボタン */
+/* 戻るボタン */
+#rear {
+    position: fixed;  /* 画面に固定 */
+    top: 10px;        /* 上からの距離 */
+    right: 10px;      /* 右からの距離 */
+    cursor: pointer;
+    z-index: 100;     /* 他の要素の下に隠れないように */
+    width: 60px;      /* ボタンの幅 */
+    height: 50px;     /* ボタンの高さ */
+}
+
+.weight-info {
+    font-size: 30px;
+    font-weight: bold;
     color: #333;
+    margin-left: 650px;   /* 左にスペースを追加 */
 }
 
-/* 右下の白い箱（トレーニング記録） */
-#training-box {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 300px;
-    height: 200px;
-    background-color: #ffffff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
+.meal-info {
+    font-size: 25px; /* サイズを少し大きく */
+    margin-right: 300px;
+}
+  
+
+/* Base styles for buttons */
+button, input[type="submit"], .con, .care, .tr {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* 枠線なし */
+    border-radius: 10px; /* 角丸 */
+    cursor: pointer; /* ホバー時にカーソル */
+    font-size: 16px; /* フォントサイズ */
+    background-color: #FFEA81; /* 背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out; /* 滑らかなエフェクトのトランジション */
 }
 
-#training-box h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+/* Hover state for buttons */
+button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
+    transform: scale(1.05); /* 少し拡大 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* シャドウを強調 */
 }
 
-.training-item {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #333;
+/* Active state for buttons */
+button:active, input[type="submit"]:active, .con:active, .care:active, .tr:active {
+    transform: translateY(5px); /* 下方向に移動 */
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4); /* シャドウを調整 */
 }
