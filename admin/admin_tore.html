@@ -33,90 +33,117 @@
             <option value="desc">降順</option>
         </select>
 
-        <!-- 食事リスト -->
+        <!-- トレーニングリスト -->
         <ul id="ToreList"></ul>
- 
-        <!-- JSのコード部分 -->
-        <script>
+    </nav>
 
-          // ページが読み込まれた際にデータを取得する
-          window.onload = function() {
-          // usersデータとfoodsデータを順番に取得
-          fetchUsers().then(fetchTore);
-          };
+    <script>
+        let ToreData = []; // トレーニングデータを一時的に保存する変数
+        let UserData = {}; // ユーザーデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
 
-          let ToreData = []; // toreデータを一時的に保存する変数
-          let UserData = {}; // userデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
- 
-          // ユーザーデータを取得
-          function fetchUsers() {
+        // ユーザーデータを取得
+        function fetchUsers() {
             return fetch('https://karadanipi-su-api.onrender.com/users')
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('ネットワークのエラーが発生しました');
-                }
-                return response.json();
-              })
-              .then(data => {
-                data.forEach(user => {
-                  UserData[user.userid] = user.username; // ユーザーIDをキーにusernameを保存
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('ネットワークのエラーが発生しました');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(user => {
+                        UserData[user.userid] = user.username; // ユーザーIDをキーに保存
+                    });
+                })
+                .catch(error => {
+                    console.error('ユーザーデータ取得エラー:', error);
+                    alert('ユーザーデータの取得に失敗しました');
                 });
-              })
-              .catch(error => {
-                console.error('ユーザーデータ取得エラー:', error);
-                alert('ユーザーデータの取得に失敗しました');
-              });
-          }
- 
-          // トレーニングデータを取得
-          function fetchTore() {
-            return fetch('https://karadanipi-su-api.onrender.com/trainings')
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('ネットワークのエラーが発生しました');
-                }
-                return response.json();
-              })
-              .then(data => {
-                ToreData = data; // toreデータを保存
-                renderToreList(ToreData); // 初期表示
-              })
-              .catch(error => {
-                console.error('データ取得エラー:', error);
-                alert('とれデータの取得に失敗しました');
-              });
-          }
+        }
 
-          // データを表示する関数
-          function renderToreList(data) {
+        // トレーニングデータを取得
+        function fetchTore() {
+            return fetch('https://karadanipi-su-api.onrender.com/trainings')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('ネットワークのエラーが発生しました');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    ToreData = data; // トレーニングデータを保存
+                    groupAndRenderToreList(ToreData); // グループ化して表示
+                })
+                .catch(error => {
+                    console.error('データ取得エラー:', error);
+                    alert('トレーニングデータの取得に失敗しました');
+                });
+        }
+
+        // ページが読み込まれた際にデータを取得
+        window.onload = function () {
+            fetchUsers().then(fetchTore);
+        };
+
+        // データをグループ化して表示する関数
+        function groupAndRenderToreList(data) {
+            // グループ化
+            const groupedData = data.reduce((acc, Tore) => {
+                const username = UserData[Tore.userid] || '不明なユーザー';
+                const date = Tore.created_at ? Tore.created_at.split('T')[0] : '日付なし'; // 日付取得
+                const key = `${username}-${date}`; // ユーザー名と日付でキー生成
+
+                if (!acc[key]) {
+                    acc[key] = { username, date, exercises: [] };
+                }
+                acc[key].exercises.push(Tore); // トレーニングデータを追加
+                return acc;
+            }, {});
+
+            renderGroupedToreList(Object.values(groupedData)); // グループ化したデータを表示
+        }
+
+        // グループ化されたデータを表示する関数
+        function renderGroupedToreList(groupedData) {
             const ToreList = document.getElementById('ToreList');
             ToreList.innerHTML = ''; // リストを初期化
- 
-            data.forEach(Tore => {
-              const listItem = document.createElement('li');
-              const username = UserData[Tore.userid] || '不明なユーザー';
-              listItem.innerHTML = `ユーザー名: ${username}<br> ${Tore.part} : ${Tore.exercise} :${Tore.sets}セット `;
-              listItem.classList.add('Toreset');
 
-              listItem.style.textAlign = 'left';  // 左寄せ
+            groupedData.forEach(group => {
+                // ユーザー名と日付のヘッダー
+                const headerItem = document.createElement('li');
+                headerItem.textContent = `ユーザー名: ${group.username} | 日付: ${group.date}`;
+                headerItem.classList.add('header-item');
+                headerItem.style.fontWeight = 'bold';
+                headerItem.style.marginTop = '20px';
 
-              
-              ToreList.appendChild(listItem);
+                ToreList.appendChild(headerItem);
+
+                // トレーニング内容をリストアップ
+                group.exercises.forEach(Tore => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        部位: ${Tore.part || '未設定'}<br>
+                        エクササイズ: ${Tore.exercise || '未設定'}<br>
+                        セット数: ${Tore.sets || '未設定'}セット
+                    `;
+                    listItem.classList.add('exercise-item');
+                    listItem.style.paddingLeft = '20px'; // インデントを追加
+
+                    ToreList.appendChild(listItem);
+                });
             });
-          }
- 
-          // 並び替え用の関数
-          function sortArray() {
+        }
+
+        // 並び替え用の関数
+        function sortArray() {
             const sortOption = document.getElementById('sortOption').value;
             const sortedData = [...ToreData].sort((a, b) => {
-              const dateA = new Date(a.created_at);
-              const dateB = new Date(b.created_at);
-              return sortOption === 'asc' ? dateA - dateB : dateB - dateA;
+                const dateA = new Date(a.created_at);
+                const dateB = new Date(b.created_at);
+                return sortOption === 'asc' ? dateA - dateB : dateB - dateA;
             });
-            renderToreList(sortedData); // 並び替えたデータで表示を更新
-          }
- 
-        </script>
-    </nav>
+            groupAndRenderToreList(sortedData); // 並び替えたデータで表示を更新
+        }
+    </script>
 </body>
 </html>
