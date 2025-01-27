@@ -3,7 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    font-family: Arial, sans-serif; /* フォント設定 */
+    background: linear-gradient(#F1FEFE, #FFFFFF);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,8 +79,7 @@ button:hover {
 /* レコード表示エリア */
 #record-container {
     width: 100%;
-    max-width: 600px; /* 幅を最大600pxに設定 */
-    padding: 10px;
+     /* 幅を最大600pxに設定 */
     text-align: center;
 }
 
@@ -101,20 +101,123 @@ button:hover {
     top: 10px;        /* 上からの距離 */
     right: 10px;      /* 右からの距離 */
     cursor: pointer;
+    
     z-index: 100;     /* 他の要素の下に隠れないように */
-    width: 60px;      /* ボタンの幅 */
+    width: 80px;      /* ボタンの幅 */
     height: 50px;     /* ボタンの高さ */
 }
 
-.weight-info {
-    font-size: 30px;
+.resize-image {
+    position: absolute;
+    width: 60px; /* 幅を200ピクセルに設定 */
+    height: 60px; /* 高さを100ピクセルに設定 */
+    left: 12px;
+    top: -6px;
+  }
+
+.created-at {
+    position: absolute;
     font-weight: bold;
+    font-size: 26px;
+    margin-top: -20px;
+    margin-left: 566px;
+}
+
+.weight-info {
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 130px;
     color: #333;
-    margin-left: 650px;   /* 左にスペースを追加 */
+    text-align: right;
+    padding-right:280px;
 }
 
 .meal-info {
     font-size: 25px; /* サイズを少し大きく */
-    margin-right: 300px;
+    Display: flex;
+    right: 40px;
+    flex-flow: column;
+    text-align: left;
+    padding-left: 150px;
+    vertical-align: top;
+    width: 200px;
 }
-  
+
+.training-info {
+    padding-left: 600px;
+    max-height: 0.3px;
+    position: right;
+    font-size: large;
+    display:flex;
+    flex-flow:column;
+    transform:translateY(100%);
+    padding-bottom: 40px;
+}
+
+.design-box-1 {
+    position: absolute;
+    margin: 2em auto;
+  padding: 1em 1em 1em;
+  background-color: #fff; /* 背景色設定 */
+  color: #000000; /* 文字色設定 */
+  font-weight: bold; /* 文字の太さ */
+  border: 5px solid #C0C0C0; /* 枠線設定 */
+  border-radius: 3px; /* 角の丸み設定 */
+  box-shadow: 0 0 8px #333, 0 0 2px #555 inset; /* ボックスの影（外側、内側） */
+    z-index: -1;
+    width: 200px;
+    height: 80px;
+    padding: 10px 20px;
+    margin: 4px;
+    
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px gray;
+    cursor: pointer; /* ポインターを表示 */
+}
+
+.design-box-2 {
+    position: absolute;
+    padding:2em;/*内側の余白*/
+	background: none;/*元のボックス背景色なし*/
+	border:1px solid #ccc ;/*線の太さ・種類・色*/
+	width: 425px;
+    height: 380px;
+    margin: 136px;
+    margin-left: 749px;
+}
+
+.design-box-2::after {
+    background-color:#eee;/*ずらしたボックスの背景色*/
+	border:none;
+	content: '';
+	position: absolute;/*配置（ここを動かす）*/
+	top: 7px;/*上から7pxずらす*/
+	left: 7px;/*左から7pxずらす*/
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+.design-box-3 {
+    position: absolute;
+    margin-top: 263px;
+    margin-right: 740px;
+    width: 250px;
+    height: 260px;
+    padding: 10px;
+    border: solid 3px #333;
+    border-radius: 8px;
+}
+
+.design-box-3 .design-box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #555;
+    font-weight: bold;
+}

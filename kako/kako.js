@@ -42,25 +42,29 @@ async function loadRecord(userId,offset) {
 function displayRecord(data) {
   const container = document.getElementById('history-details');
   container.innerHTML = `
-    <p><strong></strong> ${data.history.created_at.split('T')[0]}</p>
-    <p><strong></strong> <span class="weight-info"> ${data.history.weight || '記録なし'}kg</p>
-
-    <p><strong>朝食:</strong> <span class="meal-info"> ${data.food.breakfast ||'記録なし'}</p>
-    <p><strong>昼食:</strong> <span class="meal-info">${data.food.lunch ||'記録なし'}</p>
-    <p><strong>夕食:</strong> <span class="meal-info">${data.food.dinner ||'記録なし'}</p>
-
+    <div class="created-at">
+    <p><strong></strong> ${data.history.created_at.split('T')[0]}</p></div>
+    <strong></strong> <div class="weight-info"> ${data.history.weight || '記録なし'}kg</div>
+    
+    <div class="training-info">
+  
     <h3>トレーニング</h3>
     <ul>
       ${data.trainings.map(t => `
-        <li>
-          <strong>部位:</strong> ${t.part} |
-          <strong>運動:</strong> ${t.exercise} |
-          <strong>セット:</strong> ${t.sets} |
-          <strong>回数:</strong> ${t.reps} |
-          <strong>秒数:</strong> ${t.seconds}
-        </li>
+          <strong>部位:</strong> ${t.part} 
+          <strong>運動:</strong> ${t.exercise} 
+          <strong>セット:</strong> ${t.sets} 
+          <strong>回数:</strong> ${t.reps} 
+          <strong>秒数:</strong> ${t.seconds}<br>
       `).join('')}
     </ul>
+    </div>
+
+    <div class="meal-info">
+    <p><strong>朝食:</strong> ${data.food.breakfast ||'記録なし'}</p>
+    <p><strong>昼食:</strong> ${data.food.lunch ||'記録なし'}</p>
+    <p><strong>夕食:</strong> ${data.food.dinner ||'記録なし'}</p>
+    </div>
   `;
 }
 

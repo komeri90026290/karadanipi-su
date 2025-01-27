@@ -1,14 +1,12 @@
 body {
-   
     display: flex; /* ボディ全体をフレックスコンテナに */
     font-family: Arial, sans-serif; /* フォント設定 */
-    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/
-
-    
+    background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/   
 }
 
 .content {
     margin-left: 110px;
+    position: relative;
 }
 
 #today {
@@ -32,10 +30,19 @@ input[type="number"]{
     border-radius: 4px; /* 角を丸くする */
 }
  
+.wrapper {
+    width: 94%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
 .sidebar {
-    padding: 20px; /* パディングを追加 */
+    padding: 20px;
     border-right: 5px solid #ccc; /* サイドバーの右側に線を追加 */
     margin-right: 20px; /* サイドバーの右に余白を追加 */
+    position: sticky;
 }
 
 .logout {
@@ -138,8 +145,10 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 700px;/* グラフの幅　*/
     height: 350px;/* グラフの高さ　*/
 }
+
  
 .picto{
+    position: relative;
     margin-top:-50px;
 }
  
@@ -158,6 +167,28 @@ input[type="number"]::-webkit-inner-spin-button {
  
 .body-part {       /*ピクトグラム本体の色を変える場所*/
     fill: #ddd;
+}
+
+.design-box-1 {
+    --border-color-1:#fafafa; /*背景ストライプの色*/
+	--border-color-2:#ddd; /*上下枠線の色*/
+	padding:2em;/*内側余白*/
+	background:linear-gradient(-45deg,transparent 25%,var(--border-color-1) 25%,var(--border-color-1) 50%,transparent 50%,transparent 75%,var(--border-color-1) 75%,var(--border-color-1));
+	background-size: 4px 4px;
+	border-bottom: 4px double var(--border-color-2);
+	border-top: 4px double var(--border-color-2);
+	background-clip: padding-box;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 380px;
+    z-index: -1;
+    width: 380px;
+    height: 370px;
+    padding: 10px 20px;
+    
+    
+    
+    cursor: pointer; /* ポインターを表示 */
 }
 
  
@@ -204,7 +235,8 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: 15px;  /*中の文字の大きさ*/
     overflow-y: scroll; /*垂直方向にスクロールバー出す*/
     /* background: linear-gradient(#F1FEFE, #FFFFFF); 背景色*/
-    white-space: pre-wrap;   /* 改行を維持 */
+    white-space: pre-wrap;   
+    /* 改行を維持 */
 }
  
  
@@ -272,9 +304,7 @@ input[type="number"]::-webkit-inner-spin-button {
        
        
         background-color: #FFEA81; /* ボタンの背景色 */
-        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-     
-       
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);  
     }
      
     .history {

@@ -13,35 +13,39 @@
     <title>肉体改造管理システム</title>
 </head>
 <body id="home">
+  <div class="wrapper">
+  <aside class="scrol">
     <div class="sidebar">
     <!-- 今日の日付 -->
     <p id="today"></p>
    
     <div id="username"></div>
    
-    <!-- 身長と体重の入力 -->
-<p><label for="user_height">身長</label><input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1"></p>
-<p><label for="user_weight">体重</label><input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1"></p>
-<p><label for="moku">目標<br></label><input type="text" id="moku"placeholder="目標"></p>
+    <!-- 身長と体重の入力 -->  
+   <p><label for="user_height">身長</label><input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1"></p>
+   <p><label for="user_weight">体重</label><input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1"></p>
+   <p><label for="moku">目標<br></label><input type="text" id="moku"placeholder="目標"></p>
 
-<!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
-<div class="cm">
-    <p>cm</p>
-</div>
-
-<div class="kg">
-    <p>kg</p>
-</div>
-<!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
-<!-- BMI計算ボタン -->
-<p>BMI: <span id="result"></span></p>
-<p><button id="con" class="custom-button con" onclick="calculateBMI();saveData();">確定</button></p>
-
-<!-- 平均値表示 -->
-<h2>平均</h2>
-<p>体重: <span id="heitai"></span> kg</p>
-<p>BMI: <span id="heibmi"></span>%</p>
+    <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
+    <div class="cm">
+       <p>cm</p>
     </div>
+
+    <div class="kg">
+       <p>kg</p>
+    </div>
+     <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
+     <!-- BMI計算ボタン -->
+     <p>BMI: <span id="result"></span></p>
+     <p><button id="con" class="custom-button con" onclick="calculateBMI();saveData();">確定</button></p>
+
+     <!-- 平均値表示 -->
+     <h2>平均</h2>
+     <p>体重: <span id="heitai"></span> kg</p>
+     <p>BMI: <span id="heibmi"></span>%</p>
+
+    </div>
+  </aside>
 
     <div class="content">
      <!-- トレーニングリストを表示するためのスクロール可能なエリア -->
@@ -55,6 +59,8 @@
 
     <!-- 目標入力 -->
     <div id="mokuhyou"></div>
+    <div class="design-box-1">
+    </div>
 
  
     <div class="picto">
@@ -79,7 +85,8 @@
  
  
     <!-- 各種ボタンとグラフ表示 -->
-    <p>
+    
+      
         <div class="button-container">
             <button id="care" class="care" onclick="carepage() ">アフターケア</button>
             <button id="tr" class="tr" onclick="torepage() ">トレーニング追加</button>
@@ -91,7 +98,7 @@
           <button id="history" class=" history" onclick="kakopage()">過去記録</button>
           </div>
         <canvas id="lineChart"></canvas>
-    </p>
+    
  
     <div class="food-input">
       <textarea id="text-breakfast" placeholder="入力してください"></textarea>
@@ -153,6 +160,7 @@ window.onload = async function () {
             <button id="lunch" class="lunch" onclick="lunchpage();">昼食</button>
             <button id="dinner" class="dinner" onclick="dinnerpage();">夕食</button>
           </div>
+        </div>
  
 </body>
 </html>
