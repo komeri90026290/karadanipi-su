@@ -12,10 +12,10 @@ body {
 #today {
     font-size: 38px;
     font-weight: bold;
-    color: #00ffc3;  /* ミントっぽい青色 */
+    color: #000000;  /* ミントっぽい青色 */
     text-align: center;  /* テキストの中央寄せ */
     margin-bottom: 20px;  /* 上下マージンを追加 */
-    text-shadow: 0 0 5px rgba(0, 255, 195, 0.5);  /* 外側の縁取り */
+    text-shadow: 0 0 5px rgba(255, 255, 255,);  /* 外側の縁取り */
 }
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700italic&display=swap');
 
