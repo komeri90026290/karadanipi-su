@@ -33,20 +33,13 @@
             <option value="desc">降順</option>
         </select>
 
-        <!-- 食事リスト -->
+        <!-- トレーニングリスト -->
         <ul id="ToreList"></ul>
  
         <!-- JSのコード部分 -->
         <script>
-
-          // ページが読み込まれた際にデータを取得する
-          window.onload = function() {
-          // usersデータとfoodsデータを順番に取得
-          fetchUsers().then(fetchTore);
-          };
-
-          let ToreData = []; // toreデータを一時的に保存する変数
-          let UserData = {}; // userデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
+          let ToreData = []; // トレーニングデータを一時的に保存する変数
+          let UserData = {}; // ユーザーデータを辞書形式で保存する変数 (useridをキーとしてusernameにアクセス)
  
           // ユーザーデータを取得
           function fetchUsers() {
@@ -69,7 +62,7 @@
           }
  
           // トレーニングデータを取得
-          function fetchTore() {
+          function fetchTrainings() {
             return fetch('https://karadanipi-su-api.onrender.com/trainings')
               .then(response => {
                 if (!response.ok) {
@@ -78,31 +71,76 @@
                 return response.json();
               })
               .then(data => {
-                ToreData = data; // toreデータを保存
+                ToreData = data; // トレーニングデータを保存
                 renderToreList(ToreData); // 初期表示
               })
               .catch(error => {
                 console.error('データ取得エラー:', error);
-                alert('とれデータの取得に失敗しました');
+                alert('トレーニングデータの取得に失敗しました');
               });
           }
-
+ 
+          // ページが読み込まれた際にデータを取得する
+          window.onload = function() {
+            // usersデータとトレーニングデータを順番に取得
+            fetchUsers().then(fetchTrainings);
+          };
+ 
           // データを表示する関数
           function renderToreList(data) {
             const ToreList = document.getElementById('ToreList');
             ToreList.innerHTML = ''; // リストを初期化
- 
-            data.forEach(Tore => {
-              const listItem = document.createElement('li');
+
+            // アカウントごとにグループ化
+            const groupedByUser = data.reduce((acc, Tore) => {
               const username = UserData[Tore.userid] || '不明なユーザー';
-              listItem.innerHTML = `ユーザー名: ${username}<br> ${Tore.part} : ${Tore.exercise} :${Tore.sets}セット `;
-              listItem.classList.add('Toreset');
+              if (!acc[username]) acc[username] = [];
+              acc[username].push(Tore);
+              return acc;
+            }, {});
 
-              listItem.style.textAlign = 'left';  // 左寄せ
+            // 各ユーザーごとにデータをレンダリング
+            for (const [username, userTore] of Object.entries(groupedByUser)) {
+              const userSection = document.createElement('li');
+              userSection.innerHTML = `<h3>${username}</h3>`;
+              userSection.style.marginTop = '20px';
 
-              
-              ToreList.appendChild(listItem);
-            });
+              // 日付ごとにグループ化
+              const groupedByDate = userTore.reduce((acc, Tore) => {
+                const date = Tore.created_at ? Tore.created_at.split('T')[0] : '日付なし';
+                if (!acc[date]) acc[date] = [];
+                acc[date].push(Tore);
+                return acc;
+              }, {});
+
+              const dateList = document.createElement('ul');
+              for (const [date, tores] of Object.entries(groupedByDate)) {
+                const dateItem = document.createElement('li');
+                dateItem.innerHTML = `<strong>日付: ${date}</strong>`;
+                dateItem.style.marginTop = '10px';
+
+                const toreList = document.createElement('ul');
+                tores.forEach(Tore => {
+                  const toreItem = document.createElement('li');
+                  toreItem.innerHTML = `
+                      <div class="user-info">
+                          ユーザー名: ${username} | 日付: ${date}<br>
+                      </div>
+                      <div class="meal-info">
+                          部位: ${Tore.part || '未設定'} <br> 
+                          エクササイズ: ${Tore.exercise || '未設定'} <br> 
+                          セット数: ${Tore.sets || '未設定'}セット
+                      </div>`;
+                  toreList.appendChild(toreItem);
+                });
+
+                dateItem.appendChild(toreList);
+                dateList.appendChild(dateItem);
+              }
+
+              userSection.appendChild(dateList);
+              ToreList.appendChild(userSection);
+            }
           }
  
           // 並び替え用の関数

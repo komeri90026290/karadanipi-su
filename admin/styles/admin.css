@@ -104,6 +104,7 @@ ul{
 #back {
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景のグラデーションカラーを指定*/
     padding: 12px; /* 内側の余白を調整して内容が中央に収まるように */
+    margin-left: 150px; /* サイドバーの右側に余白を追加 */
 }
 
 
@@ -219,19 +220,66 @@ select:focus {
     margin-top: 20px;        /* ユーザー名と日付の下にスペースを追加 */
 }
 
-/* admin.css に追加 */
+/* トレーニングリストのスタイル */
 #ToreList {
-    margin-top: 200px;
-    list-style: none;  /* デフォルトのリストマーカーを削除 */
-    /* padding-left: 0;   左のインデントを0にする */
-  }
- 
-  #ToreList li {
+    margin-top: 60px; /* サイドバーと重ならないように上部に余白を追加 */
+    list-style: none; /* デフォルトのリストマーカーを削除 */
+    padding-left: 0;   /* 左のインデントを0にする */
+    margin-left: 10px; /* 左側に少しスペースを追加 */
+}
+
+/* トレーニングアイテムのスタイル */
+#ToreList li {
     font-size: 30px; /* フォントサイズを調整 */
     font-weight: bold; /* 太字にする（任意） */
-    padding-left:150px; /* 適度な左余白を追加 */
-    margin-bottom: 60px;  /* 各リスト項目の間隔を少し空ける */
-    text-indent: -350px;    /* テキスト部分を左に少し移動 */
-    border: 1px solid #ddd;
-    list-style-type: none;
-  }
+    padding-left: 30px; /* リストのテキストを左に余白を設定 */
+    margin-bottom: 10px; /* 各リスト項目の間隔を少し空ける */
+    text-indent: -30px; /* テキスト部分を左に少し移動 */
+    border-bottom: 2px solid #ddd; /* 下に薄いグレーの線を追加 */
+}
+
+/* 最後のリストアイテムの下線を消す */
+#ToreList li:last-child {
+    border-bottom: none;
+}
+
+/* ユーザー情報のスタイル */
+#ToreList li .user-info {
+    display: flex; /* 横並びに配置 */
+    font-size: 20px; /* ユーザーネームと日付のフォントサイズを調整 */
+}
+
+/* トレーニング情報のスタイル */
+#ToreList li .meal-info {
+    position: relative;   
+    display: flex;          /* 横並びに配置 */
+    flex-direction: column; /* 上から下に配置 */
+    gap: 10px;              /* 各食事情報間のスペース */
+    font-size: 20px;         /* 食事情報のフォントサイズ */
+    text-align: right;       /* 右寄せ */
+    margin-top: 20px;        /* ユーザー名と日付の下にスペースを追加 */
+}
+
+/* Base styles for buttons */
+button, input[type="submit"], .con, .care, .tr {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* 枠線なし */
+    border-radius: 10px; /* 角丸 */
+    cursor: pointer; /* ホバー時にカーソル */
+    font-size: 16px; /* フォントサイズ */
+    background-color: #FFEA81; /* 背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out; /* 滑らかなエフェクトのトランジション */
+}
+
+/* Hover state for buttons */
+button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
+    transform: scale(1.05); /* 少し拡大 */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* シャドウを強調 */
+}
+
+/* Active state for buttons */
+button:active, input[type="submit"]:active, .con:active, .care:active, .tr:active {
+    transform: translateY(5px); /* 下方向に移動 */
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4); /* シャドウを調整 */
+}
