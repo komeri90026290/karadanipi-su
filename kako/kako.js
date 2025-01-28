@@ -52,10 +52,10 @@ function displayRecord(data) {
     <ul>
       ${data.trainings.map(t => `
           <strong>部位:</strong> ${t.part} 
-          <strong>運動:</strong> ${t.exercise} 
-          <strong>セット:</strong> ${t.sets} 
-          <strong>回数:</strong> ${t.reps} 
-          <strong>秒数:</strong> ${t.seconds}<br>
+          <strong>運動:</strong> ${t.exercise}           
+          ${t.reps ? `<strong>回数:</strong> ${t.reps}回` : ''}
+          ${t.seconds ? `<strong>秒数:</strong> ${t.seconds}秒` : ''}
+          <strong>セット:</strong> ${t.sets}<br>
       `).join('')}
     </ul>
     </div>
