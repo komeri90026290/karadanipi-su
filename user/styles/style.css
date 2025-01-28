@@ -249,7 +249,7 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 50px;
     padding: 10px 20px;
     margin: 125px;   /*ボタンの間に余白を設定する*/
-    margin-top: -50px; /*ボタンを上に動かす*/
+    margin-top: -40px; /*ボタンを上に動かす*/
     text-align: center; /*真ん中に揃える*/
     background-color: #FFEA81; /* ボタンの背景色 */
     border-radius: 10px;
@@ -475,7 +475,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 1525px;        /*上からの位置指定*/
+    top: 1630px;        /*上からの位置指定*/
     left: 700px;      /*左からの位置指定*/
     font-size: 17.5px; /*文字の大きさ指定*/
     padding: 17px 40px; /*内側の余白の大きさ*/
