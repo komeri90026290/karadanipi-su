@@ -248,8 +248,8 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 180px;
     height: 50px;
     padding: 10px 20px;
-    margin: 30px;   /*ボタンの間に余白を設定する*/
-    margin-top: -40px; /*ボタンを上に動かす*/
+    margin: 125px;   /*ボタンの間に余白を設定する*/
+    margin-top: -50px; /*ボタンを上に動かす*/
     text-align: center; /*真ん中に揃える*/
     background-color: #FFEA81; /* ボタンの背景色 */
     border-radius: 10px;
