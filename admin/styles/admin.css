@@ -222,42 +222,32 @@ select:focus {
 
 /* トレーニングリストのスタイル */
 #ToreList {
-    margin-top: 60px; /* サイドバーと重ならないように上部に余白を追加 */
-    list-style: none; /* デフォルトのリストマーカーを削除 */
-    padding-left: 0;   /* 左のインデントを0にする */
-    margin-left: 10px; /* 左側に少しスペースを追加 */
+    margin-top: 150px;
+    padding-left: 0;
+    margin-left: 10px;
+    list-style: none;
 }
 
-/* トレーニングアイテムのスタイル */
 #ToreList li {
-    font-size: 30px; /* フォントサイズを調整 */
-    font-weight: bold; /* 太字にする（任意） */
-    padding-left: 30px; /* リストのテキストを左に余白を設定 */
-    margin-bottom: 10px; /* 各リスト項目の間隔を少し空ける */
-    text-indent: -30px; /* テキスト部分を左に少し移動 */
-    border-bottom: 2px solid #ddd; /* 下に薄いグレーの線を追加 */
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    text-indent: -30px;
+    border-bottom: 2px solid #ddd; /* 各アイテムの下線 */
 }
 
-/* 最後のリストアイテムの下線を消す */
 #ToreList li:last-child {
-    border-bottom: none;
+    border-bottom: none; /* 最後の要素の線を削除 */
 }
 
-/* ユーザー情報のスタイル */
-#ToreList li .user-info {
-    display: flex; /* 横並びに配置 */
-    font-size: 20px; /* ユーザーネームと日付のフォントサイズを調整 */
-}
-
-/* トレーニング情報のスタイル */
 #ToreList li .meal-info {
-    position: relative;   
-    display: flex;          /* 横並びに配置 */
-    flex-direction: column; /* 上から下に配置 */
-    gap: 10px;              /* 各食事情報間のスペース */
-    font-size: 20px;         /* 食事情報のフォントサイズ */
-    text-align: right;       /* 右寄せ */
-    margin-top: 20px;        /* ユーザー名と日付の下にスペースを追加 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+    text-align: right;
+    margin-top: 20px;
 }
 
 /* Base styles for buttons */

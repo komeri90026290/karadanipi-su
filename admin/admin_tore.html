@@ -102,8 +102,8 @@
             // 各ユーザーごとにデータをレンダリング
             for (const [username, userTore] of Object.entries(groupedByUser)) {
               const userSection = document.createElement('li');
-              userSection.innerHTML = `<h3>${username}</h3>`;
-              userSection.style.marginTop = '20px';
+              userSection.innerHTML = `<h2>${username}</h2>`;
+              userSection.style.marginTop = '30px';
 
               // 日付ごとにグループ化
               const groupedByDate = userTore.reduce((acc, Tore) => {
@@ -116,20 +116,29 @@
               const dateList = document.createElement('ul');
               for (const [date, tores] of Object.entries(groupedByDate)) {
                 const dateItem = document.createElement('li');
-                dateItem.innerHTML = `<strong>日付: ${date}</strong>`;
+                dateItem.innerHTML = `<h3>日付: ${date}</h3>`;
                 dateItem.style.marginTop = '10px';
 
                 const toreList = document.createElement('ul');
                 tores.forEach(Tore => {
                   const toreItem = document.createElement('li');
+
+                  // 秒数または回数の表示
+                  let detail = '';
+                  if (Tore.reps) {
+                    detail = `回数: ${Tore.reps}回`;
+                  } else if (Tore.seconds) {
+                    detail = `秒数: ${Tore.seconds}秒`;
+                  } else {
+                    detail = '未設定';
+                  }
+
                   toreItem.innerHTML = `
-                      <div class="user-info">
-                          ユーザー名: ${username} | 日付: ${date}<br>
-                      </div>
                       <div class="meal-info">
                           部位: ${Tore.part || '未設定'} <br> 
-                          エクササイズ: ${Tore.exercise || '未設定'} <br> 
-                          セット数: ${Tore.sets || '未設定'}セット
+                          エクササイズ: ${Tore.exercise || '未設定'} <br>
+                          ${detail} <br>
+                          セット数: ${Tore.sets || '未設定'}セット 
                       </div>`;
                   toreList.appendChild(toreItem);
                 });
