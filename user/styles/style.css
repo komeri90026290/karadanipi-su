@@ -5,7 +5,7 @@ body {
 }
 
 .content {
-    margin-left: 110px;
+    margin-left: 80px;
     position: relative;
 }
 
@@ -76,18 +76,17 @@ input[type="number"]:focus {
 
  
 .wrapper {
-    width: 94%;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    
     display: flex;
-    justify-content: space-between;
 }
 
 .sidebar {
     padding: 20px;
+    
     border-right: 5px solid #ccc; /* サイドバーの右側に線を追加 */
-    margin-right: 20px; /* サイドバーの右に余白を追加 */
-    position: sticky;
+    
+    
 }
 
 .logout {
@@ -476,8 +475,8 @@ input[type="number"]::-webkit-inner-spin-button {
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 1545px;        /*上からの位置指定*/
-    left: 1030px;      /*左からの位置指定*/
+    top: 1525px;        /*上からの位置指定*/
+    left: 700px;      /*左からの位置指定*/
     font-size: 17.5px; /*文字の大きさ指定*/
     padding: 17px 40px; /*内側の余白の大きさ*/
     background-color: #ffea81; /*ボタンの色を指定*/
