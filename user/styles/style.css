@@ -95,7 +95,7 @@ input[type="number"]:focus {
     color: white;
     position: absolute; /* 親要素である #logout 内の位置指定 */
     top: 10px; /* 「目標」入力フィールドの下に配置 */
-    right: 10px; /* 「目標」入力フィールドの右端に配置 */
+    left: 830px; /* 「目標」入力フィールドの右端に配置 */
 
 }
 
@@ -398,7 +398,7 @@ input[type="number"]::-webkit-inner-spin-button {
         width: calc(33.33% - 15px);
         height: 100px;
         padding: 10px;
-        font-size: 14px;
+        font-size: 24px;
         border: 2px solid rgba(0, 0, 255, 0.2); /* 柔らかい青色の枠 */
         border-radius: 8px;
         resize: none;
