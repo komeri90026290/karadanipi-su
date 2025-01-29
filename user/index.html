@@ -22,8 +22,23 @@
     <div id="username"></div>
    
     <!-- 身長と体重の入力 -->  
-   <p><label for="user_height">身長</label><input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1"></p>
-   <p><label for="user_weight">体重</label><input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1"></p>
+    <p>
+      <label for="user_height">身長</label>
+      <input type="number" id="user_height" placeholder="例: 160" min="0" max="999" step="1">
+  </p>
+  <p>
+      <label for="user_weight">体重</label>
+      <input type="number" id="user_weight" placeholder="例: 55" min="0" max="1000" step="0.1">
+  </p>
+  
+  <style>
+      input[type="number"] {
+          font-size: 20px; /* フォントサイズを大きく */
+          padding: 10px; /* 入力欄の余白 */
+          width: 100px; /* 入力欄の幅 */
+      }
+  </style>
+  
    <p><label for="moku">目標<br></label><input type="text" id="moku"placeholder="目標"></p>
 
     <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->

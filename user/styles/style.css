@@ -39,6 +39,12 @@ body {
     font-weight: 700; /* 太字（Bold）を指定 */
 }
 
+input[type="number"] {
+    font-size: 50px; /* フォントサイズを大きく */
+    padding: 10px; /* 入力欄の内側の余白を広げる */
+    width: 80px; /* 入力欄の幅を調整 */
+}
+
 input[type="text"] {
     width: 150px;  /* 幅を維持 */
     padding: 5px;  /* パディング */
@@ -133,7 +139,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .cm {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 173px;        /*上からの位置指定*/
+    top: 180px;        /*上からの位置指定*/
     left: 140px;      /*左からの位置指定*/
     font-size: 17.5px;     /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
@@ -144,7 +150,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .kg {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
-    top: 218px;               /*上からの位置指定*/
+    top: 235px;               /*上からの位置指定*/
     left: 144px;            /*左からの位置指定*/  
     font-size: 17.5px;          /*文字の大きさ指定*/
     padding: 0; /* 内側の余白をゼロに */
