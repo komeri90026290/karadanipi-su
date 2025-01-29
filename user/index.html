@@ -38,7 +38,7 @@
           width: 100px; /* 入力欄の幅 */
       }
   </style>
-  
+
    <p><label for="moku">目標<br></label><input type="text" id="moku"placeholder="目標"></p>
 
     <!--~~~~~~~~~入力欄の中のcm,kgを表示させるための部分~~~~~~~~~~-->
@@ -58,6 +58,7 @@
      <h2>平均</h2>
      <p>体重: <span id="heitai"></span> kg</p>
      <p>BMI: <span id="heibmi"></span>%</p>
+     <button id="history" class=" history" onclick="kakopage()">過去記録</button>
 
     </div>
   
@@ -109,7 +110,6 @@
         <div id="taijyu">
           <button id="days" class=" days" onclick="days_id()">デイリー</button>
           <button id="week" class=" week" onclick="week_id()">ウィークリー</button>
-          <button id="history" class=" history" onclick="kakopage()">過去記録</button>
           </div>
         <canvas id="lineChart"></canvas>
     
