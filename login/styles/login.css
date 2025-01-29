@@ -5,7 +5,14 @@
 }
 
 
-
+.toggle-password {
+    position: absolute;
+    right: 205px; /* 右側に配置 */
+    top: 375px;
+    transform: translateY(-50%); /* 縦中央揃え */
+    cursor: pointer;
+    font-size: 20px;
+}
 #title {
     font-size: 35px; /*文字の大きさ指定*/
     text-align: center; /*中央に寄せる*/
