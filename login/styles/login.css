@@ -4,8 +4,21 @@
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ指定*/
 }
 
+label, p {
+    font-size: 15px; /* 文字の大きさを小さく */
+    color: #333; /* 色を少し暗くする（好みに応じて変更可） */
+}
 
 
+
+.toggle-password {
+    position: absolute;
+    right: 370px; /* 右側に配置 */
+    top: 340px;
+    transform: translateY(-50%); /* 縦中央揃え */
+    cursor: pointer;
+    font-size: 20px;
+}
 #title {
     font-size: 35px; /*文字の大きさ指定*/
     text-align: center; /*中央に寄せる*/
@@ -22,7 +35,7 @@
 #input input[type="text"],
 #input input[type="password"] {
     text-align: center; /*中央に揃える*/
-    width: 60%; /*横幅指定*/
+    width: 35%; /*横幅指定*/
     font-size: 20px; /*文字の大きさ指定*/
     padding: 10px; /*内側の余白の大きさ*/
     margin: 10px 0; /*外側の余白の大きさ*/
@@ -48,6 +61,7 @@
 }
 
 #newentry {
+    font-size: 20px;
     text-align: right; /*右に移動*/
     margin: 50px;  /*外側の余白の大きさ*/
 } 
