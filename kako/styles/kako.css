@@ -133,15 +133,40 @@ button:hover {
 }
 
 .meal-info {
-    font-size: 25px; /* サイズを少し大きく */
-    Display: flex;
-    right: 40px;
+    font-size: 20px; /* サイズを少し大きく */
+    display: flex;
     flex-flow: column;
     text-align: left;
     padding-left: 150px;
     vertical-align: top;
-    width: 200px;
+    width: 340px;
+    margin-top: -50px;
+    max-height: 330px; /* 高さを制限 */
+    overflow-y: auto; /* 縦スクロールを有効化 */
+    word-wrap: break-word; /* 長い単語を適切に折り返す */
+    word-break: break-word; /* 長い単語を強制的に改行 */
+    white-space: pre-wrap; /* 改行を維持しつつ折り返す */
+        /* 位置調整 */
+        position: absolute; /* 絶対位置指定 */
+        top: 200px; /* 上から10pxに配置（調整可能） */
+        left: 30px; /* 左から10pxに配置（調整可能） */
+        z-index: 9999;
 }
+
+/* スクロールバーの透明化 */
+.meal-info::-webkit-scrollbar {
+    width: 8px; /* 横幅を設定 */
+    background-color: transparent; /* 背景を透明に */
+}
+
+.meal-info::-webkit-scrollbar-thumb {
+    background-color: transparent; /* スクロールバーのつまみ部分を透明に */
+}
+
+.meal-info::-webkit-scrollbar-track {
+    background-color: transparent; /* スクロールバーのトラック部分を透明に */
+}
+
 
 .training-info {
     padding-left: 600px;
@@ -191,7 +216,7 @@ button:hover {
 	border:none;
 	content: '';
 	position: absolute;/*配置（ここを動かす）*/
-	top: 7px;/*上から7pxずらす*/
+	top: 0px;/*上から7pxずらす*/
 	left: 7px;/*左から7pxずらす*/
 	width: 100%;
 	height: 100%;
@@ -201,10 +226,10 @@ button:hover {
 .design-box-3 {
     position: absolute;
     margin-top: 263px;
-    margin-right: 740px;
-    width: 250px;
-    height: 260px;
-    padding: 10px;
+    margin-right: 650px;
+    top: -120px;
+    width: 400px;
+    height: 395px;
     border: solid 3px #333;
     border-radius: 8px;
 }
