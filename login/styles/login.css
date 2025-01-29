@@ -61,6 +61,7 @@ label, p {
 }
 
 #newentry {
+    font-size: 20px;
     text-align: right; /*右に移動*/
     margin: 50px;  /*外側の余白の大きさ*/
 } 
