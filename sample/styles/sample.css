@@ -61,7 +61,7 @@ body {
 .bfimage {       /*納豆ご飯画像*/
     position:absolute;
     left: 850px;
-    bottom:250px;
+    bottom:260px;
 }
 
 .bfimage2 {       /*温泉卵*/
@@ -97,7 +97,7 @@ body {
 .diimage {       /*ポトフ*/
     position:absolute;
     left:934px;
-    bottom:250px;
+    bottom:260px;
 }
 
 .diimage2 {     /*餃子*/
