@@ -482,7 +482,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #submit input[type="submit"] {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 1515px;        /*上からの位置指定*/
+    top: 1530px;        /*上からの位置指定*/
     left: 700px;      /*左からの位置指定*/
     font-size: 17.5px; /*文字の大きさ指定*/
     padding: 17px 40px; /*内側の余白の大きさ*/
