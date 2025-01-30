@@ -44,7 +44,8 @@ function displayRecord(data) {
   container.innerHTML = `
     <div class="created-at">
     <p><strong></strong> ${data.history.created_at.split('T')[0]}</p></div>
-    <strong></strong> <div class="weight-info"> ${data.history.weight}kg</div>
+
+    <strong></strong> <div class="weight-info"> ${data.history.weight || ''}kg</div>
     
     <div class="training-info">
   
