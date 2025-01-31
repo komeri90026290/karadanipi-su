@@ -7,50 +7,66 @@
  
 #input select{
     position: relative; /* 今の位置を基準 */
-    top: 20px; /* 上からの位置指定 */
+    top: 30px; /* 上からの位置指定 */
     left: 100px; /* 左からの位置指定 */
-    font-size: 25px; /*文字の大きさ指定*/
-    padding: 6px 45px; /*枠の縦横の数値を指定*/
+    font-size: 35px; /*文字の大きさ指定*/
+    padding: 10px 55px; /*枠の縦横の数値を指定*/
     border: 1px solid #ccc; /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
+}
+
+#part {
+    appearance: none; /* デフォルトの矢印を非表示 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>"); /* 大きな矢印 */
+    background-repeat: no-repeat;
+    background-position: right 20px center; /* 矢印の位置 */
+    background-size: 30px; /* 矢印のサイズ（ここで調整） */
+    padding-right: 50px; /* 矢印がかぶらないように余白を調整 */
 }
  
 #input input[type="text"]{
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
     text-align: center; /*入力される文が入力欄の真ん中に出るように設定*/
     width: 40%; /*横幅指定*/
-    font-size: 35px; /*文字の大きさ指定*/
-    padding: 3px 45px; /*枠の縦横の数値を指定*/
+    font-size: 45px; /*文字の大きさ指定*/
+    padding: 15px 195px; /*枠の縦横の数値を指定*/
     margin: 10px 0; /*枠の上にあるスペースの大きさを指定*/
     border: 1px solid #ccc; /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
     margin-left: 100px; /*枠の左のスペース*/
+    top: 120px; /* 上からの位置指定 */
 }
  
+#tore::placeholder {
+    color: rgba(0, 0, 0, 0.3); /* 文字色を薄いグレーに変更 */
+    font-weight: normal; /* フォントの太さを標準に */
+}
  
 #input input[id="byou"]{
-    top: 80px; /*上からの位置指定*/
+    top: 150px; /*上からの位置指定*/
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
     position: relative; /* 今の位置を基準 */
     text-align: center; /*入力される文が入力欄の真ん中に出るように設定*/
-    left: 120px; /* 左から20px */
+    left: 100px; /* 左から20px */
     width: 7%; /*枠の横幅指定*/
-    font-size: 25px; /*入力される文字の大きさ指定*/
-    padding: 20px 25px; /*枠の縦横の数値を指定*/
+    font-size: 50px; /*入力される文字の大きさ指定*/
+    padding: 30px 40px; /*枠の縦横の数値を指定*/
     border: 1px solid #ccc; /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸みを指定*/
 }
  
  
 #input input[id="kai"]{
-    top: 84px; /*上からの位置指定*/
+    top: 180px; /*上からの位置指定*/
     position: absolute; /*無敵コード(他の部分に影響されない無敵モード)*/
     position: relative; /* 今の位置を基準 */
     text-align: center; /*入力される文が入力欄の真ん中に出るように設定*/
-    left: 120px; /* 左から120px */
+    left: 100px; /* 左から120px */
     width: 7%;  /*横幅設定*/
-    font-size: 25px; /*文字の大きさ指定*/
-    padding: 20px 25px; /*枠の縦横の数値を指定*/
+    font-size: 50px; /*文字の大きさ指定*/
+    padding: 30px 40px; /*枠の縦横の数値を指定*/
     border: 1px solid #ccc;  /*枠線の太さと色指定*/
     border-radius: 15px;/*枠の淵の丸みを指定*/
 }
@@ -60,36 +76,36 @@
 .seconds {
     z-index: 9999; /*何があっても一番前に表示*/
     position: absolute;     /*無敵*/
-    top: 157px;        /*上からの位置指定*/
-    left: 240px;      /*左からの位置指定*/
-    font-size: 25px;     /*文字の大きさ指定*/
+    top: 260px;        /*上からの位置指定*/
+    left: 220px;      /*左からの位置指定*/
+    font-size: 35px;     /*文字の大きさ指定*/
     color: #333;         /*文字の色指定*/
 }
  
 .numbertime {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
-    top: 248px;               /*上からの位置指定*/
-    left: 240px;            /*左からの位置指定*/  
-    font-size: 25px;          /*文字の大きさ指定*/
+    top: 430px;               /*上からの位置指定*/
+    left: 220px;            /*左からの位置指定*/  
+    font-size: 35px;          /*文字の大きさ指定*/
     color: #333;              /*文字の色指定*/    
 }
  
 .kakeru {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
-    top: 138px;               /*上からの位置指定*/
-    left: 308px;              /*左からの位置指定*/
-    font-size: 50px;        /*文字の大きさ指定*/  
+    top: 270px;               /*上からの位置指定*/
+    left: 350px;              /*左からの位置指定*/
+    font-size: 70px;        /*文字の大きさ指定*/  
     color: #333;          /*文字の色指定*/    
 }
  
 .set {
     z-index: 9999;      /* 高い数値ほど前面に表示される */
     position: absolute;       /*無敵*/
-    top: 214px;               /*上からの位置指定*/
-    left: 460px;             /*左からの位置指定*/
-    font-size: 20px;          /*文字の大きさ指定*/  
+    top: 390px;               /*上からの位置指定*/
+    left: 540px;             /*左からの位置指定*/
+    font-size: 25px;          /*文字の大きさ指定*/  
     color: #333;      /*文字の色指定*/
 }
  
@@ -99,33 +115,34 @@
  
  
 #input input[id="seto"]{
-    top: 210px;  /*上からの位置指定*/
+    top: 350px;  /*上からの位置指定*/
     position: absolute;  /*無敵*/
     text-align: center;   /*今の位置*/
     width: 7%;  /*横幅*/
-    font-size: 25px;  /*文字の大きさ指定*/
-    padding: 25px 25px; /*枠の縦横の数値指定*/
+    font-size: 45px;  /*文字の大きさ指定*/
+    padding: 40px 40px; /*枠の縦横の数値指定*/
     margin: 10px 0; /*上の余白の大きさ指定*/
     border: 1px solid #ccc;  /*枠線の太さと色指定*/
     border-radius: 15px; /*枠の淵の丸み指定*/
-    margin-left: 380px; /*左側の余白の大きさ指定*/
+    margin-left: 440px; /*左側の余白の大きさ指定*/
     margin-top: -25px;  /*上からの位置指定*/
 }
  
  
  
 #submit button{
-    left : 630px; /*左からの位置指定*/
+    left : 930px; /*左からの位置指定*/
     position: absolute; /*無敵*/
     margin: 25px auto; /*上の余白の大きさ指定*/
     font-size: 25px; /*文字の大きさ指定*/
-    padding: 8px 16px; /*枠の縦横の指定*/
+    padding: 25px 48px; /*枠の縦横の指定*/
     background-color: #ffea81; /*背景色指定*/
     color: black; /*文字の大きさ指定*/
     border: none; /* 枠を削除 */
     cursor: pointer; /*ボタンの上に行ったときポインター変更*/
     border-radius: 10px; /*枠の淵の丸み指定*/
     box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
+    top: 430px;  /*上からの位置指定*/
 }
  
  
@@ -156,4 +173,28 @@ button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
 button:active, input[type="submit"]:active, .con:active, .care:active, .tr:active {
     transform: translateY(5px); /* 下方向に移動 */
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4); /* シャドウを調整 */
+}
+
+.resize-image {
+    position: absolute;
+    width: 60px; /* 幅を200ピクセルに設定 */
+    height: 60px; /* 高さを100ピクセルに設定 */
+    left: 12px;
+    top: -6px;
+  }
+
+.rear {            /* もどるボタン */
+    position: absolute;
+    border: none; /*ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
+    margin-top: 120px;
+    bottom: 460px;
+    top: -110px;
+    left: 1175px;
+    width: 80px; /* もどるボタンの幅 */
+    height: 50px; /* もどるボタンの高さ */
+    background-color: #f3efef; 
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
