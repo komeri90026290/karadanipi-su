@@ -1,5 +1,5 @@
 body {
-    display: flex; /* ボディ全体をフレックスコンテナに */
+    
     font-family: Arial, sans-serif; /* フォント設定 */
     background: linear-gradient(#F1FEFE, #FFFFFF); /*背景色グラデ*/    
 }
@@ -58,63 +58,48 @@ body {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
 }
 
-.bfimage {       /*納豆ご飯画像*/
-    position:absolute;
-    left: 735px;
-    bottom:215px;
-}
 
 .bfimage2 {       /*温泉卵*/
     position:absolute;
-    left:735px;
+    left:850px;
     top:430px;
 }
 
 .bfimage3 {       /*ツナチーズトースト*/
     position:absolute;
-    left:735px;
+    left:850px;
     top: 710px;
 }
 
 .bfimage4 {       /*ヨーグルト*/
     position:absolute;
-    left:735px;
+    left:850px;
     top: 1000px;
 }
 
-.luimage {       /*サラダチキン*/
-    position:absolute;
-    left:735px;
-    bottom:215px;
-}
 
 .luimage3 {      /*肉サラダ*/
     position:absolute;
-    left: 775px;
-    top:720px;
+    left: 888px;
+    top:725px;
 }
 
-.diimage {       /*ポトフ*/
-    position:absolute;
-    left:820px;
-    bottom:215px;
-}
 
 .diimage2 {     /*餃子*/
     position:absolute;
-    left:770px;
+    left:888px;
     top:440px;
 }
 
 .diimage3 {     /*うどんげ*/
     position:absolute;
-    left:740px;
+    left:850px;
     top:710px;
 }
 
 .diimage4 {     /*生姜焼き*/
     position:absolute;
-    left:735px;
+    left:869px;
     top:984px;
 }
 
@@ -132,26 +117,26 @@ body {
 
 .sample-text {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
-    top: 70px;
-    left: 165px;
+    top: 75px;
+    left: 135px;
 }
 
 .sample-text-2 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
     bottom: 155px;
-    left: 165px;
+    left: 135px;
 }
 
 .sample-text-3 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
     bottom: -130px;
-    left: 165px;
+    left: 135px;
 }
 
 .sample-text-4 {/*Lunchとdinnerのダイエットと筋トレの文字位置*/
     position: absolute;
     bottom: -410px;
-    left: 165px;
+    left: 135px;
 }
 
 .breakfast {
@@ -185,13 +170,13 @@ body {
 .kintore_title {     /*「筋トレ」の配置変更*/
     position:absolute;
     top:640px;
-    left:170px;
+    left:135px;
 }
 
 .kintore_title2 {    /*「筋トレ」の配置変更*/
     position:absolute;
     top:920px;
-    left:170px;
+    left:135px;
 }
 
 .after_main {
@@ -231,7 +216,7 @@ button, input[type="submit"], .con, .care, .tr {
     padding: 10px 20px; /* 共通のパディング */
     border: none; /* 枠線なし */
     border-radius: 10px; /* 角丸 */
-    cursor: pointer; /* ホバー時にカーソル */
+    cursor: pointer; /*ホバー時にカーソル */
     font-size: 16px; /* フォントサイズ */
     background-color: #FFEA81; /* 背景色 */
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
@@ -239,10 +224,10 @@ button, input[type="submit"], .con, .care, .tr {
 }
 
 /* Hover state for buttons */
-button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
+/*button:hover, input[type="submit"]:hover, .con:hover, .care:hover, .tr:hover {
     transform: scale(1.05); /* 少し拡大 */
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* シャドウを強調 */
-}
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4); /* シャドウを強調 */
+/*}
 
 /* Active state for buttons */
 button:active, input[type="submit"]:active, .con:active, .care:active, .tr:active {

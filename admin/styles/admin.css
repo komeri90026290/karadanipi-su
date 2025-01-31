@@ -44,11 +44,11 @@
     margin-top: 10px;
     margin-right: 60px;
     border-radius: 10px;
-    width: 40px;
+    width: 60px;
     color: white;
     position: absolute; /* 親要素である #logout 内の位置指定 */
     top: 10px; /* 「目標」入力フィールドの下に配置 */
-    right: 10px; /* 「目標」入力フィールドの右端に配置 */
+    left: 1180px; /* 「目標」入力フィールドの右端に配置 */
  
 }
  
