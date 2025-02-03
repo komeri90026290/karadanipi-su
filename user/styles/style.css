@@ -288,11 +288,15 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 300px;   /*高さ*/
     padding: 0px;   /*内側余白*/
     border: none;    /*枠線の色とか*/
-    font-size: 15px;  /*中の文字の大きさ*/
+    font-size: 20px;  /*中の文字の大きさ*/
     overflow-y: scroll; /*垂直方向にスクロールバー出す*/
     /* background: linear-gradient(#F1FEFE, #FFFFFF); 背景色*/
     white-space: pre-wrap;   
     /* 改行を維持 */
+    
+    font-family: 'Cormorant Garamond', serif; /* フォントファミリーに指定 */
+    font-style: italic; /* イタリック体を指定 */
+    font-weight: 700; /* 太字（Bold）を指定 */
 }
  
  
