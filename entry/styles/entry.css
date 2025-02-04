@@ -47,25 +47,25 @@ nav#input select {
  
  
 #submit {
-    text-align: right; /*登録ボタンの場所を右端に*/
-    margin: 20px auto; /*外側の余白の大きさ*/
-    border-radius: 15px; /*枠の淵の丸みを指定*/
+    text-align: center; /* 中央揃え */
+    margin: 20px auto; /* 外側の余白 */
+    display: flex;
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え（必要なら追加） */
+    margin-right: 25px;
 }
- 
+
 #submit input[type="submit"] {
-    z-index: 9999; /*何があっても一番前に表示*/
-    position: absolute;     /*無敵*/
-    top: 513px;        /*上からの位置指定*/
-    left: 720px;      /*左からの位置指定*/
-    font-size: 20px; /*文字の大きさ指定*/
-    padding: 8px 16px; /*内側の余白の大きさ*/
-    background-color: #ffea81; /*ボタンの色を指定*/
-    color: black; /*文字の色指定*/
-    cursor: pointer; /*マウスが上に行った際にクリックできますよ的な感じのやつにポインターが変わるお*/
-    border: none; /*枠削除*/
-    border-radius: 10px; /*枠の淵の丸みを指定*/
-    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3); /* シャドウ追加 */
+    font-size: 20px;
+    padding: 8px 16px;
+    background-color: #ffea81;
+    color: black;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.5), inset 0px -3px 6px -2px rgba(0,0,0,0.3);
 }
+
  
 /*体重小数点エラー部分*/
 .error {
