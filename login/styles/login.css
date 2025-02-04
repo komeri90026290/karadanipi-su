@@ -45,7 +45,7 @@ label, p {
 
 
 #submit {
-    text-align: right; /* ボタンを右に寄せる */
+    text-align: center; /* ボタンを右に寄せる */
     margin: 20px auto; /*外側の余白の大きさ*/
 }
 
