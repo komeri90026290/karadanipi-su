@@ -8,82 +8,81 @@
     </head>
     <body>
         <nav id="back"> <!--背景色指定のためのID[back]-->
+        <button  class="logout" onclick="location.href='../login/login.html';"></button>
         <nav id="title"> <!--タイトルの大きさ変更のためのID[title]-->
             <h1>新規会員登録</h1>
         </nav>
  
         <nav id="input"> <!--入力欄の大きさ等すべて操作するためのID[input]-->
         <form id="registerForm">                                          
-            <!--ユーザーネーム、パスワード、身長、体重、年齢、性別入力-->
+            <!--ユーザーネーム、パスワード入力-->
  
             <label for="user_name">●ユーザーネーム</label><br> <!--●ユーザーネームでラベル付け-->
             <input type="text" id="user_name" name="user_name"><br>
  
             <div class="password_container">
                 <p>●パスワード(半角英数字8-16文字)</p>
-                <input type="password" id="user_password" name="user_password"minlength="8" maxlength="16"pattern="^[a-zA-Z0-9]+$"> <!--パスワード入力欄、英数字のみの指定-->
+                <input type="password" id="user_password" name="user_password" minlength="8" maxlength="16" pattern="^[a-zA-Z0-9]+$"> <!--パスワード入力欄、英数字のみの指定-->
                 <span class="toggle-password" onclick="clickButton()">👀</span><br><!--関数clickButtonを呼び出すことでパスワードの表示非表示を切り替え-->
             </div>
-                          <!--~~~~~~~~~入力欄の中のやつ終わり~~~~~~~~~~~-->
-                        <!--登録ボタン-->
-                        <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
-                            <input type="submit" value="登録">
-                        </nav>
-                        </div>
-                        </nav>
-                </form>
-<!--~~~~~~~~~~~~~~~パスワード表示、非表示切り替えゾーン~~~~~~~~~~~~~~~~~~~~-->
-                <script>
-                    function clickButton() {        
-                        var user_password = document.getElementById("user_password"); //変数user_passwordに入力途中のパスワードを入れとく
-                        var toggleIcon = document.querySelector(".toggle-password"); //変数toggleIconにtoggle-passwordを入れとく
-                     
-                        if (user_password.type === "password") { //パスワードのtype属性が[password](隠れている状態であること)確認 そうだった場合そのまま下のコードへ
-                            user_password.type = "text"; //type属性を[text]に変更することでpasswordの中身を表示
-                            toggleIcon.textContent = "👀"; // パスワードが見れるようになったら👀に絵文字を変更
-                        } else {
-                            user_password.type = "password"; //type属性をpasswordに変更することでpasswordの中身を隠す
-                            toggleIcon.textContent = "🙈"; // パスワードが見れなくなったら🙈に絵文字を変更
-                        }
-                    };
 
-      document.getElementById('registerForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // ページのリロードを防ぐ
-
-      // 入力されたデータを取得
-      const username = document.getElementById('user_name').value;
-      const password = document.getElementById('user_password').value;
-      const height = document.getElementById('user_height').value;
-      const weight = document.getElementById('user_weight').value;
-
-
-      // フォームのデータをサーバーに送信
-      fetch('https://karadanipi-su-api.onrender.com/users', { //ゆうたが来たらレンダーのurlでやる
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify({ username, password, height, weight })
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert('会員登録が完了しました！');
-        console.log('サーバーからの応答:', data);
-         // ログイン画面にリダイレクト
-        location.href = '../login/login.html'; // ログイン画面のURLに置き換えてください
-      })
-      .catch(error => {
-        console.error('エラー:', error);
-        alert('データの保存に失敗しました:' + error.message);
-      });
-    });
-
-                    
-                </script>
-<!--~~~~~~~~~~~~~~ゾーン終わり~~~~~~~~~~~~~~~~-->
- 
-
-           
+            <!--登録ボタン-->
+            <div id="submit"> <!--登録ボタンをCSSでいじるためのID[submit]-->
+                <input type="submit" value="登録">
+            </div>
+        </form>
         </nav>
+        </nav>
+
+        <!--~~~~~~~~~~~~~~~パスワード表示、非表示切り替えゾーン~~~~~~~~~~~~~~~~~~~~-->
+        <script>
+            function clickButton() {        
+                var user_password = document.getElementById("user_password"); //変数user_passwordに入力途中のパスワードを入れとく
+                var toggleIcon = document.querySelector(".toggle-password"); //変数toggleIconにtoggle-passwordを入れとく
+            
+                if (user_password.type === "password") { //パスワードのtype属性が[password](隠れている状態であること)確認 そうだった場合そのまま下のコードへ
+                    user_password.type = "text"; //type属性を[text]に変更することでpasswordの中身を表示
+                    toggleIcon.textContent = "👀"; // パスワードが見れるようになったら👀に絵文字を変更
+                } else {
+                    user_password.type = "password"; //type属性をpasswordに変更することでpasswordの中身を隠す
+                    toggleIcon.textContent = "🙈"; // パスワードが見れなくなったら🙈に絵文字を変更
+                }
+            };
+
+            document.getElementById('registerForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // ページのリロードを防ぐ
+
+                // 入力されたデータを取得
+                const username = document.getElementById('user_name').value.trim();
+                const password = document.getElementById('user_password').value.trim();
+
+                // 必須フィールドのバリデーション
+                if (username === '' || password === '') {
+                    alert('ユーザーネームとパスワードを入力してください。'); // 入力がない場合にアラート表示
+                    return;
+                }
+
+                // フォームのデータをサーバーに送信
+                fetch('https://karadanipi-su-api.onrender.com/users', { //ゆうたが来たらレンダーのurlでやる
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert('会員登録が完了しました！'); // 登録完了メッセージ
+                    console.log('サーバーからの応答:', data);
+                    // ログイン画面にリダイレクト
+                    location.href = '../login/login.html'; // ログイン画面のURLに置き換えてください
+                })
+                .catch(error => {
+                    console.error('エラー:', error);
+                    alert('データの保存に失敗しました:' + error.message);
+                });
+            });
+        </script>
+        <!--~~~~~~~~~~~~~~ゾーン終わり~~~~~~~~~~~~~~~~-->
     </body>
 </html>
