@@ -16,6 +16,8 @@ body {
     text-align: center;  /* テキストの中央寄せ */
     margin-bottom: 20px;  /* 上下マージンを追加 */
     text-shadow: 0 0 5px rgba(255, 255, 255,);  /* 外側の縁取り */
+    color: #000000;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
 }
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700italic&display=swap');
 
@@ -269,7 +271,7 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 180px;
     height: 50px;
     padding: 10px 20px;
-    margin-left:30px;
+    margin-left:193px;
     text-align: center;/*真ん中に揃える*/
     background-color: #FFEA81; /* ボタンの背景色 */
     border-radius: 10px;
@@ -288,11 +290,15 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 300px;   /*高さ*/
     padding: 0px;   /*内側余白*/
     border: none;    /*枠線の色とか*/
-    font-size: 15px;  /*中の文字の大きさ*/
+    font-size: 20px;  /*中の文字の大きさ*/
     overflow-y: scroll; /*垂直方向にスクロールバー出す*/
     /* background: linear-gradient(#F1FEFE, #FFFFFF); 背景色*/
     white-space: pre-wrap;   
     /* 改行を維持 */
+    
+    font-family: 'Cormorant Garamond', serif; /* フォントファミリーに指定 */
+    font-style: italic; /* イタリック体を指定 */
+    font-weight: 700; /* 太字（Bold）を指定 */
 }
  
  
@@ -324,46 +330,47 @@ input[type="number"]::-webkit-inner-spin-button {
     gap:152px;
 }
  
-    .days {
-        padding: 10px 20px; /* 共通のパディング */
-        border: none; /* ボーダーなし */
-        border-radius: 10px; /* 角を丸くする */
-        cursor: pointer; /* ポインターを表示 */
-        font-size: 16px; /* フォントサイズ */
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
-        border-radius: 10px;
-        width: 110px;
-        height:60px ;
-        text-align: center;/**/
-       
-     
-        background-color: #FFEA81; /* ボタンの背景色 */
-        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
-    }
-     
-    .week {
-        padding: 10px 20px; /* 共通のパディング */
-        border: none; /* ボーダーなし */
-        border-radius: 10px; /* 角を丸くする */
-        cursor: pointer; /* ポインターを表示 */
-        font-size: 16px; /* フォントサイズ */
-        padding: 10px 20px;
-        font-size: 10px;
-        cursor: pointer;
-        margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
-        border-radius: 10px;
-        width: 110px;
-        height:60px ;
-        text-align: center;/**/
-       
-       
-        background-color: #FFEA81; /* ボタンの背景色 */
-        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);  
-    }
-     
+.days {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
+    border-radius: 10px;
+    width: 180px;
+    height: 50px;
+    text-align: center;/**/
+    margin-left: 150px; /* 右に移動 */
+   
+ 
+    background-color: #FFEA81; /* ボタンの背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+}
+ 
+.week {
+    padding: 10px 20px; /* 共通のパディング */
+    border: none; /* ボーダーなし */
+    border-radius: 10px; /* 角を丸くする */
+    cursor: pointer; /* ポインターを表示 */
+    font-size: 16px; /* フォントサイズ */
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 5px;                 /* ボタン間の横方向のスペースを設定 */
+    border-radius: 10px;
+    width: 180px;
+    height: 50px;
+    text-align: center;/**/
+    margin-left: 40px; /* 右に移動 */
+   
+   
+    background-color: #FFEA81; /* ボタンの背景色 */
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);  
+}
     .history {
         padding: 10px 20px; /* 共通のパディング */
         border: none; /* ボーダーなし */

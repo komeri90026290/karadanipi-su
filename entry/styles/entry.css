@@ -128,3 +128,19 @@ button:active, input[type="submit"]:active, .con:active, .care:active, .tr:activ
     transform: translateY(5px); /* 下方向に移動 */
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4); /* シャドウを調整 */
 }
+
+.logout {
+    border-radius: 10px;
+    width: 50px;
+    color: white;
+    position: absolute; /* 親要素である #logout 内の位置指定 */
+    top: 10px; /* 「目標」入力フィールドの下に配置 */
+    left: 830px; /* 「目標」入力フィールドの右端に配置 */
+
+}
+
+.logout::before {
+    content: url(logout.svg);
+    margin-right: 10px;
+    vertical-align: middle;
+}
