@@ -1,20 +1,126 @@
-//データ表示関数
-// function renderFoodList(data) {
-//     const FoodList = document.getElementById('FoodList');
-//     FoodList.innerHTML = ''; // リストを初期化
+let myLineChart;
+let userWeightData = [];
 
-//     data.forEach(Food => {
-//       const listItem = document.createElement('li');
-//       const username = UserData[Food.userid] || '不明なユーザー';
-//       listItem.innerHTML = `ユーザー名: ${username}<br> | 朝食: ${Food.breakfast}<br> | 昼食: ${Food.lunch}<br> | 夕食: ${Food.dinner}`;
-//       listItem.classList.add('Foodset');
 
-//       listItem.style.textAlign = 'left';  // 左寄せ
+async function loadWeightHistory(userId) {
+    console.log("ユーザーID:", userId);  // userIdが正しく取得されているか確認
+    try {
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/getallweights/${userId}`);
+        const text = await response.text(); // JSONの前に生のレスポンスを確認
+        console.log("APIレスポンス:", text); 
+        if (!response.ok) {
+            throw new Error('データの取得に失敗しました');
+        }
 
-     
-//       FoodList.appendChild(listItem);
-//     });
-//   }
+        const data = JSON.parse(text); // JSONとしてパース
+        
+        console.log("取得した体重データ:", data.weights);
+
+        processWeightData(data.weights);
+    } catch (error) {
+        console.error('エラー:', error);
+    }
+}
+
+function processWeightData(data) {
+    userWeightData = data.map(item => ({
+        date: item.created_at.split('T')[0],
+        weight: item.weight
+    }));
+
+    console.log("処理後の体重データ:", userWeightData);
+
+    showDailyChart();
+}
+
+function getRecentWeightData(days = 7) {
+    const recentData = userWeightData.slice(-days);
+    return {
+        dates: recentData.map(item => item.date),
+        weights: recentData.map(item => item.weight)
+    };
+}
+
+function getWeeklyWeightData() {
+    const weeklyData = [];
+    let lastWeekDate = "";
+    let lastWeight = null;
+
+    userWeightData.forEach(item => {
+        const date = new Date(item.date);
+        const weekNumber = `${date.getFullYear()}-${Math.floor(date.getDate() / 7)}`;
+
+        if (weekNumber !== lastWeekDate) {
+            if (lastWeekDate) {
+                weeklyData.push({ date: lastWeekDate, weight: lastWeight });
+            }
+            lastWeekDate = weekNumber;
+        }
+        lastWeight = item.weight;
+    });
+
+    if (lastWeekDate) {
+        weeklyData.push({ date: lastWeekDate, weight: lastWeight });
+    }
+
+    return {
+        dates: weeklyData.map(item => item.date),
+        weights: weeklyData.map(item => item.weight)
+    };
+}
+
+function initializeChart() {
+    const ctx = document.getElementById('lineChart').getContext('2d');
+
+    // 既存のチャートを破棄する（これがエラー対策）
+    if (myLineChart) {
+        myLineChart.destroy();
+    }
+
+    myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: '体重',
+                data: [],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2,
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+}
+
+function showDailyChart() {
+    const recentData = getRecentWeightData();
+    myLineChart.data.labels = recentData.dates;
+    myLineChart.data.datasets[0].data = recentData.weights;
+    myLineChart.update();
+}
+
+function showWeeklyChart() {
+    const weeklyData = getWeeklyWeightData();
+    myLineChart.data.labels = weeklyData.dates;
+    myLineChart.data.datasets[0].data = weeklyData.weights;
+    myLineChart.update();
+}
+
+function initPage(userId) {
+    if (userId) {
+        initializeChart();
+    }
+}
 
 // APIを呼び出してtorehisidをhistoryテーブルに転送する関数
 async function transferTorehisIdToHistory(userId) {
@@ -203,15 +309,6 @@ async function loadAndDisplayFood(userId) {
         
 
 
-// // ページ読み込み時に目標データをロード
-// window.onload = function() {
-//     loadmokuhyouData(); // 目標データをロード
-
-//     // 必要に応じてユーザーIDを指定して目標を表示
-//     const userId = 2; // ここに表示したいユーザーIDを指定
-//     displayMokuhyou(userId); // 指定されたユーザーIDの目標を表示
-// };
-
 
 // 身長と体重の入力制限
 const heightkeep = document.getElementById('user_height');
@@ -270,175 +367,7 @@ function calculateBMI() {
     localStorage.setItem('weightData', JSON.stringify(weightData));
 
     // グラフの更新 (updateChartとupdateWeightChange関数を使っている場合)
-    updateChart();
 }
-
-//チャート系入れ物
-let myLineChart;
-let weightData = {}; // 初期値は空のオブジェクト
- 
-// データベースから体重データを取得してオブジェクトに変換する
-async function loadWeightData() {
-    try {
-        const response = await fetch('https://karadanipi-su-api.onrender.com/users'); // 適切なAPIエンドポイントに置き換える
-        if (response.ok) {
-            const data = await response.json();
- 
-            // データベースの結果をweightDataに変換
-            weightData = data.reduce((acc, item) => {
-                acc[item.date] = item.weight;
-                return acc;
-            }, {});
-            console.log("体重データがロードされました:", weightData);
-        } else {
-            console.error("体重データの取得に失敗しました:", await response.text());
-        }
-    } catch (error) {
-        console.error("エラーが発生しました:", error);
-    }
-}
- 
-
-//ログイン時にhistoryテーブルに追加するコード
-async function addTodayHistory(userId) {
-    try {
-      // APIにリクエストを送信
-      const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/${userId}`, {
-        method: 'POST', // POSTメソッドを指定
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-     
- 
-      // サーバーからのレスポンスを処理
-      if (response.ok) {
-        const result = await response.json();
-        console.log(`API成功: ${result.message}`);
-      } else {
-        const error = await response.json();
-        console.error(`APIエラー: ${error.error}`);
-        alert(`エラー: ${error.error}`);
-      }
-    } catch (error) {
-      console.error('リクエスト中にエラーが発生しました:', error);
-      alert('サーバーと通信中にエラーが発生しました');
-    }
-  }
-// let myLineChart;
-// let weightData = JSON.parse(localStorage.getItem('weightData')) || {}; //weightDataはオブジェクト形式。日付としてdata、値として体重（wight）
-// //ページ読み込み時にweightDataをlocalStorageから取得している
- 
-// // 体重データを7日分に制限して保存する関数
-// function saveWeightData(date, weight) {
-//     weightData[date] = weight;
- 
-//     // 7件を超えた場合は古いデータを削除
-//     const dates = Object.keys(weightData);
-//     if (dates.length > 7) {
-//         delete weightData[dates[0]]; // 最も古いデータを削除
-//     }
- 
-//     // 更新後のデータを保存
-//     localStorage.setItem('weightData', JSON.stringify(weightData));
-// }
- 
-// グラフの初期化関数
-
-
-//チャート関数
-
-function initializeChart() {
-    const ctx = document.getElementById('lineChart').getContext('2d');
-    const recentData = getRecentWeightData(); //X軸（日付）とY軸（体重）のデータを取得
- 
-    myLineChart = new Chart(ctx, {   //new Chart(ctx, {　で取得したデータをもとに折れ線グラフを生成し、myLineChartに代入してる
-        type: 'line',  //折れ線グラフにさせる
-        data: {
-            labels: recentData.dates,  // x軸に表示する日付
-            datasets: [{
-                label: '体重',
-                data: recentData.weights,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 2,  // 線の太さ
-                tension: 0.1  // 線の曲がり具合
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,  // y軸を0から始める
-                    ticks: {
-                        stepSize: 10  // y軸の目盛りの間隔を1に設定
-                    }
-                }
-            }
-        }
-    });
-}
- 
-// 最新の7日間の体重データを取得する関数
-function getRecentWeightData() {  //getRecentWeightData関数を使って保存されたWightDataを表示させる
-    const dates = Object.keys(weightData).slice(-7); // 最新の7件を取得
-    const weights = dates.map(date => weightData[date]);  // その日付に対応する体重データを取得
- 
-    return { dates, weights };
-}
- 
-// 日間グラフ表示関数
-function showDailyChart() {
-    const recentData = getRecentWeightData();
-    myLineChart.data.labels = recentData.dates;
-    myLineChart.data.datasets[0].data = recentData.weights;
-    myLineChart.update(); //updateでグラフ更新
-}
- 
-// 週間グラフ表示関数
-function showWeeklyChart() {
-    let dates = Object.keys(weightData).slice(-7); // 最新の7日分を取得
-    let weights = dates.map(date => weightData[date]);
- 
-    // 7日間記録されていない場合、空のデータを表示
-    if (dates.length < 7) {
-        dates = Array(7).fill('');
-        weights = Array(7).fill(null);  // nullにすることでグラフに空のデータを表示
-    }
- 
-    // 7日間記録が完了した場合、最終日のデータを週間に反映
-    if (dates.length === 7) {
-        const latestWeight = weights[weights.length - 1];
-        myLineChart.data.labels = dates;
-        myLineChart.data.datasets[0].data = weights;
-        myLineChart.update(); // 週間グラフを更新
-    } 
-}
- 
-// 最終日の体重を表示する関数
-function showLatestWeight(weight) {
-    const latestWeightElement = document.getElementById("latest-weight"); //最終日の記録を表示させるためにlatest-weightをHTMLにも組み込んでいる
-    if (latestWeightElement) {
-        latestWeightElement.textContent = `最終日の体重: ${weight} kg`;
-    }
-}
- 
-
- 
-// グラフの更新関数
-function updateChart() {
-    showDailyChart(); // デフォルトは日間グラフで更新
-}
- 
-// 日間週間の関数
-function days_id() {
-    showDailyChart(); // 日間ボタンをクリックしたら日間グラフを表示
-}
- 
-function week_id() {
-    showWeeklyChart(); // 週間ボタンをクリックしたら週間グラフを表示
-}
-
 
 function saveFood() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -576,27 +505,6 @@ function GetFood() {
     });
 }
 
-//ここ二つロード時やらせる
-// function fetchUsers() {
-//     return fetch('https://karadanipi-su-api.onrender.com/users')
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('ネットワークのエラーが発生しました');
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         data.forEach(user => {
-//           UserData[user.userid] = user.username, user.mokuhyou, user.height, user.weight; // ユーザーIDをキーにusernameを保存
-//         });
-//       })
-//       .catch(error => {
-//         console.error('ユーザーデータ取得エラー:', error);
-//         alert('ユーザーデータの取得に失敗しました');
-//       });
-//   }
-
-
   async function foodonedayData(userid) {
     try {
       const response = await fetch(apiUrl, {
@@ -619,35 +527,6 @@ function GetFood() {
     }
   }
 
-  
-// function fetchFoods() {
-//     return fetch('https://karadanipi-su-api.onrender.com/foods')
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('ネットワークのエラーが発生しました');
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         // 各ユーザーの最新の食事データを取得
-//         data.forEach(food => {
-//           // ユーザーのIDを使ってFoodDataを更新
-//           // もしFoodDataにそのユーザーのデータがない、または新しい食事データがある場合に更新
-//           if (!FoodData[food.userid] || new Date(FoodData[food.userid].created_at) < new Date(food.created_at)) {
-//             FoodData[food.userid] = {
-//               breakfast: food.breakfast,
-//               lunch: food.lunch,
-//               dinner: food.dinner,
-//               created_at: food.created_at  // 最新のcreated_atも保存
-//             };
-//           }
-//         });
-//       })
-//       .catch(error => {
-//         console.error('食事データ取得エラー:', error);
-//         alert('データの取得に失敗しました');
-//       });
-//   }
 
 function saveData() {
     const urlParams = new URLSearchParams(window.location.search);

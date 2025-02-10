@@ -108,10 +108,12 @@
             <button id="tr" class="tr" onclick="torepage() ">トレーニング追加</button>
        <h1>体重管理</h1>
         <div id="taijyu">
-          <button id="days" class=" days" onclick="days_id()">デイリー</button>
-          <button id="week" class=" week" onclick="week_id()">ウィークリー</button>
+          <button id="days" class=" days" onclick="showDailyChart()">デイリー</button>
+          <button id="week" class=" week" onclick="showWeeklyChart()">ウィークリー</button>
           </div>
-        <canvas id="lineChart"></canvas>
+          <body onload="initPage()">
+            <canvas id="lineChart"></canvas>
+        </body>
     
  
     <div class="food-input">
@@ -127,13 +129,11 @@ window.onload = async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
     console.log('取得したuserId:', userId); // ここでuserIdを確認
-    await loadWeightData(); // データベースから体重データをロード
+    await loadWeightHistory(userId);
     await loadAndDisplayuserName(userId);
     await loadAndDisplayMokuhyou(userId);
     await loadAndDisplayFood(userId);
-    // await loadAndDisplayTrainings(userId);
     GetFood();
-    addTodayHistory(userId);
     initCreateData(userId);
     transferFoodIdToHistory(userId);
     transferTorehisIdToHistory(userId);
