@@ -22,6 +22,34 @@ async function loadWeightHistory(userId) {
     }
 }
 
+//ログイン時にhistoryテーブルに追加するコード
+async function addTodayHistory(userId) {
+    try {
+      // APIにリクエストを送信
+      const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/${userId}`, {
+        method: 'POST', // POSTメソッドを指定
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+     
+ 
+      // サーバーからのレスポンスを処理
+      if (response.ok) {
+        const result = await response.json();
+        console.log(`API成功: ${result.message}`);
+      } else {
+        const error = await response.json();
+        console.error(`APIエラー: ${error.error}`);
+        alert(`エラー: ${error.error}`);
+      }
+    } catch (error) {
+      console.error('リクエスト中にエラーが発生しました:', error);
+      alert('サーバーと通信中にエラーが発生しました');
+    }
+  }
+
+
 function processWeightData(data) {
     userWeightData = data.map(item => ({
         date: item.created_at.split('T')[0],
