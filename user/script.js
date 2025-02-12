@@ -5,7 +5,7 @@ let userWeightData = [];
 async function loadWeightHistory(userId) {
     console.log("ユーザーID:", userId);  // userIdが正しく取得されているか確認
     try {
-        const response = await fetch(`https://karadanipi-su-api.onrender.com/histories/getallweights/${userId}`);
+        const response = await fetch(`https://karadanipi-su-api.onrender.com/vvv/getallweights/${userId}`);
         const text = await response.text(); // JSONの前に生のレスポンスを確認
         console.log("APIレスポンス:", text); 
         if (!response.ok) {
