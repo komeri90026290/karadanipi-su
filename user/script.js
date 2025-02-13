@@ -556,7 +556,7 @@ function GetFood() {
   }
 
 
-function saveData() {
+  function saveData() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = Number(urlParams.get('userId')); // userIdを数値として取得
     const numberheight = Number(document.getElementById('user_height').value.trim()); // 入力値を取得して余分な空白を除去
@@ -568,12 +568,12 @@ function saveData() {
         localStorage.setItem('moku', textmoku);
     }
 
-
-
     // 1. `users`テーブルに目標を保存するリクエスト
+    const requests = []; // 並列処理のためのリクエスト配列
     if (textmoku) {
         const userUpdateData = { mokuhyou: textmoku };
-        fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
+        requests.push(
+            fetch(`https://karadanipi-su-api.onrender.com/users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -583,25 +583,25 @@ function saveData() {
             .then(response => response.json())
             .then(data => {
                 console.log('ユーザーの目標が保存されました:', data);
-    
-                // 保存成功後に目標を表示
                 const mokuhyouDiv = document.getElementById('mokuhyou');
                 mokuhyouDiv.textContent = `${textmoku}`;
             })
             .catch(error => {
                 console.error('ユーザー目標の保存エラー:', error);
                 alert('ユーザー目標の保存に失敗しました: ' + error.message);
-            });
-        }
-    
-        // 2. `history`テーブルに身長と体重を保存するリクエスト
-        if (numberheight || numberweight) { // 身長か体重のどちらかが入力されている場合に送信
-            const historyData = {
-                userId: userId,
-                height: numberheight || null, // 数値がない場合はnull
-                weight: numberweight || null // 数値がない場合はnull
-            };
-    
+            })
+        );
+    }
+
+    // 2. `history`テーブルに身長と体重を保存するリクエスト
+    if (numberheight || numberweight) { // 身長か体重のどちらかが入力されている場合に送信
+        const historyData = {
+            userId: userId,
+            height: numberheight || null, // 数値がない場合はnull
+            weight: numberweight || null // 数値がない場合はnull
+        };
+
+        requests.push(
             fetch(`https://karadanipi-su-api.onrender.com/histories/updateheight/${userId}`, {
                 method: 'POST',
                 headers: {
@@ -616,8 +616,14 @@ function saveData() {
             .catch(error => {
                 console.error('履歴の保存エラー:', error);
                 alert('身長と体重の履歴保存に失敗しました: ' + error.message);
-            });
-        }
+            })
+        );
+    }
+
+    // 全てのリクエストが完了したらページをリロード
+    Promise.all(requests).then(() => {
+        location.reload();
+    });
 }
 
 
