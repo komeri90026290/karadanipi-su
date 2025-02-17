@@ -619,6 +619,11 @@ function GetFood() {
             })
         );
     }
+
+        // 全てのリクエストが完了したらページをリロード
+        Promise.all(requests).then(() => {
+            location.reload();
+        });
 }
 
 
